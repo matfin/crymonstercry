@@ -1,0 +1,16 @@
+/**
+ *	Colours
+ */
+@backgroundColourPrimary: #73bdd0;
+@backgroundColourSecondary: #2d394a;
+@colourWhite: #fff;
+@colourYellow: #f1d911;
+
+/**
+ *	Fonts
+ */
+
+/**
+ *	Layout
+ */
+@gridSpacing: 16px;

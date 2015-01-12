@@ -22,7 +22,7 @@
 /**
  *	Font families
  */
-@standardFontFamily: Futura;
+@standardFontFamily: Futura, 'Trebuchet MS', Arial, sans-serif;
 
 /**
  *	Layout

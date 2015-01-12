@@ -3,7 +3,11 @@
  */
 @font-face {
 	font-family: 'markusink';
-	src:url('/fonts/markus-ink.ttf') format('truetype');
+	src:url('/fonts/markus-ink.eot');
+	src:url('/fonts/markus-ink.eot') format('embedded-opentype'),
+		url('/fonts/markus-ink.woff') format('woff'),
+		url('/fonts/markus-ink.ttf') format('truetype'),
+		url('/fonts/markus-ink.svg#MarkusInk') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

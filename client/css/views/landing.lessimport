@@ -1,0 +1,32 @@
+#landing {
+	> img {
+		display: inline-block;
+		width: 50%;
+		height: auto;
+	}
+
+	ul {
+		display: inline-block;
+		margin-top: @gridSpacing * 4;
+		width: 50%;
+		li {
+			display: inline;
+			width: 50%;
+
+			&:first-child {
+				a {
+					img {
+						float: left;
+					}
+				}
+			}
+			&:last-child {
+				a {
+					img {
+						float: right;
+					}
+				}
+			}			
+		}
+	}
+}

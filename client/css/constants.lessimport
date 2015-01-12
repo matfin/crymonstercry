@@ -7,10 +7,26 @@
 @colourYellow: #f1d911;
 
 /**
- *	Fonts
+ *	Font sizes
  */
+@baseFontSize: 16px;
+@fontSizeMiddle: @baseFontSize * 1.5;
+@fontSizeMiddleLarge: @baseFontSize * 3;
+@fontSizeLarge: @baseFontSize * 4;
+
+/**
+ *	Font weights
+ */
+@fontWeightNormal: 300;
+
+/**
+ *	Font families
+ */
+@standardFontFamily: Futura;
 
 /**
  *	Layout
  */
 @gridSpacing: 16px;
+@maxWidth: @gridSpacing * 64;
+@minWidth: @gridSpacing * 48;

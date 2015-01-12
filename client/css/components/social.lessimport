@@ -1,0 +1,27 @@
+.social {
+	position: absolute;
+	top: @gridSpacing * 3;
+	right: @gridSpacing * 2;
+	width: @gridSpacing * 4;
+
+	ol {
+		display: block;
+		width: 100%;
+
+		li {
+			display: block;
+			width: 100%;
+			margin-top: @gridSpacing;
+			a {
+				display: block;
+				width: @gridSpacing * 3;
+				height: @gridSpacing * 3;
+				line-height: @gridSpacing * 3;
+				background-color: @backgroundColourSecondary;
+				.border-radius(@gridSpacing * 2);
+				color: @backgroundColourPrimary;
+				font-size: @fontSizeMiddle;
+			}
+		}
+	}
+}

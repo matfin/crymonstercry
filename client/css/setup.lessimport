@@ -1,0 +1,52 @@
+body {
+	font-family: @standardFontFamily;
+	font-size: @baseFontSize;
+	background-color: @backgroundColourPrimary;
+}
+
+.container {
+	width: 100%;
+	min-width: @minWidth;
+	.wrapper {
+		width: 100%;
+		text-align: center;
+
+		&:first-child {
+			border-bottom: 2px solid @colourWhite;
+			background-color: @backgroundColourSecondary;
+		}
+
+		&:nth-child(2) {
+			position: relative;
+		}
+	}
+}
+
+.content {
+	margin: 0 auto;
+	min-width: @minWidth;
+	max-width: @maxWidth;
+	min-height: @gridSpacing * 24;
+	padding-top: @gridSpacing * 4;
+}
+
+html,
+body, 
+div, 
+h1,
+h2,
+h3,
+h4,
+p {
+	.resetPaddingMargin;
+	font-weight: @fontWeightNormal;
+}
+
+ol, 
+ul {
+	.resetList;
+}
+
+a {
+	text-decoration: none;
+}

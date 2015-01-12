@@ -1,0 +1,35 @@
+header {
+	margin: 0 auto;
+	min-width: @minWidth;
+	max-width: @maxWidth;
+	height: @gridSpacing * 7;
+
+	h1 {
+		font-family: 'markusink';
+		font-size: @fontSizeLarge;
+		color: @colourWhite;
+		float: left;
+		display: inline;
+		height: @gridSpacing * 5;
+		line-height: @gridSpacing * 5;
+		margin: @gridSpacing;
+	}
+
+	h2 {
+		display: inline;
+		float: right; 
+		color: @colourYellow;
+		height: @gridSpacing * 3;
+		margin: @gridSpacing;
+		margin-top: @gridSpacing * 2.25;
+		span {
+			text-transform: uppercase;
+			&:first-child {
+				font-size: @baseFontSize;
+			}
+			&:last-child {
+				font-size: @baseFontSize * 2;
+			}
+		}
+	}
+}

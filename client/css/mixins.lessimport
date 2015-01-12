@@ -1,0 +1,19 @@
+/**
+ *	Common mixins.
+ *	Cry Monster Cry
+ *	Written by Matt Finucane 2015
+ */
+
+/**
+ *	Reset default browser padding and margin
+ */
+.resetPaddingMargin {
+	padding: 0;
+	margin: 0;
+}
+
+.resetList {
+	list-style: none;
+	.resetPaddingMargin;
+}
+

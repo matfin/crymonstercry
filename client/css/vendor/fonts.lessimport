@@ -1,0 +1,62 @@
+/**
+ *	The font for the Cry Monster Cry Logo
+ */
+@font-face {
+	font-family: 'markusink';
+	src:url('fonts/markus-ink.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/**
+ *	IcoMoon font icons
+ */
+@font-face {
+	font-family: 'crymonstercry';
+	src:url('fonts/crymonstercry.eot?-8ar4qj');
+	src:url('fonts/crymonstercry.eot?#iefix-8ar4qj') format('embedded-opentype'),
+		url('fonts/crymonstercry.woff?-8ar4qj') format('woff'),
+		url('fonts/crymonstercry.ttf?-8ar4qj') format('truetype'),
+		url('fonts/crymonstercry.svg?-8ar4qj#crymonstercry') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'crymonstercry';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-soundcloud:before {
+	content: "\e600";
+}
+
+.icon-facebook:before {
+	content: "\ea8c";
+}
+
+.icon-instagram:before {
+	content: "\ea90";
+}
+
+.icon-twitter:before {
+	content: "\ea91";
+}
+
+.icon-youtube:before {
+	content: "\ea99";
+}
+
+.icon-tumblr:before {
+	content: "\eabb";
+}
+

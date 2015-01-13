@@ -1,0 +1,11 @@
+{
+	"public": {
+
+	},
+
+	"content_api_keys": {
+		"contentful": 	"<contentful_api_key_here>",
+		"tumblr": 		"<tumblr_api_key_here>",
+		"instagram":	"<instagram_api_key_here>"	
+	}
+}

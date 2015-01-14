@@ -5,6 +5,9 @@
  *	@class Content
  *	@static
  */
+
+var Fiber = Npm.require('fibers');
+
 Server = {
 
 	/**
@@ -31,26 +34,25 @@ Server = {
 			self = Server;
 
 		Contentful.releases().then(function(result) {
-			
+		
 			_.each(result.data.collections, function(collection) {
-
-				var boundFunction = Meteor.bindEnvironment(function() {
-					self.collections[collection.name].remove({});
-				});
-
-				
-
-				/** 
-				 *	Clear out old items
+				/**
+				 *	Calling Meteor to insert to and remove from a Collection
+				 *	requires the use of a fiber
 				 */
-				//self.collections[collection.name].remove({});
+				Fiber(function() {
+					
+					self.collections[collection.name].remove({});
 
-				// _.each(collection.items, function(item) {
-				// 	self.collections[collection.name].insert(item);
-				// });
-				// Meteor.publish(item.collection, function() {
-				// 	return self[item.collection].find();
-				// });
+					_.each(collection.items, function(item) {
+						self.collections[collection.name].insert(item);
+					});
+
+					Meteor.publish(collection.name, function() {
+						return self.collections[collection.name].find();
+					});
+
+				}).run();
 			});
 
 			deferred.resolve();
@@ -59,8 +61,8 @@ Server = {
 			
 			deferred.reject(error);
 
-		});		
-
+		});
+	
 		return deferred.promise;
 	}
 

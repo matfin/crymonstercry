@@ -14,4 +14,10 @@ if(Meteor.isServer) {
 		console.log('Releases could not be populated');
 	});
 
+	Server.populateCFGigs().then(function() {
+		console.log('Gigs populated successfully');
+	}).fail(function() {
+		console.log('Gigs could not be populated');
+	});
+
 }

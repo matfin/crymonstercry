@@ -50,6 +50,7 @@ Package.onUse(function(api) {
 	 *	Export the above data fetchers as objects
 	 */
 	api.export('Server');
+	api.export('App');
 
 
 });

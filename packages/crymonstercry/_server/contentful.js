@@ -59,10 +59,34 @@ Contentful = {
 	 */
 	gigs: function() {
 
-		return this.connectAndFetch(function() {
+		return this.connectAndFetch({
+			contentType: this.contentTypes.gigs,
+			include: 1,
+			filterFunction: function(result) {
+				/**
+				 *	Convert the result to a json object
+				 */
+				resultContent = EJSON.parse(result.content);
 
+				/**
+				 *	Return the modified result object, along
+				 *	with the name of the collection its data
+				 *	should be populated to.
+				 *
+				 *	Since this is a simple content type with 
+				 *	no linked assets or entries, we return a
+				 *	simpler object
+				 */
+				return {
+					collections: [
+						{	
+							name: 'cf_gigs',
+							items: resultContent.items
+						}
+					]
+				};
+			}
 		});
-
 	},
 
 	/**

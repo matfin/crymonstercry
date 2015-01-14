@@ -20,8 +20,13 @@ Package.onUse(function(api) {
 	/**
 	 *	Other packages as requirements
 	 */
-	api.use('underscore', 'server');
-	api.use('http', 'server');
+	api.use('underscore', 	['client', 'server']);
+	api.use('mongo', 		['client', 'server']);
+	api.use('aramk:q',		'server');
+	api.use('http', 		'server');
+	api.use('ejson',		'server');
+	api.use('deps',			'client');
+
 	
 	/**
 	 *	Server side files included as part of this package
@@ -44,7 +49,7 @@ Package.onUse(function(api) {
 	/**
 	 *	Export the above data fetchers as objects
 	 */
-	
+	api.export('Server');
 
 
 });

@@ -27,3 +27,19 @@ Template['components_header'].rendered = function() {
 Template['components_header'].destroyed = function() {
 	console.log('components_header: destroyed()');
 };
+
+/**
+ *	Template - components_header
+ *	Helper functions
+ */
+Template['components_header'].helpers({
+
+	/**
+	 *	Return an active class if the top nav link 
+	 *	is on the current view
+	 */
+	activeClass: function(parent) {
+		return parent.view === this.route ? 'active':false;
+	}
+
+});

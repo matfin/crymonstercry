@@ -35,7 +35,9 @@ Router.map(function() {
 	this.route('news', {
 		path: '/news',
 		data: function() {
-
+			return {
+				view: 'news'
+			};
 		},
 		template: 'template_main',
 		yieldTemplates: {
@@ -51,7 +53,9 @@ Router.map(function() {
 	this.route('tour', {
 		path: '/tour',
 		data: function() {
-
+			return {
+				view: 'tour'
+			};
 		},
 		template: 'template_main',
 		yieldTemplates: {
@@ -67,7 +71,9 @@ Router.map(function() {
 	this.route('music', {
 		path: '/music',
 		data: function() {
-
+			return {
+				view: 'music'
+			};
 		},
 		template: 'template_main',
 		yieldTemplates: {
@@ -83,7 +89,9 @@ Router.map(function() {
 	this.route('video', {
 		path: '/video',
 		data: function() {
-
+			return {
+				view: 'video'
+			};
 		},
 		template: 'template_main',
 		yieldTemplates: {
@@ -99,7 +107,9 @@ Router.map(function() {
 	this.route('photos', {
 		path: '/photos',
 		data: function() {
-
+			return {
+				view: 'photos'
+			};
 		},
 		template: 'template_main',
 		yieldTemplates: {
@@ -115,7 +125,9 @@ Router.map(function() {
 	this.route('about', {
 		path: '/about',
 		data: function() {
-
+			return {
+				view: 'about'
+			};
 		},
 		template: 'template_main',
 		yieldTemplates: {

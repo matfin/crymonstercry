@@ -1,14 +1,16 @@
 <template name="components_header">
 	<header>
 		<h1>
-			Cry Monster Cry
+			<a href="{{pathFor 'landing'}}" title="Home">
+				Cry Monster Cry
+			</a>
 		</h1>
 		<nav>
 			<ol>
 				{{#each topNav}}
 				<li>
 					<a href="{{pathFor route}}" title="{{title}}">
-						Hi!
+						{{title}}
 					</a>
 				</li>
 				{{/each}}

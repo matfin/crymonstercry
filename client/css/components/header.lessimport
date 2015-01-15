@@ -1,35 +1,48 @@
 header {
 	margin: 0 auto;
 	min-width: @minWidth;
-	max-width: @maxWidth;
 	height: @gridSpacing * 7;
 
 	h1 {
 		font-family: 'markusink';
 		font-size: @fontSizeLarge;
-		color: @colourWhite;
 		float: left;
 		display: inline;
-		height: @gridSpacing * 5;
-		line-height: @gridSpacing * 5;
-		margin: @gridSpacing;
+		height: @gridSpacing * 7;
+		line-height: @gridSpacing * 7;
+		margin-left: @gridSpacing * 2;
+
+		a {
+			color: @colourWhite;
+		}
 	}
 
-	h2 {
+	nav {
 		display: inline;
-		float: right; 
-		color: @colourYellow;
-		height: @gridSpacing * 3;
-		margin: @gridSpacing;
-		margin-top: @gridSpacing * 2.25;
-		span {
-			text-transform: uppercase;
-			&:first-child {
-				font-size: @baseFontSize;
-			}
-			&:last-child {
-				font-size: @baseFontSize * 2;
+		float: right;
+		margin-right: @gridSpacing * 2;
+		ol {
+			.display(flex);
+			li {
+				.flex(1);
+				height: @gridSpacing * 7;
+				line-height: @gridSpacing * 7;
+				min-width: @gridSpacing * 5;
+
+				a {
+					color: @colourYellow;
+					line-height: @gridSpacing * 2;
+					height: @gridSpacing * 2;
+					text-transform: lowercase;
+					font-size: @fontSizeMiddle;
+					font-weight: @fontWeightNormal; 
+					&.active,
+					&:hover {
+						text-decoration: underline;
+					}
+				}
 			}
 		}
 	}
+	
 }

@@ -27,6 +27,102 @@ Router.map(function() {
 			'views_landing': 		{to: 'content'},
 			'components_footer': 	{to: 'footer'}
 		}
-	})
+	});
+
+	/**
+	 *	The news page
+	 */
+	this.route('news', {
+		path: '/news',
+		data: function() {
+
+		},
+		template: 'template_main',
+		yieldTemplates: {
+			'components_header': 	{to: 'header'},
+			'views_news': 		{to: 'content'},
+			'components_footer': 	{to: 'footer'}
+		}
+	});
+
+	/**
+	 *	The tour page
+	 */
+	this.route('tour', {
+		path: '/tour',
+		data: function() {
+
+		},
+		template: 'template_main',
+		yieldTemplates: {
+			'components_header': 	{to: 'header'},
+			'views_tour': 			{to: 'content'},
+			'components_footer': 	{to: 'footer'}
+		}
+	});
+
+	/**
+	 *	The music page
+	 */
+	this.route('music', {
+		path: '/music',
+		data: function() {
+
+		},
+		template: 'template_main',
+		yieldTemplates: {
+			'components_header': 	{to: 'header'},
+			'views_music': 			{to: 'content'},
+			'components_footer': 	{to: 'footer'}
+		}
+	});
+
+	/**
+	 *	The video page
+	 */
+	this.route('video', {
+		path: '/video',
+		data: function() {
+
+		},
+		template: 'template_main',
+		yieldTemplates: {
+			'components_header': 	{to: 'header'},
+			'views_video': 			{to: 'content'},
+			'components_footer': 	{to: 'footer'}
+		}
+	});
+
+	/**
+	 *	The photos page
+	 */
+	this.route('photos', {
+		path: '/photos',
+		data: function() {
+
+		},
+		template: 'template_main',
+		yieldTemplates: {
+			'components_header': 	{to: 'header'},
+			'views_photos': 		{to: 'content'},
+			'components_footer': 	{to: 'footer'}
+		}
+	});
+
+	/**
+	 *	The about page
+	 */
+	this.route('about', {
+		path: '/about',
+		data: function() {
+
+		},
+		template: 'template_main',
+		yieldTemplates: {
+			'components_header': 	{to: 'header'},
+			'views_about': 			{to: 'content'},
+			'components_footer': 	{to: 'footer'}
+		}
+	});
 
 });

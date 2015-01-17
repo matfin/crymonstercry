@@ -6,7 +6,6 @@
  */
 Template['views_landing'].created = function() {
 	$('body').addClass('landing');
-	console.log(this.data);
 };
 
 /**
@@ -85,8 +84,6 @@ Template['views_landing'].helpers({
 				'sys.id': {$in: entryIds}
 			},
 			releaseLinks = App.collections.cf_entries.find(query).fetch();
-
-			console.log(releaseLinks);
 
 			return releaseLinks;
 		}

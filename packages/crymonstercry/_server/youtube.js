@@ -65,7 +65,7 @@ Youtube = {
 					deferred.resolve({
 						status: 'ok',
 						data: result
-					})
+					});
 				}
 
 			});

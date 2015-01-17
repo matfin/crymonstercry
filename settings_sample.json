@@ -13,5 +13,16 @@
 		"endpointUrl": "https://www.googleapis.com/youtube/v3",
 		"apiKey": "{your_youtube_api_key_here}",
 		"channelUser": "{your_channel_user_here}"
+	},
+	"tumblr": {
+		"blogUrl": "{yourblog}.tumblr.com",
+		"consumerKey": "{your_consumer_key}",
+		"apiUrl": "api.tumblr.com",
+		"filterParams": {
+			"posts": {
+				"type": "text",
+				"filter": "html"
+			}
+		}
 	}
 }

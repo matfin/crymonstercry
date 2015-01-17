@@ -8,7 +8,6 @@ if(Meteor.isServer) {
 	 */
 	console.log('Meteor server booting up - ' + new Date().toString());
 
-
 	/**
 	 *	Grabbing contenful releases
 	 */
@@ -34,5 +33,14 @@ if(Meteor.isServer) {
 		console.log('YouTube videos populated successfully');
 	}).fail(function() {
 		console.log('Could not populate YouTube videos');
+	});
+
+	/**
+	 *	Grabbing Tumblr posts
+	 */
+	Server.populateTumblrPosts().then(function() {
+		console.log('Tumblr posts populated successfully');
+	}).fail(function() {
+		console.log('Could not populate Tumblr posts');
 	});
 }

@@ -5,7 +5,6 @@
  *	@return undefined
  */
 Template['cards_link'].created = function() {
-	console.log(this.data);	
 };
 
 /**

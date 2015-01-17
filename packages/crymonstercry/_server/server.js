@@ -28,7 +28,62 @@ Server = {
 		/**
 		 *	Youtube videos collection
 		 */
-		yt_videos: new Mongo.Collection('yt_videos')
+		yt_videos: new Mongo.Collection('yt_videos'),
+
+		/**
+		 *	Tumblr posts collection
+		 */
+		tmblr_posts: new Mongo.Collection('tmblr_posts')
+	},
+
+	/**
+	 *	Function to populate Tumblr posts via the Tumblr api
+	 *
+	 *	@method populateTumblrPosts()
+	 *	@return {Object} - a resolved or rejected promise
+	 */
+	populateTumblrPosts: function() {
+
+		var deferred = Q.defer();
+			self = this;
+
+		/**
+		 *	Grab the Tumblr posts
+		 */
+		Tumblr.posts().then(function(result) {
+
+			Fiber(function() {
+				self.collections.tmblr_posts.remove({});
+
+				if(Helpers.checkNested(result, 'data', 'response', 'posts')) {
+
+					_.each(result.data.response.posts, function(item) {
+						self.collections.tmblr_posts.insert(item);
+					});
+
+					/**
+			    	 *	Then we publish the collection so the client collection 
+			    	 *	can access it
+			    	 */
+			    	Meteor.publish('tmblr_posts', function() {
+						return self.collections.tmblr_posts.find({});
+					});
+				}
+				else {	
+					deferred.reject();
+				}
+
+			}).run();
+
+			deferred.resolve();
+
+		}).fail(function() {
+
+			deferred.reject();
+
+		});
+
+		return deferred.promise;
 	},
 
 	/**

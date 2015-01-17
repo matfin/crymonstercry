@@ -1,17 +1,15 @@
 .social {
-	position: absolute;
-	top: @gridSpacing * 3;
-	right: @gridSpacing * 2;
-	width: @gridSpacing * 4;
+	
+	.flex(1);
+	padding-top: @gridSpacing * 4;
 
 	ol {
-		display: block;
-		width: 100%;
-
+		display: inline-block;
 		li {
 			display: block;
-			width: 100%;
 			margin-top: @gridSpacing;
+			float: right;
+			clear: both;
 			a {
 				display: block;
 				width: @gridSpacing * 3;

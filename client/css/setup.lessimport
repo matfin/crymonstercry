@@ -22,18 +22,20 @@ body {
 			background-color: @backgroundColourSecondary;
 		}
 
-		&:nth-child(2) {
-			position: relative;
+		&.main {
+			margin: 0 auto;
+			min-width: @minWidth;
+			max-width: @maxWidth;
+			.display(flex);
 		}
 	}
 }
 
 .content {
 	margin: 0 auto;
-	min-width: @minWidth;
-	max-width: @maxWidth;
 	min-height: @gridSpacing * 24;
 	padding-top: @gridSpacing * 4;
+	.flex(9);
 }
 
 html,

@@ -1,6 +1,7 @@
 header {
 	margin: 0 auto;
 	min-width: @minWidth;
+	max-width: @maxWidth;
 	height: @gridSpacing * 7;
 
 	h1 {

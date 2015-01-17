@@ -44,13 +44,21 @@ Package.onUse(function(api) {
 	 */
 	api.addFiles([
 		'_client/app.js'
-	], 	'client')
+	], 	'client');
+
+	/**
+	 *	Client and server side files included as part of this package
+	 */
+	api.addFiles([
+		'helpers.js'
+	], ['client', 'server']);
 
 	/**
 	 *	Export the above data fetchers as objects
 	 */
 	api.export('Server');
 	api.export('App');
+	api.export('Helpers');
 
 
 });

@@ -5,7 +5,6 @@
  *	@return undefined
  */
 Template['components_header'].created = function() {
-	console.log('components_header: created()');
 };
 
 /**
@@ -15,7 +14,6 @@ Template['components_header'].created = function() {
  *	@return undefined
  */
 Template['components_header'].rendered = function() {
-	console.log('components_header: rendered()');
 };
 
 /**
@@ -25,7 +23,6 @@ Template['components_header'].rendered = function() {
  *	@return undefined
  */
 Template['components_header'].destroyed = function() {
-	console.log('components_header: destroyed()');
 };
 
 /**

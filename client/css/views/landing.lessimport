@@ -1,3 +1,14 @@
+/**
+ *	This view has a custom background
+ */
+body {
+	&.landing {
+		background: @backgroundColourPrimary url('/images/landing.jpg') no-repeat center bottom;
+		background-size: cover;
+	}
+}
+
+
 #landing {
 	
 }

@@ -28,5 +28,5 @@
  *	Layout
  */
 @gridSpacing: 16px;
-@maxWidth: @gridSpacing * 64;
+@maxWidth: @gridSpacing * 80;
 @minWidth: @gridSpacing * 64;

@@ -7,17 +7,61 @@ Router.map(function() {
 	 */
 	this.route('landing', {
 		path: '/',
+		subscriptions: function() {
+			/**
+			 *	Subscribe to these three collections publised
+			 *	from the server. We need them for the featured
+			 *	album that will appear on the landing page.
+			 */
+			return [
+				Meteor.subscribe('cf_releases'),
+				Meteor.subscribe('cf_assets'),
+				Meteor.subscribe('cf_entries')
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
 		data: function() {
 
-			// var api_key = 'AIzaSyD5fjm_jlJoQLptrJYM45BHPP1uHlJcfSI',
-			// 	channel_id = 'UCdhNjOs9iRMkcTEOfuQJJpw',
-			// 	url = 'https://www.googleapis.com/youtube/v3/search?key=' + api_key + '&channelId=' + channel_id + '&part=snippet,id&order=date&maxResults=20';
+			/** 
+			 *	Fetch the featured album or failing that,
+			 *	fetch the latest album added. These are 
+			 *	the queries we can use to do this.
+			 */
+			var query = {	
+				isFeatured: {
+					'fields.isFeatured': true
+				}
+			};
+			var sort = {
+				sort: {
+					'fields.releaseDate': -1
+				}
+			};
 
-			// HTTP.call('get', 'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyD5fjm_jlJoQLptrJYM45BHPP1uHlJcfSI&part=snippet,contentDetails&id=7iFwsX01uYc,UOcTIAwBrbg,nVfQ1EB888I', function(error, result) {
-			// 	console.log(error, result);
-			// });
+			/**
+			 *	Grab the featured release
+			 */
+			var release = App.collections.cf_releases.findOne(query.isFeatured);
 
+			/**
+			 *	If no releases are featured, then grab the latest one
+			 */
+			if(typeof release === 'undefined') {
+				release = App.collections.cf_releases.findOne({}, sort);
+			}
+
+			/**
+			 *	Then return the data
+			 */
 			return {
+				release: release,
 				view: 'landing'
 			};
 		},

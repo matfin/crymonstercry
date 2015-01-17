@@ -3,12 +3,55 @@
  */
 body {
 	&.landing {
-		background: @backgroundColourPrimary url('/images/landing.jpg') no-repeat center bottom;
-		background-size: cover;
+		.container {
+			background: @backgroundColourPrimary url('/images/landing.jpg') no-repeat center bottom;
+			background-size: cover;
+			padding-bottom: @gridSpacing * 4;
+		}
 	}
 }
 
 
 #landing {
-	
+	.feature {
+		display: block;
+		float: right;
+		width: @gridSpacing * 25;
+
+		figure {
+			display: block;
+			width: 100%;
+
+			> img,
+			> caption {
+				display: block;
+				width: 100%;
+			}
+
+			> img {
+				height: @gridSpacing * 25;
+			}
+
+			> caption {
+				margin-top: @gridSpacing;
+				color: @colourWhite;
+				font-size: @baseFontSize * 2;
+				text-transform: uppercase;
+				letter-spacing: 4px;
+			}
+		}
+
+		> ol {
+			display: block;
+			width: 100%;
+			margin-top: @gridSpacing * 2;
+			text-align: center;
+
+			li {
+				display: block;
+				width: 40%;
+				margin: @gridSpacing * 2 auto;
+			}
+		}
+	}
 }

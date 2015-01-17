@@ -55,6 +55,11 @@ ul {
 	.resetList;
 }
 
+figure,
+caption {
+	.resetPaddingMargin;
+}
+
 a {
 	text-decoration: none;
 	img {

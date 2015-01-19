@@ -19,7 +19,8 @@ App = {
 		cf_entries: 	new Mongo.Collection('cf_entries'),
 		cf_gigs: 		new Mongo.Collection('cf_gigs'),
 		yt_videos: 		new Mongo.Collection('yt_videos'),
-		tmblr_posts: 	new Mongo.Collection('tmblr_posts')
+		tmblr_posts: 	new Mongo.Collection('tmblr_posts'),
+		in_images:  	new Mongo.Collection('in_images')
 	},
 
 	/**

@@ -59,6 +59,4 @@ Package.onUse(function(api) {
 	api.export('Server');
 	api.export('App');
 	api.export('Helpers');
-
-
 });

@@ -1,28 +1,33 @@
 {
 	"contentful": {
-		"endpointUrl": "{contentful_endpoint_in_here}",
-		"authorisationHeader": "Bearer {your_auth_access_token}",
-		"contentTypeHeader": "application/vnd.contentful.delivery.v1+json",
-		"spaceId": "{your_contentful_space_id_here}",
+		"endpointUrl": 			"{contentful_endpoint_in_here}",
+		"authorisationHeader": 	"Bearer {your_auth_access_token}",
+		"contentTypeHeader": 	"application/vnd.contentful.delivery.v1+json",
+		"spaceId": 				"{your_contentful_space_id_here}",
 		"contentTypes": {
-			"releases": "{content_type_id_here}",
-			"gigs": "{content_type_id_here}"
+			"releases": 	"{content_type_id_here}",
+			"gigs": 		"{content_type_id_here}"
 		}
 	},
 	"youtube": {
-		"endpointUrl": "https://www.googleapis.com/youtube/v3",
-		"apiKey": "{your_youtube_api_key_here}",
-		"channelUser": "{your_channel_user_here}"
+		"endpointUrl": 	"https://www.googleapis.com/youtube/v3",
+		"apiKey": 		"{your_youtube_api_key_here}",
+		"channelUser": 	"{your_channel_user_here}"
 	},
 	"tumblr": {
-		"blogUrl": "{yourblog}.tumblr.com",
-		"consumerKey": "{your_consumer_key}",
-		"apiUrl": "api.tumblr.com",
+		"blogUrl": 		"{yourblog}.tumblr.com",
+		"consumerKey": 	"{your_consumer_key}",
+		"apiUrl": 		"api.tumblr.com",
 		"filterParams": {
 			"posts": {
-				"type": "text",
-				"filter": "html"
+				"type": 	"text",
+				"filter": 	"html"
 			}
 		}
+	},
+	"instagram": {
+		"apiUrl": 			"https://api.instagram.com",
+		"clientID": 		"{your_client_id}",
+		"userId": 			"{your_user_id}"
 	}
 }

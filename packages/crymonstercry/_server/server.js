@@ -33,7 +33,59 @@ Server = {
 		/**
 		 *	Tumblr posts collection
 		 */
-		tmblr_posts: new Mongo.Collection('tmblr_posts')
+		tmblr_posts: new Mongo.Collection('tmblr_posts'),
+
+		/** 
+		 *	Instagram media collection
+		 */
+		in_images: new Mongo.Collection('in_images')
+	},
+
+	/**
+	 *	Function to kick off fetching of Instagram posts
+	 *
+	 *	@method populateInstagramContent
+	 *	@return {Object} - a resoved or rejected promise
+	 */
+	populateInstagramContent: function() {
+
+		var deferred = Q.defer(),
+			self = this;
+
+		Instagram.getRecentMedia().then(function(result) {
+
+			/**
+			 *	Populate the collection from within a Fiber
+			 */
+			Fiber(function() {
+
+				/**
+				 *	Clear out the old collection data
+				 */
+				self.collections.in_images.remove({});
+
+				/**
+				 *	Then refresh it, publishing the collections
+				 */
+				_.each(result.data.data, function(item) {
+					self.collections.in_images.insert(item);
+				});
+
+				Meteor.publish('in_images', function() {
+					return self.collections.in_images.find({});
+				});
+
+			}).run();
+
+			deferred.resolve();
+
+		}).fail(function(error) {
+			
+			deferred.reject();
+
+		});
+
+		return deferred.promise;
 	},
 
 	/**

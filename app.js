@@ -43,4 +43,13 @@ if(Meteor.isServer) {
 	}).fail(function() {
 		console.log('Could not populate Tumblr posts');
 	});
+
+	/**
+	 *	Fetch instragram access token code
+	 */
+	Server.populateInstagramContent().then(function() {
+		console.log('Instagram media populated successfully');
+	}).fail(function() {
+		console.log('Could not populate Instagram media');
+	});
 }

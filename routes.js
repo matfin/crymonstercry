@@ -137,8 +137,37 @@ Router.map(function() {
 	 */
 	this.route('music', {
 		path: '/music',
+		subscriptions: function() {
+			/**
+			 *	Subscribe to these three collections publised
+			 *	from the server. We need them for the featured
+			 *	album that will appear on the landing page.
+			 */
+			return [
+				Meteor.subscribe('cf_releases'),
+				Meteor.subscribe('cf_assets'),
+				Meteor.subscribe('cf_entries')
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
 		data: function() {
+
+			var sort = {
+				sort: {
+					'fields.releaseDate': -1
+				}
+			},
+			releases = App.collections.cf_releases.find({}, sort).fetch();
+
 			return {
+				releases: releases,
 				view: 'music'
 			};
 		},

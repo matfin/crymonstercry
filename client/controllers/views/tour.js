@@ -5,6 +5,9 @@
  *	@return undefined
  */
 Template['views_tour'].created = function() {
+
+	console.log(this.data);
+
 };
 
 /**

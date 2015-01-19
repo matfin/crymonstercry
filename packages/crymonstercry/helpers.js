@@ -30,7 +30,3 @@ Helpers = {
 		return true;
 	}
 };
-
-test = function(args) {
-	console.log(Array.prototype.slice.call(arguments));
-}

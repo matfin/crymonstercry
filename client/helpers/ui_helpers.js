@@ -27,10 +27,23 @@ UI.registerHelper('socialNav', function() {
 /**
  *	Function to return a lowercased string, useful for class names
  *	
- *	@function 	loweCase
+ *	@function 	lowerCase
  *	@param 		{String} - the string that needs to be converted to lowercase
  *	@return		{String} - a lowercase string
  */
 UI.registerHelper('lowerCase', function(str) {
 	return str.toLowerCase();
+});
+
+/**
+ *	Function to return a date formatted with Moment JS
+ *
+ *	@function 	formattedDate
+ *	@param 		{String} - the date string
+ *	@param 		{String} - desired date format string
+ *	@return 	{String} - the formatted date
+ */
+UI.registerHelper('formattedDate', function(dateString, dateFormat) {
+	var m = moment(dateString);
+	return m.isValid() ? m.format(dateFormat):dateString;
 });

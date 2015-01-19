@@ -1,0 +1,44 @@
+#tour {
+	> table {
+		display: table;
+		width: 100%;
+		color: @colourWhite;
+		border-spacing: 0;
+		pdding-left: @gridSpacing;
+		thead {
+			font-size: @fontSizeMiddle;
+			tr {
+				th {
+					text-align: left;
+					border-bottom: 2px solid #ffffff;
+					padding-bottom: @gridSpacing;
+				}	
+			}
+		}
+
+		tbody {
+			tr {
+				td {
+					text-align: left;
+					padding: @gridSpacing 0;
+					border-bottom: 1px solid @colourWhite;
+					a {
+						color: @colourWhite;
+					}
+				}
+
+				&:first-child {
+ 					td {
+ 						padding-top: @gridSpacing * 3;
+ 					}
+				}
+
+				&:last-child {
+					td {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+	}
+}

@@ -96,8 +96,31 @@ Router.map(function() {
 	 */
 	this.route('tour', {
 		path: '/tour',
+		subscriptions: function() {
+			return [
+				Meteor.subscribe('cf_gigs')
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
+
 		data: function() {
+
+			var sort = {
+					sort: {
+						'fields.date': 1
+					}
+				},
+				gigs = App.collections.cf_gigs.find({}, sort).fetch();
+
 			return {
+				gigs: gigs,
 				view: 'tour'
 			};
 		},

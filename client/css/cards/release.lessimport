@@ -1,3 +1,59 @@
 .release {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: @gridSpacing * 4;
+
+	> img {
+		display: inline;
+		float: left;
+		width: @gridSpacing * 25;
+		margin-left: @gridSpacing * 2;
+		height: auto;
+	}
+
+	> div.info {
+		position: relative;
+		display: inline;
+		float: left;
+		width: @gridSpacing * 25;
+		min-height: @gridSpacing * 25;
+		padding-left: @gridSpacing * 2;
+		.box-sizing(border-box);
+		text-align: left;
+
+		h2 {
+			display: block;
+			color: @colourWhite;
+			margin-bottom: @gridSpacing * 1.25;
+		}
+
+		ol.tracks {
+			li {
+				color: @colourWhite;
+			}
+		}	
+
+		ol.links {
+			position: absolute;
+			bottom: 0;
+			left: @gridSpacing * 2;
+
+			.display(flex);
+			li {
+				.flex(1);
+				padding-right: @gridSpacing;
+
+				a {
+					display: block;
+					height: @gridSpacing * 4;
+					line-height: @gridSpacing * 4;
+					img {
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+	}
+
 	
 }

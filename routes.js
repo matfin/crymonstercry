@@ -1,4 +1,11 @@
 /**
+ *	Loading template for all routes
+ */
+Router.configure({
+	loadingTemplate: 'components_loading'
+});
+
+/**
  *	Router map function
  */
 Router.map(function() {
@@ -140,8 +147,8 @@ Router.map(function() {
 		subscriptions: function() {
 			/**
 			 *	Subscribe to these three collections publised
-			 *	from the server. We need them for the featured
-			 *	album that will appear on the landing page.
+			 *	from the server. We need them for the albums 
+			 *	we will be listing.
 			 */
 			return [
 				Meteor.subscribe('cf_releases'),
@@ -184,8 +191,27 @@ Router.map(function() {
 	 */
 	this.route('video', {
 		path: '/video',
+		subscriptions: function() {
+			/**
+			 *	Subscribe to these three collections publised
+			 *	from the server. We need them for the albums 
+			 *	we will be listing.
+			 */
+			return [
+				Meteor.subscribe('yt_videos'),
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
 		data: function() {
 			return {
+				videos: App.collections.yt_videos.find({}).fetch(),
 				view: 'video'
 			};
 		},

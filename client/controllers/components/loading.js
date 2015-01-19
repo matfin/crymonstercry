@@ -1,27 +1,26 @@
 /**
- *	Template - views_video
+ *	Template - components_loading
  *	Callback function called automatically when the template instance is created
  *	@method created
  *	@return undefined
  */
-Template['views_video'].created = function() {
-	console.log(this.data);
+Template['components_loading'].created = function() {
 };
 
 /**
- *	Template - views_video
+ *	Template - components_loading
  *	Callback function called automatically when the template instance is rendered
  *	@method rendered
  *	@return undefined
  */
-Template['views_video'].rendered = function() {
+Template['components_loading'].rendered = function() {
 };
 
 /**
- *	Template - views_video
+ *	Template - components_loading
  *	Callback function called automatically when the template instance is destroyed
  *	@method destroyed
  *	@return undefined
  */
-Template['views_video'].destroyed = function() {
+Template['components_loading'].destroyed = function() {
 };

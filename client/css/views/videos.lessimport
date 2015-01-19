@@ -1,0 +1,17 @@
+#video {
+	> div.video {
+		display: block;
+		float: left;
+		margin-bottom: @gridSpacing * 4;
+
+		h2 {
+			float: left;
+			color: @colourWhite;
+			margin-bottom: @gridSpacing;
+		}
+
+		iframe {
+			float: left;
+		}
+	}
+}

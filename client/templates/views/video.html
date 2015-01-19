@@ -1,2 +1,12 @@
 <template name="views_video">
+	<section class="content" id="{{view}}">
+		{{#each videos}}
+			<div class="video">
+				<h2>
+					{{snippet.title}}
+				</h2>
+				<iframe width="924" height="520" src="//www.youtube.com/embed/{{id}}?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+			</div>
+		{{/each}}
+	</section>
 </template>

@@ -41,7 +41,7 @@ Template['cards_link'].helpers({
 	 *	@return		{String} - The URL of the vendor svg
 	 */
 	vendorLogo: function() {
-		return '/svg/' + this.fields.linkTitle.toLowerCase() + '.svg';
+		return '/images/vendors/' + this.fields.linkTitle.toLowerCase() + '.png';
 	}
 
 });

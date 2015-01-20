@@ -1,2 +1,7 @@
 <template name="views_photos">
+	<section class="content" id="{{view}}">
+		{{#each images}}
+			{{> cards_instagram_photo}}
+		{{/each}}
+	</section>
 </template>

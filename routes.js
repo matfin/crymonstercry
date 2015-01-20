@@ -233,8 +233,15 @@ Router.map(function() {
 			}
 		},
 		data: function() {
+
+			var sort = {
+				sort: {
+					'created_time': -1
+				}
+			};
+
 			return {
-				videos: App.collections.yt_videos.find({}).fetch(),
+				videos: App.collections.yt_videos.find({}, sort).fetch(),
 				view: 'video'
 			};
 		},
@@ -251,8 +258,26 @@ Router.map(function() {
 	 */
 	this.route('photos', {
 		path: '/photos',
+		subscriptions: function() {
+			/**
+			 *	Returning the subscription for Instagram 
+			 *	photos here, needed for this view.
+			 */
+			return [
+				Meteor.subscribe('in_images')
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
 		data: function() {
 			return {
+				images: App.collections.in_images.find({}).fetch(),
 				view: 'photos'
 			};
 		},

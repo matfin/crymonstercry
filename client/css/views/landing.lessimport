@@ -32,7 +32,7 @@ body {
 				height: @gridSpacing * 25;
 			}
 
-			> caption {
+			> figcaption {
 				margin-top: @gridSpacing;
 				color: @colourWhite;
 				font-size: @baseFontSize * 2;

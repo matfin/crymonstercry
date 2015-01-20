@@ -75,7 +75,14 @@ Template['cards_release'].helpers({
 			var query = {
 				'sys.id': {$in: entryIds}
 			},
-			releaseTracks = App.collections.cf_entries.find(query).fetch();
+			sort = {
+				sort: {
+					'fields.trackNumber': 1
+				}
+			},
+			releaseTracks = App.collections.cf_entries.find(query, sort).fetch();
+
+			console.log(releaseTracks);
 
 			return releaseTracks;
 		}

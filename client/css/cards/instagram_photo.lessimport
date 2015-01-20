@@ -1,19 +1,19 @@
 div.image {
+
 	.display(flex);
-	.flex-direction(column);
-	.box-sizing(border-box);
-	float: left;
 	width: 33%;
+	.box-sizing(border-box);
 	padding: @gridSpacing / 2;
 
 	figure {
-		padding: @gridSpacing;
-		background-color: @colourWhite;
-		.display(flex);
-		.flex-direction(column);
 		.flex(1);
+		background-color: @colourWhite;
+		padding: @gridSpacing;
 		.box-shadow(0 1px 0 rgba(255,255,255,.4),0 1px 0 1px rgba(255,255,255,.1));
-
+		img {
+			width: 100%;
+			height: auto;
+		}
 		figcaption {
 			margin-top: @gridSpacing;
 			text-align: left;

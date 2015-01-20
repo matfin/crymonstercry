@@ -5,7 +5,6 @@
  *	@return undefined
  */
 Template['cards_tumblr_post'].created = function() {
-	console.log(this.data);
 };
 
 /**
@@ -39,6 +38,6 @@ Template['cards_tumblr_post'].helpers({
 	 *	@return 	{Number} - the JS timestamp
 	 */
 	jsTimestamp: function() {
-		return new Date(this.date);
+		return new Date(this.timestamp * 1000);
 	}
 });

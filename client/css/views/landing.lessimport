@@ -51,6 +51,9 @@ body {
 				display: block;
 				width: 40%;
 				margin: @gridSpacing * 2 auto;
+				img {
+					height: 60px;
+				}
 			}
 		}
 	}

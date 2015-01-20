@@ -1,25 +1,18 @@
 div.post {
 	.display(flex);
-	.flex-direction(column);
-	float: left;
-	width: 50%;
 	text-align: left;
-	position: relative;
+	width: 50%;
 	.box-sizing(border-box);
 	padding: @gridSpacing / 2;
 }
 
-
 article.story {
-	.display(flex);
-	.flex-direction(column);
-	float: left;
+	position: relative;
 	background-color: @colourWhite;
-	.flex(1);
+	width: 100%;
+	.box-sizing(border-box);
 	padding: @gridSpacing;
 	padding-bottom: @gridSpacing * 3;
-	.box-shadow(0 0 2px rgba(0,0,0,.2));
-	.border-radius(@gridSpacing / 8);
 
 	h1 {
 		color: @colourSecondary;
@@ -55,8 +48,7 @@ article.story {
 
 	time {
 		position: absolute;
-		bottom: @gridSpacing * 2;
-		right: @gridSpacing * 2;
-		color: @colourPost;
+		bottom: @gridSpacing;
+		right: @gridSpacing;
 	}
 }

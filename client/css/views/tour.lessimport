@@ -1,4 +1,6 @@
 #tour {
+	padding-left: @gridSpacing * 2;
+	
 	> table {
 		display: table;
 		width: 100%;

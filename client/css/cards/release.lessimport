@@ -38,18 +38,16 @@
 			bottom: 0;
 			left: @gridSpacing * 2;
 
-			.display(flex);
-			li {
-				.flex(1);
-				padding-right: @gridSpacing;
+			width: 100%;
 
+			li {
+				display: inline;
+				float: left;
+				width: @gridSpacing * 7.5;
+				height: @gridSpacing * 3;
+				margin-right: @gridSpacing / 2;
 				a {
 					display: block;
-					height: @gridSpacing * 4;
-					line-height: @gridSpacing * 4;
-					img {
-						vertical-align: middle;
-					}
 				}
 			}
 		}

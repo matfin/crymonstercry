@@ -85,8 +85,32 @@ Router.map(function() {
 	 */
 	this.route('news', {
 		path: '/news',
+		subscriptions: function() {
+			return [
+				Meteor.subscribe('tmblr_posts')
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
 		data: function() {
+
+			/**
+			 *	Sort posts by date
+			 */
+			var sort = {
+				sort: {
+					'timestamp': -1
+				}
+			};
+
 			return {
+				posts: App.collections.tmblr_posts.find({}, sort).fetch(),
 				view: 'news'
 			};
 		},
@@ -116,7 +140,6 @@ Router.map(function() {
 				this.next();
 			}
 		},
-
 		data: function() {
 
 			var sort = {

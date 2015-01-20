@@ -1,2 +1,7 @@
 <template name="views_news">
+	<section class="content" id="{{view}}">
+		{{#each posts}}
+			{{> cards_tumblr_post}}
+		{{/each}}
+	</section>
 </template>

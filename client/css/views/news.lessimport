@@ -1,0 +1,7 @@
+#news {
+	overflow: hidden;
+	.display(flex);
+	.flex-wrap(wrap);
+	padding-left: @gridSpacing * 2;
+	padding-bottom: @gridSpacing * 4;
+}

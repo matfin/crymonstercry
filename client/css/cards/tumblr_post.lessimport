@@ -1,0 +1,62 @@
+div.post {
+	.display(flex);
+	.flex-direction(column);
+	float: left;
+	width: 50%;
+	text-align: left;
+	position: relative;
+	.box-sizing(border-box);
+	padding: @gridSpacing / 2;
+}
+
+
+article.story {
+	.display(flex);
+	.flex-direction(column);
+	float: left;
+	background-color: @colourWhite;
+	.flex(1);
+	padding: @gridSpacing;
+	padding-bottom: @gridSpacing * 3;
+	.box-shadow(0 0 2px rgba(0,0,0,.2));
+	.border-radius(@gridSpacing / 8);
+
+	h1 {
+		color: @colourSecondary;
+	}
+
+	> div {
+		color: @colourPost;
+		margin-top: @gridSpacing;
+
+		a {
+			color: @colourPostLink;
+		}
+
+		span.source {
+			display: block;
+			margin-top: @gridSpacing;
+			a {
+				color: @colourPostLink;
+			}
+		}
+	}
+
+	ol.tags {
+		margin: @gridSpacing 0;
+		font-size: @baseFontSize;
+		li {
+			display: inline;
+			float: left;
+			margin-right: @gridSpacing / 2;
+			color: @colourLight;
+		}
+	}
+
+	time {
+		position: absolute;
+		bottom: @gridSpacing * 2;
+		right: @gridSpacing * 2;
+		color: @colourPost;
+	}
+}

@@ -68,3 +68,7 @@ a {
 		outline: none;
 	}
 }
+
+blockquote {
+	.resetPaddingMargin;
+}

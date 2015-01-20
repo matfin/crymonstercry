@@ -4,12 +4,17 @@
 @backgroundColourPrimary: #73bdd0;
 @backgroundColourSecondary: #2d394a;
 @colourWhite: #fff;
+@colourSecondary: #343434;
+@colourPost: #666769;
+@colourPostLink: #529ECC;
+@colourLight: #ccc;
 @colourYellow: #f1d911;
 
 /**
  *	Font sizes
  */
 @baseFontSize: 16px;
+@fontSizeSmall: @baseFontSize * 0.8;
 @fontSizeMiddle: @baseFontSize * 1.5;
 @fontSizeMiddleLarge: @baseFontSize * 3;
 @fontSizeLarge: @baseFontSize * 4;

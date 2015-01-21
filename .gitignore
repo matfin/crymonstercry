@@ -1,2 +1,3 @@
 *.tar.gz
 settings.json
+packages/npm-container

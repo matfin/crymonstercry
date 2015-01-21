@@ -10,7 +10,7 @@ if(Meteor.isServer) {
 	 *	Required NPM modules
 	 */
 	var connect 	= Meteor.npmRequire('connect'),
-	 	Fiber		= Meteor.npmRequire('fibers'),
+	 	fiber		= Meteor.npmRequire('fibers'),
 	 	bodyParser	= Meteor.npmRequire('body-parser');
 
 	/**
@@ -22,7 +22,7 @@ if(Meteor.isServer) {
 	.use(bodyParser.json({type: 'application/vnd.contentful.management.v1+json'}))
 	.use('/hooks/contentful', function(req, res, next) {
 
-		Fiber(function() {
+		fiber(function() {
 
 			console.log(req.headers);
 			console.log(req.body);

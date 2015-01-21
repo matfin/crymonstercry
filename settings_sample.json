@@ -1,7 +1,6 @@
 {
 	"app": {
-		"debug": true,
-		"key": "{callback_key_here}"
+		"debug": true
 	},
 	"contentful": {
 		"endpointUrl": 			"{contentful_endpoint_in_here}",

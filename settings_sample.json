@@ -1,4 +1,8 @@
 {
+	"app": {
+		"debug": true,
+		"key": "{callback_key_here}"
+	},
 	"contentful": {
 		"endpointUrl": 			"{contentful_endpoint_in_here}",
 		"authorisationHeader": 	"Bearer {your_auth_access_token}",

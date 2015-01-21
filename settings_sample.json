@@ -7,10 +7,16 @@
 		"authorisationHeader": 	"Bearer {your_auth_access_token}",
 		"contentTypeHeader": 	"application/vnd.contentful.delivery.v1+json",
 		"spaceId": 				"{your_contentful_space_id_here}",
-		"contentTypes": {
-			"releases": 	"{content_type_id_here}",
-			"gigs": 		"{content_type_id_here}"
-		}
+		"contentTypes": [
+			{
+				"name": "release",
+				"id": "{content_type_id}"
+			},
+			{
+				"name": "gig",
+				"id": "{content_type_id}"
+			}
+		]
 	},
 	"youtube": {
 		"endpointUrl": 	"https://www.googleapis.com/youtube/v3",

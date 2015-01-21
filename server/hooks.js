@@ -24,8 +24,34 @@ if(Meteor.isServer) {
 
 		fiber(function() {
 
-			console.log(req.headers);
-			console.log(req.body);
+			/**
+			 *	Promise returned from update functions
+			 */
+			var promise = false;
+
+			/**
+			 *	Checking x-contentful-topic for update or delete
+			 */
+			if(Helpers.checkNested(req, 'headers', 'X-Contentful-Topic')) {
+
+				switch(req.headers['X-Contentful-Topic']) {
+					case 'ContentManagement.Entry.publish':
+					case 'ContentManagement.Asset.publish': {
+					
+						break;
+					}
+					case 'ContentManagement.Entry.unpublish':
+					case 'ContentManagement.Asset.unpublish': {
+						
+						break;
+					}
+					default: {
+						console.log('Do nothing');
+						break;
+					}
+				}
+
+			}
 
 			res.writeHead(200, {'Content-Type': 'application/json'});
         	res.end(JSON.stringify({
@@ -36,3 +62,5 @@ if(Meteor.isServer) {
 		}).run();
 	});
 }
+
+

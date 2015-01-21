@@ -12,21 +12,12 @@ Meteor.startup(function() {
 		console.log('Meteor server booting up - ' + new Date().toString());
 
 		/**
-		 *	Grabbing contenful releases
+		 *	Grabbing Contentful Assets and Entries
 		 */
-		Contentful.populateCFReleases().then(function() {
-			console.log('Releases populated successfully');
-		}).fail(function() {
-			console.log('Releases could not be populated');
-		});
-
-		/**
-		 *	Grabbing contentful gigs
-		 */
-		Contentful.populateCFGigs().then(function() {
-			console.log('Gigs populated successfully');
-		}).fail(function() {
-			console.log('Gigs could not be populated');
+		Contentful.fetchAndPopulate().then(function() {
+			console.log('Contentful assets and entries populated successfully');
+		}).fail(function(err) {
+			console.log('Could not populate Contentful data');
 		});
 
 		/**

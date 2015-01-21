@@ -21,7 +21,6 @@ Router.map(function() {
 			 *	album that will appear on the landing page.
 			 */
 			return [
-				Meteor.subscribe('cf_releases'),
 				Meteor.subscribe('cf_assets'),
 				Meteor.subscribe('cf_entries')
 			];
@@ -42,9 +41,8 @@ Router.map(function() {
 			 *	the queries we can use to do this.
 			 */
 			var query = {	
-				isFeatured: {
-					'fields.isFeatured': true
-				}
+				'fields.isFeatured': true,
+				'contentTypeName': 'release'
 			};
 			var sort = {
 				sort: {
@@ -55,13 +53,13 @@ Router.map(function() {
 			/**
 			 *	Grab the featured release
 			 */
-			var release = App.collections.cf_releases.findOne(query.isFeatured);
+			var release = App.collections.cf_entries.findOne(query);
 
 			/**
 			 *	If no releases are featured, then grab the latest one
 			 */
 			if(typeof release === 'undefined') {
-				release = App.collections.cf_releases.findOne({}, sort);
+				release = App.collections.cf_entries.findOne({contentTypeName: 'release'}, sort);
 			}
 
 			/**
@@ -129,7 +127,7 @@ Router.map(function() {
 		path: '/tour',
 		subscriptions: function() {
 			return [
-				Meteor.subscribe('cf_gigs')
+				Meteor.subscribe('cf_entries')
 			];
 		},
 		action: function() {
@@ -147,7 +145,10 @@ Router.map(function() {
 						'fields.date': 1
 					}
 				},
-				gigs = App.collections.cf_gigs.find({}, sort).fetch();
+				query = {
+					contentTypeName: 'gig'
+				},
+				gigs = App.collections.cf_entries.find(query, sort).fetch();
 
 			return {
 				gigs: gigs,
@@ -174,7 +175,6 @@ Router.map(function() {
 			 *	we will be listing.
 			 */
 			return [
-				Meteor.subscribe('cf_releases'),
 				Meteor.subscribe('cf_assets'),
 				Meteor.subscribe('cf_entries')
 			];
@@ -194,7 +194,10 @@ Router.map(function() {
 					'fields.releaseDate': -1
 				}
 			},
-			releases = App.collections.cf_releases.find({}, sort).fetch();
+			query = {
+				contentTypeName: 'release'
+			},
+			releases = App.collections.cf_entries.find(query, sort).fetch();
 
 			return {
 				releases: releases,

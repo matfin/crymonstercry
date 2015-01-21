@@ -18,10 +18,8 @@ Server = {
 		/**
 		 *	Contentful collections
 		 */
-		cf_releases: new Mongo.Collection('cf_releases'),
 		cf_assets: new Mongo.Collection('cf_assets'),
 		cf_entries: new Mongo.Collection('cf_entries'),
-		cf_gigs: new Mongo.Collection('cf_gigs'),
 
 		/**
 		 *	Youtube videos collection

@@ -54,9 +54,13 @@ Package.onUse(function(api) {
 	], ['client', 'server']);
 
 	/**
-	 *	Export the above data fetchers as objects
+	 *	Exports
 	 */
 	api.export('Server');
 	api.export('App');
 	api.export('Helpers');
+	api.export('Contentful');
+	api.export('Instagram');
+	api.export('Tumblr');
+	api.export('Youtube');
 });

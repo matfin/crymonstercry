@@ -5,9 +5,12 @@
  *	@static
  */
 
-var Fiber = Npm.require('fibers');
-
 Tumblr = { 
+
+	/**
+	 *	Fiber needed for async stuff
+	 */
+	Fiber: Npm.require('fibers'),
 
 	/**
 	 *	Tumblr API endpoint url
@@ -41,6 +44,59 @@ Tumblr = {
 	 */
 	filterParams: Meteor.settings.tumblr.filterParams,
 
+
+	/**
+	 *	Function to populate Tumblr posts via the Tumblr api
+	 *
+	 *	@method populatePosts()
+	 *	@return {Object} - a resolved or rejected promise
+	 */
+	populatePosts: function() {
+
+		var deferred = Q.defer();
+			self = this;
+
+		/**
+		 *	Grab the Tumblr posts
+		 */
+		this.posts().then(function(result) {
+
+			self.Fiber(function() {
+
+				Server.collections.tmblr_posts.remove({});
+
+				if(Helpers.checkNested(result, 'data', 'response', 'posts')) {
+
+					_.each(result.data.response.posts, function(item) {
+						Server.collections.tmblr_posts.insert(item);
+					});
+
+					/**
+			    	 *	Then we publish the collection so the client collection 
+			    	 *	can access it
+			    	 */
+			    	Meteor.publish('tmblr_posts', function() {
+						return Server.collections.tmblr_posts.find({});
+					});
+				}
+				else {	
+					deferred.reject();
+				}
+
+			}).run();
+
+			deferred.resolve();
+
+		}).fail(function() {
+
+			deferred.reject();
+
+		});
+
+		return deferred.promise;
+	},
+
+
 	/**
 	 *	Function to fetch filtered Tumblr blog posts
 	 *
@@ -59,33 +115,28 @@ Tumblr = {
 		/**
 		 *	Run this inside a Fiber
 		 */
-		Fiber(function() {
+		//Fiber(function() {
 
-			HTTP.call('get', url, function(error, result) {
+		HTTP.call('get', url, function(error, result) {
 
-				if(error) {
-					deferred.reject({
-						status: 'error',
-						data: error
-					});
-				}
-				else {
-					deferred.resolve({
-						status: 'ok',
-						data: EJSON.parse(result.content)
-					});
-				}
+			if(error) {
+				deferred.reject({
+					status: 'error',
+					data: error
+				});
+			}
+			else {
+				deferred.resolve({
+					status: 'ok',
+					data: EJSON.parse(result.content)
+				});
+			}
 
-			});
+		});
 
-		}).run();
+		//}).run();
 
 		return deferred.promise;
 	}
 
 };
-
-/**
- * 
- *	api.tumblr.com/v2/blog/crymonstercry.tumblr.com/posts?api_key=0moHkznS646WKq3ADmxhRwWYzO09JIh0GHosyjTllTIBmXy2bz&type=text&filter=html
- */

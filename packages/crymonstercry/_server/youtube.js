@@ -4,10 +4,12 @@
  *	@class Youtube
  *	@static
  */
-
-var Fiber = Npm.require('fibers');
-
 Youtube = {
+
+	/**
+	 *	Fiber needed for async stuff
+	 */
+	Fiber: Npm.require('fibers'),
 
 	/**
 	 *	The endpoint url of the YouTube data api
@@ -33,6 +35,78 @@ Youtube = {
 	 */
 	channelUser: Meteor.settings.youtube.channelUser,
 
+
+	/**
+	 *	Function to populate YouTube videos from the YouTube api
+	 *	
+	 *	@method populateeVideos()
+	 *	@return {Object} - a resolved or rejected promise
+	 */
+	populateVideos: function() {
+
+		var deferred = Q.defer(),
+			self = this;
+
+		/**
+		 *	This series of chained promises takes care of the following
+		 *
+		 *	1) 	Given the youtube username, it fetches the channel
+		 *	2) 	Then, with the channels channel id it fetches a list of videos
+		 *	3) 	Then with the video ids, it connects to the api passing in each
+		 *		video Id and grabs the video data, pushing it into the YouTube
+		 *		collection. 
+		 *
+		 *	Why the binding? Without it, inside each chained function, the scope 
+		 *	of 'this' points to the nodejs object and not our YouTube object.
+		 */
+		this.channel().then(this.videoIds.bind(this))
+		.then(this.videos.bind(this))
+	    .then(function(result) {
+	    	/**
+	    	 *	Any code that inserts to Meteor Mongo Collections
+	    	 *	needs to be run inside a Fiber.
+	    	 */
+	    	self.Fiber(function() {
+
+	    		/**
+	    	 	 *	Clear out the old collection
+	    	 	 */
+	    		Server.collections.yt_videos.remove({});
+
+		    	/**
+		    	 *	We have the videos, so lets add them to the collection
+		    	 */
+		    	if(typeof result.data !== 'undefined' && result.data.items !== 'undefined') {
+		    		_.each(result.data.items, function(item) {
+		    			Server.collections.yt_videos.insert(item);
+		    		});
+
+		    		/**
+			    	 *	Then we publish the collection so the client collection 
+			    	 *	can access it
+			    	 */
+			    	Meteor.publish('yt_videos', function() {
+						return Server.collections.yt_videos.find({});
+					});
+		    	}
+		    	else {
+		    		deferred.reject();
+		    	}
+
+	    	}).run();
+	   		
+	   		deferred.resolve();
+	   	})
+	   	.fail(function(error) {
+	   		deferred.reject({
+	   			status: 'error',
+	   			data: error
+	   		});
+	   	});
+
+		return deferred.promise;
+	},
+
 	/**
 	 *	Function to fetch the channel id given the username
 	 *	
@@ -49,28 +123,20 @@ Youtube = {
 
 			url 		= 	this.endpointUrl + '/channels?' + params;
 
-		/**
-		 *	Meteor requires functions like this to be run inside a fiber
-		 */
-		Fiber(function() {
-
-			HTTP.call('get', url, function(error, result) {
-				if(error) {
-					deferred.reject({
-						status: 'error',
-						data: error
-					});
-				}
-				else {
-					deferred.resolve({
-						status: 'ok',
-						data: result
-					});
-				}
-
-			});
-
-		}).run();
+		HTTP.call('get', url, function(error, result) {
+			if(error) {
+				deferred.reject({
+					status: 'error',
+					data: error
+				});
+			}
+			else {
+				deferred.resolve({
+					status: 'ok',
+					data: result
+				});
+			}
+		});
 
 		return deferred.promise;
 	},
@@ -92,7 +158,7 @@ Youtube = {
 		/**
 		 *	Meteor requires functions like this to be run inside a fiber
 		 */
-		Fiber(function() {
+		self.Fiber(function() {
 
 			if(typeof channelData !== 'undefined' && typeof channelData.items !== 'undefined' && channelData.items[0] !== 'undefined') {
 
@@ -115,7 +181,7 @@ Youtube = {
 							data: result
 						});
 					}
-				})
+				});
 			}
 			else {
 				deferred.reject({
@@ -149,9 +215,9 @@ Youtube = {
 		/**
 		 *	Meteor requires functions like this to be run inside a fiber
 		 */
-		Fiber(function() {
+		self.Fiber(function() {
+
 			if(typeof videoIdsData !== 'undefined' && typeof videoIdsData.items !== 'undefined') {
-				
 				/**
 				 *	Grab each video ID and add it to the above array
 				 */
@@ -182,7 +248,6 @@ Youtube = {
 							});
 						}
 					});
-
 				}
 			}
 			else {
@@ -194,7 +259,5 @@ Youtube = {
 		}).run();
 
 		return deferred.promise;
-
 	}
-
-}
+};

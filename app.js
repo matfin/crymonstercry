@@ -1,13 +1,5 @@
 Meteor.startup(function() {
 
-	/**
-	 *	Client side set up code will go in here for client
-	 *	side startup
-	 */
-	if(Meteor.isClient) {
-
-	}
-
 	/** 
 	 *	App startup for the server - where we fetch data 
 	 *	and push it into our collections.
@@ -22,7 +14,7 @@ Meteor.startup(function() {
 		/**
 		 *	Grabbing contenful releases
 		 */
-		Server.populateCFReleases().then(function() {
+		Contentful.populateCFReleases().then(function() {
 			console.log('Releases populated successfully');
 		}).fail(function() {
 			console.log('Releases could not be populated');
@@ -31,7 +23,7 @@ Meteor.startup(function() {
 		/**
 		 *	Grabbing contentful gigs
 		 */
-		Server.populateCFGigs().then(function() {
+		Contentful.populateCFGigs().then(function() {
 			console.log('Gigs populated successfully');
 		}).fail(function() {
 			console.log('Gigs could not be populated');
@@ -40,7 +32,7 @@ Meteor.startup(function() {
 		/**
 		 *	Grabbing YouTube videos
 		 */
-		Server.populateYoutubeVideos().then(function(){
+		Youtube.populateVideos().then(function(){
 			console.log('YouTube videos populated successfully');
 		}).fail(function() {
 			console.log('Could not populate YouTube videos');
@@ -49,16 +41,16 @@ Meteor.startup(function() {
 		/**
 		 *	Grabbing Tumblr posts
 		 */
-		Server.populateTumblrPosts().then(function() {
+		Tumblr.populatePosts().then(function() {
 			console.log('Tumblr posts populated successfully');
 		}).fail(function() {
 			console.log('Could not populate Tumblr posts');
 		});
 
 		/**
-		 *	Fetch instragram access token code
+		 *	Fetch instragram content
 		 */
-		Server.populateInstagramContent().then(function() {
+		Instagram.populateContent().then(function() {
 			console.log('Instagram media populated successfully');
 		}).fail(function() {
 			console.log('Could not populate Instagram media');

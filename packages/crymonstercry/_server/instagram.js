@@ -4,10 +4,12 @@
  *	@class Instagram
  *	@static
  */
-
-var Fiber = Npm.require('fibers');
-
 Instagram = {
+
+	/**
+	 *	Fiber needed for async stuff
+	 */
+	Fiber: Npm.require('fibers'),
 
 	/**
 	 *	The Instagram API url
@@ -32,6 +34,54 @@ Instagram = {
 	 *	@type 		{String}
 	 */
 	userId: Meteor.settings.instagram.userId,
+
+
+	/**
+	 *	Function to kick off fetching of Instagram posts
+	 *
+	 *	@method populateContent
+	 *	@return {Object} - a resoved or rejected promise
+	 */
+	populateContent: function() {
+
+		var deferred = Q.defer(),
+			self = this;
+
+		this.getRecentMedia().then(function(result) {
+
+			/**
+			 *	Populate the collection from within a Fiber
+			 */
+			self.Fiber(function() {
+
+				/**
+				 *	Clear out the old collection data
+				 */
+				Server.collections.in_images.remove({});
+
+				/**
+				 *	Then refresh it, publishing the collections
+				 */
+				_.each(result.data.data, function(item) {
+					Server.collections.in_images.insert(item);
+				});
+
+				Meteor.publish('in_images', function() {
+					return Server.collections.in_images.find({});
+				});
+
+			}).run();
+
+			deferred.resolve();
+
+		}).fail(function(error) {
+			
+			deferred.reject();
+
+		});
+
+		return deferred.promise;
+	},
 
 	/**
 	 * 	Function to grab the users most recent media
@@ -64,7 +114,6 @@ Instagram = {
 		});
 
 		return deferred.promise;
-
 	}
 };
 

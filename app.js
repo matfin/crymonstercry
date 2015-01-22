@@ -13,6 +13,8 @@ Meteor.startup(function() {
 
 		/**
 		 *	Grabbing Contentful Assets and Entries
+		 *	No polling is needed here as Contentul
+		 *	uses hooks to notify of refreshed content.
 		 */
 		Contentful.fetchAndPopulate().then(function() {
 			console.log('Contentful assets and entries populated successfully');
@@ -23,19 +25,37 @@ Meteor.startup(function() {
 		/**
 		 *	Grabbing YouTube videos
 		 */
-		Youtube.populateVideos().then(function(){
+		Youtube.refreshVideos().then(function(){
 			console.log('YouTube videos populated successfully');
+			/**
+			 *	Publish the collection and start polling for updates
+			 */
+			Youtube.publishCollection();
+			Youtube.pollForUpdates();
 		}).fail(function() {
 			console.log('Could not populate YouTube videos');
+			/**
+			 *	Stop polling for changes on error
+			 */
+			Meteor.clearInterval(Youtube.pollUpdateInterval);
 		});
 
 		/**
 		 *	Grabbing Tumblr posts
 		 */
-		Tumblr.populatePosts().then(function() {
+		Tumblr.refreshPosts().then(function() {
 			console.log('Tumblr posts populated successfully');
+			/**
+			 *	Publish the collection and start polling for updates
+			 */
+			Tumblr.publishCollection();
+			Tumblr.pollForUpdates();
 		}).fail(function() {
 			console.log('Could not populate Tumblr posts');
+			/**
+			 *	Stop polling for changes on error
+			 */
+			Meteor.clearInterval(Tumblr.pollUpdateInterval);
 		});
 
 		/**
@@ -54,7 +74,7 @@ Meteor.startup(function() {
 			/**
 			 *	Stop polling for changes on error
 			 */
-			Meteor.clearTimeout(Instagram.pollUpdateInterval);
+			Meteor.clearInterval(Instagram.pollUpdateInterval);
 		});
 
 		/**

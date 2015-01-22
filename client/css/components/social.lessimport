@@ -1,6 +1,7 @@
 .social {
 	
 	.flex(1);
+	min-width: @gridSpacing * 6.25;
 	padding-top: @gridSpacing * 4;
 
 	ol {

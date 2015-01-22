@@ -60,18 +60,18 @@ Instagram = {
 		 */
 		this.Fiber(function() {
 
-		this.updatePollInterval = Meteor.setTimeout(function() {
-			
-			self.refreshContent().then(function() {
-				console.log('Content refreshed: ' + new Date().getTime());
-			}).fail(function(){
-				/**
-				 *	Kill the poll update interval on fail
-				 */
-				Meteor.clearTimrout(self.updatePollInterval);
-			});
+			this.updatePollInterval = Meteor.setInterval(function() {
+				
+				self.refreshContent().then(function() {
+					console.log('Instagram refreshed: ' + new Date().getTime());
+				}).fail(function() {
+					/**
+					 *	Kill the poll update interval on fail
+					 */
+					Meteor.clearInterval(self.updatePollInterval);
+				});
 
-		}, Meteor.settings.app.pollInterval);
+			}, Meteor.settings.app.pollInterval);
 
 		}).run();
 	},
@@ -109,16 +109,16 @@ Instagram = {
 				 *	Call an upsert to check for and add new content
 				 */
 				_.each(result.data.data, function(item) {
-
-					Server.collections.in_images.update(
-						{
-							id: item.id
-						},
-						item,
-						{
-							upsert: true
-						}
-					);
+					/**
+					 *	Call the upsert
+					 */
+					Server.collections.in_images.update({
+						id: item.id
+					},
+					item,
+					{
+						upsert: true
+					});
 				});
 
 			}).run();

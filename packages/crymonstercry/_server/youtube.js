@@ -36,22 +36,64 @@ Youtube = {
 	channelUser: Meteor.settings.youtube.channelUser,
 
 	/**
+	 *	Interval reference for poll function
+	 *
+	 *	@property	updatePollInterval
+	 *	@type		{Function}
+	 *	@default 	false
+	 */
+	updatePollInterval: false,
+
+	/**
 	 *	Function to poll for updated
 	 *	
 	 *	@method pollForUpdates()
 	 *	@return undefined - returns nothing 	
 	 */
 	pollForUpdates: function() {
-		
+
+		var self = this;
+
+		/**
+		 * 	Set the update to call at a specified interval
+		 *	This needs to be run inside a fiber
+		 */
+		this.Fiber(function() {
+
+			this.updatePollInterval = Meteor.setInterval(function() {
+
+				self.refreshVideos().then(function() {
+					console.log('Youtube refreshed' + new Date().getTime());
+				}).fail(function() {
+					/**
+					 *	Kill the poll update interval on fail
+					 */
+					Meteor.clearInterval(self.updatePollInterval);
+				});
+			}, Meteor.settings.app.pollInterval);
+
+		}).run();
+	},
+
+	/**
+	 *	Function to publish the collection
+	 *	
+	 *	@function 	publishContent
+	 *	@return 	undefined - returns nothing;
+	 */
+	publishCollection: function() {
+		Meteor.publish('yt_videos', function() {
+			return Server.collections.yt_videos.find({});
+		});
 	},
 
 	/**
 	 *	Function to populate YouTube videos from the YouTube api
 	 *	
-	 *	@method populateVideos()
+	 *	@method refreshVideos()
 	 *	@return {Object} - a resolved or rejected promise
 	 */
-	populateVideos: function() {
+	refreshVideos: function() {
 
 		var deferred = Q.defer(),
 			self = this;
@@ -76,27 +118,19 @@ Youtube = {
 	    	 *	needs to be run inside a Fiber.
 	    	 */
 	    	self.Fiber(function() {
-
-	    		/**
-	    	 	 *	Clear out the old collection
-	    	 	 */
-	    		Server.collections.yt_videos.remove({});
-
 		    	/**
 		    	 *	We have the videos, so lets add them to the collection
 		    	 */
 		    	if(typeof result.data !== 'undefined' && result.data.items !== 'undefined') {
-		    		_.each(result.data.items, function(item) {
-		    			Server.collections.yt_videos.insert(item);
-		    		});
-
-		    		/**
-			    	 *	Then we publish the collection so the client collection 
-			    	 *	can access it
-			    	 */
-			    	Meteor.publish('yt_videos', function() {
-						return Server.collections.yt_videos.find({});
-					});
+	    			_.each(result.data.items, function(item) {
+	    				Server.collections.yt_videos.update({
+	    					id: item.id
+	    				}, 
+	    				item,
+	    				{
+	    					upsert: true
+	    				});
+	    			});
 		    	}
 		    	else {
 		    		deferred.reject();

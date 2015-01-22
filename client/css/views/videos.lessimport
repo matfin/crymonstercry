@@ -3,6 +3,9 @@
 		display: block;
 		float: left;
 		margin-bottom: @gridSpacing * 4;
+		width: 100%;
+		.box-sizing(border-box);
+		padding-left: @gridSpacing * 2;
 
 		h2 {
 			float: left;
@@ -13,7 +16,6 @@
 
 		iframe {
 			float: left;
-			margin-left: @gridSpacing * 2;
 		}
 	}
 }

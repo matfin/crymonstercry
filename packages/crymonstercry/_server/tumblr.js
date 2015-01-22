@@ -44,14 +44,66 @@ Tumblr = {
 	 */
 	filterParams: Meteor.settings.tumblr.filterParams,
 
+	/**
+	 *	Interval reference for poll function
+	 *
+	 *	@property	updatePollInterval
+	 *	@type		{Function}
+	 *	@default 	false
+	 */
+	updatePollInterval: false,
 
 	/**
-	 *	Function to populate Tumblr posts via the Tumblr api
+	 *	Function to poll for content updates at an interval
+	 *	
+	 *	@method 	pollForUpdates
+	 *	@return 	undefined - returns nothing;
+	 */
+	pollForUpdates: function() {
+
+		var self = this;
+
+		/**
+		 * 	Set the update to call at a specified interval
+		 *	This needs to be run inside a fiber
+		 */
+		this.Fiber(function() {
+
+			this.updatePollInterval = Meteor.setInterval(function() {
+				
+				self.refreshPosts().then(function() {
+					console.log('Tumblr refreshed: ' + new Date().getTime());
+				}).fail(function() {
+					/**
+					 *	Kill the poll update interval on fail
+					 */
+					Meteor.clearTimrout(self.updatePollInterval);
+				});
+
+			}, Meteor.settings.app.pollInterval);
+
+		}).run();
+	},
+
+	/**
+	 *	Function to publish the collection
+	 *	
+	 *	@function 	publishContent
+	 *	@return 	undefined - returns nothing;
+	 */
+	publishCollection: function() {
+		Meteor.publish('tmblr_posts', function() {
+			return Server.collections.tmblr_posts.find({});
+		});
+	},
+
+	/**
+	 *	Function to refresh Tumblr posts via the Tumblr api
 	 *
-	 *	@method populatePosts()
+	 *	@method refreshPosts()
 	 *	@return {Object} - a resolved or rejected promise
 	 */
-	populatePosts: function() {
+	refreshPosts: function() {
 
 		var deferred = Q.defer();
 			self = this;
@@ -63,20 +115,19 @@ Tumblr = {
 
 			self.Fiber(function() {
 
-				Server.collections.tmblr_posts.remove({});
-
 				if(Helpers.checkNested(result, 'data', 'response', 'posts')) {
 
 					_.each(result.data.response.posts, function(item) {
-						Server.collections.tmblr_posts.insert(item);
-					});
-
-					/**
-			    	 *	Then we publish the collection so the client collection 
-			    	 *	can access it
-			    	 */
-			    	Meteor.publish('tmblr_posts', function() {
-						return Server.collections.tmblr_posts.find({});
+						/**
+						 *	Call the upsert
+						 */
+						Server.collections.tmblr_posts.update({
+							id: item.id
+						},
+						item,
+						{
+							upsert: true
+						});
 					});
 				}
 				else {	

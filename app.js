@@ -1,5 +1,4 @@
 Meteor.startup(function() {
-
 	/** 
 	 *	App startup for the server - where we fetch data 
 	 *	and push it into our collections.

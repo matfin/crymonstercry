@@ -11,7 +11,6 @@
 			float: left;
 			color: @colourWhite;
 			margin-bottom: @gridSpacing;
-			margin-left: @gridSpacing * 2;
 		}
 
 		iframe {

@@ -63,7 +63,7 @@ Youtube = {
 			this.updatePollInterval = Meteor.setInterval(function() {
 
 				self.refreshVideos().then(function() {
-					console.log('Youtube refreshed' + new Date().getTime());
+					console.log('Youtube refreshed: ' + new Date().getTime());
 				}).fail(function() {
 					/**
 					 *	Kill the poll update interval on fail

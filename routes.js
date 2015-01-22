@@ -5,6 +5,14 @@ Router.configure({
 	loadingTemplate: 'components_loading'
 });
 
+Router.onRun(function() {
+	this.next();
+});
+
+Router.onBeforeAction(function() {
+	this.next();
+});	
+
 /**
  *	Router map function
  */
@@ -14,7 +22,7 @@ Router.map(function() {
 	 */
 	this.route('landing', {
 		path: '/',
-		subscriptions: function() {
+		waitOn: function() {
 			/**
 			 *	Subscribe to these three collections publised
 			 *	from the server. We need them for the featured
@@ -83,7 +91,7 @@ Router.map(function() {
 	 */
 	this.route('news', {
 		path: '/news',
-		subscriptions: function() {
+		waitOn: function() {
 			return [
 				Meteor.subscribe('tmblr_posts')
 			];
@@ -125,7 +133,7 @@ Router.map(function() {
 	 */
 	this.route('tour', {
 		path: '/tour',
-		subscriptions: function() {
+		waitOn: function() {
 			return [
 				Meteor.subscribe('cf_entries')
 			];
@@ -168,7 +176,7 @@ Router.map(function() {
 	 */
 	this.route('music', {
 		path: '/music',
-		subscriptions: function() {
+		waitOn: function() {
 			/**
 			 *	Subscribe to these three collections publised
 			 *	from the server. We need them for the albums 
@@ -217,7 +225,7 @@ Router.map(function() {
 	 */
 	this.route('video', {
 		path: '/video',
-		subscriptions: function() {
+		waitOn: function() {
 			/**
 			 *	Subscribe to these three collections publised
 			 *	from the server. We need them for the albums 
@@ -261,7 +269,7 @@ Router.map(function() {
 	 */
 	this.route('photos', {
 		path: '/photos',
-		subscriptions: function() {
+		waitOn: function() {
 			/**
 			 *	Returning the subscription for Instagram 
 			 *	photos here, needed for this view.

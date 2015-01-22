@@ -1,2 +1,7 @@
 <template name="views_about">
+	<section class="content" id="{{view}}">
+		{{#markdown}}
+			{{page.fields.content}}
+		{{/markdown}}
+	</section>
 </template>

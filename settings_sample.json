@@ -16,6 +16,10 @@
 			{
 				"name": "gig",
 				"id": "{content_type_id}"
+			},
+			{
+				"name": "page",
+				"id": "{content_type_id}"
 			}
 		]
 	},

@@ -11,7 +11,7 @@ Router.onRun(function() {
 
 Router.onBeforeAction(function() {
 	this.next();
-});	
+});
 
 /**
  *	Router map function
@@ -59,9 +59,9 @@ Router.map(function() {
 			};
 
 			/**
-			 *	Grab the featured release
+			 *	Grab the featured release and page content
 			 */
-			var release = App.collections.cf_entries.findOne(query);
+			var release = App.collections.cf_entries.findOne(query); 
 
 			/**
 			 *	If no releases are featured, then grab the latest one
@@ -75,6 +75,7 @@ Router.map(function() {
 			 */
 			return {
 				release: release,
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'landing'}),
 				view: 'landing'
 			};
 		},
@@ -93,7 +94,8 @@ Router.map(function() {
 		path: '/news',
 		waitOn: function() {
 			return [
-				Meteor.subscribe('tmblr_posts')
+				Meteor.subscribe('tmblr_posts'),
+				Meteor.subscribe('cf_entries')
 			];
 		},
 		action: function() {
@@ -117,6 +119,7 @@ Router.map(function() {
 
 			return {
 				posts: App.collections.tmblr_posts.find({}, sort).fetch(),
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'news'}),
 				view: 'news'
 			};
 		},
@@ -160,6 +163,7 @@ Router.map(function() {
 
 			return {
 				gigs: gigs,
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'tour'}),
 				view: 'tour'
 			};
 		},
@@ -209,6 +213,7 @@ Router.map(function() {
 
 			return {
 				releases: releases,
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'music'}),
 				view: 'music'
 			};
 		},
@@ -233,6 +238,7 @@ Router.map(function() {
 			 */
 			return [
 				Meteor.subscribe('yt_videos'),
+				Meteor.subscribe('cf_entries')
 			];
 		},
 		action: function() {
@@ -252,6 +258,7 @@ Router.map(function() {
 			};
 
 			return {
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'video'}),
 				videos: App.collections.yt_videos.find({}, sort).fetch(),
 				view: 'video'
 			};
@@ -275,7 +282,8 @@ Router.map(function() {
 			 *	photos here, needed for this view.
 			 */
 			return [
-				Meteor.subscribe('in_images')
+				Meteor.subscribe('in_images'),
+				Meteor.subscribe('cf_entries')
 			];
 		},
 		action: function() {
@@ -295,6 +303,7 @@ Router.map(function() {
 			};
 
 			return {
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'photos'}),
 				images: App.collections.in_images.find({},{sort: orderBy}).fetch(),
 				view: 'photos'
 			};
@@ -312,8 +321,22 @@ Router.map(function() {
 	 */
 	this.route('about', {
 		path: '/about',
+		waitOn: function() {
+			return [
+				Meteor.subscribe('cf_entries')
+			];
+		},
+		action: function() {
+			if(this.ready()) {
+				this.render();
+			}
+			else {
+				this.next();
+			}
+		},
 		data: function() {
 			return {
+				page: App.collections.cf_entries.findOne({'fields.identifier': 'about'}),
 				view: 'about'
 			};
 		},

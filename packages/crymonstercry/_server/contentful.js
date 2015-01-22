@@ -147,30 +147,20 @@ Contentful = {
 
 			this.Fiber(function() {
 
-				collection.upsert({
-					'sys.id': entry.sys.id
-				}, 
-				{
-					$set: {
+				collection.update(
+					{
+						'sys.id': entry.sys.id
+					},
+					{
 						fields: Helpers.flattenObjects(entry.fields, 'en-IE'),
 						sys: entry.sys,
 						contentTypeName: self.contentTypeName(entry)
-					} 
-				});
-
-				// var updateData = Helpers.flattenObjects(entry.fields, 'en-IE'),
-				// 	contentTypeName = self.contentTypeName(entry);
-
-				// collection.upsert({
-				// 	'sys.id': entry.sys.id
-				// }, {
-				// 	$set: {
-				// 		fields: updateData,
-				// 		sys: entry.sys,
-				// 		contentTypeName: contentTypeName
-				// 	}
-				// });
-
+					},
+					{
+						upsert: true
+					}	
+				);
+				
 				deferred.resolve({
 					status: 'ok',
 					message: 'Contentful content updated ok'

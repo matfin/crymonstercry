@@ -147,8 +147,6 @@ Contentful = {
 
 			this.Fiber(function() {
 
-				console.log(entry.sys);
-
 				collection.upsert({
 					'sys.id': entry.sys.id
 				}, 

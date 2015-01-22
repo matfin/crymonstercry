@@ -6,7 +6,6 @@ body {
 		.container {
 			background: @backgroundColourPrimary url('/images/landing.jpg') no-repeat center bottom;
 			background-size: cover;
-			padding-bottom: @gridSpacing * 4;
 		}
 	}
 }

@@ -148,9 +148,7 @@ Contentful = {
 			this.Fiber(function() {
 
 				collection.upsert({
-					sys: {
-						id: entry.sys.id
-					}
+					'sys.id': entry.sys.id
 				}, 
 				{
 					$set: {
@@ -159,6 +157,19 @@ Contentful = {
 						contentTypeName: self.contentTypeName(entry)
 					} 
 				});
+
+				// var updateData = Helpers.flattenObjects(entry.fields, 'en-IE'),
+				// 	contentTypeName = self.contentTypeName(entry);
+
+				// collection.upsert({
+				// 	'sys.id': entry.sys.id
+				// }, {
+				// 	$set: {
+				// 		fields: updateData,
+				// 		sys: entry.sys,
+				// 		contentTypeName: contentTypeName
+				// 	}
+				// });
 
 				deferred.resolve({
 					status: 'ok',

@@ -5,7 +5,6 @@
  *	@return undefined
  */
 Template['cards_instagram_photo'].created = function() {
-	console.log(this.data);
 };
 
 /**

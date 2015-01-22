@@ -41,10 +41,20 @@ Meteor.startup(function() {
 		/**
 		 *	Fetch instragram content
 		 */
-		Instagram.populateContent().then(function() {
+		Instagram.refreshContent().then(function() {
 			console.log('Instagram media populated successfully');
+			/**
+			 *	Publish the collection and then start polling for updates
+			 */
+			Instagram.publishCollection();
+			Instagram.pollForUpdates();
+
 		}).fail(function() {
 			console.log('Could not populate Instagram media');
+			/**
+			 *	Stop polling for changes on error
+			 */
+			Meteor.clearTimeout(Instagram.pollUpdateInterval);
 		});
 
 		/**

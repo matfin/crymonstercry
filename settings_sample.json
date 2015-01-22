@@ -1,6 +1,7 @@
 {
 	"app": {
-		"debug": true
+		"debug": true,
+		"pollInterval": 3600000
 	},
 	"contentful": {
 		"endpointUrl": 			"{contentful_endpoint_in_here}",

@@ -35,11 +35,20 @@ Youtube = {
 	 */
 	channelUser: Meteor.settings.youtube.channelUser,
 
+	/**
+	 *	Function to poll for updated
+	 *	
+	 *	@method pollForUpdates()
+	 *	@return undefined - returns nothing 	
+	 */
+	pollForUpdates: function() {
+		
+	},
 
 	/**
 	 *	Function to populate YouTube videos from the YouTube api
 	 *	
-	 *	@method populateeVideos()
+	 *	@method populateVideos()
 	 *	@return {Object} - a resolved or rejected promise
 	 */
 	populateVideos: function() {

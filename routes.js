@@ -279,8 +279,15 @@ Router.map(function() {
 			}
 		},
 		data: function() {
+			/**
+			 *	Order by time descending
+			 */
+			var orderBy = {
+				created_time: -1
+			};
+
 			return {
-				images: App.collections.in_images.find({}).fetch(),
+				images: App.collections.in_images.find({},{sort: orderBy}).fetch(),
 				view: 'photos'
 			};
 		},

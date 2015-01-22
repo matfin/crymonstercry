@@ -35,39 +35,90 @@ Instagram = {
 	 */
 	userId: Meteor.settings.instagram.userId,
 
+	/**
+	 *	Interval reference for poll function
+	 *
+	 *	@property	updatePollInterval
+	 *	@type		{Function}
+	 *	@default 	false
+	 */
+	updatePollInterval: false,
+
+	/**
+	 *	Function to poll for content updates at an interval
+	 *	
+	 *	@method 	pollForUpdates
+	 *	@return 	undefined - returns nothing;
+	 */
+	pollForUpdates: function() {
+
+		var self = this;
+		
+		/**
+		 * 	Set the update to call at a specified interval
+		 *	This needs to be run inside a fiber
+		 */
+		this.Fiber(function() {
+
+		this.updatePollInterval = Meteor.setTimeout(function() {
+			
+			self.refreshContent().then(function() {
+				console.log('Content refreshed: ' + new Date().getTime());
+			}).fail(function(){
+				/**
+				 *	Kill the poll update interval on fail
+				 */
+				Meteor.clearTimrout(self.updatePollInterval);
+			});
+
+		}, Meteor.settings.app.pollInterval);
+
+		}).run();
+	},
+
+	/**
+	 *	Function to publish the collection
+	 *	
+	 *	@function 	publishContent
+	 *	@return 	undefined - returns nothing;
+	 */
+	publishCollection: function() {
+		Meteor.publish('in_images', function() {
+			return Server.collections.in_images.find({});
+		});
+	},
 
 	/**
 	 *	Function to kick off fetching of Instagram posts
 	 *
-	 *	@method populateContent
+	 *	@method refreshContent
 	 *	@return {Object} - a resoved or rejected promise
 	 */
-	populateContent: function() {
+	refreshContent: function() {
 
 		var deferred = Q.defer(),
 			self = this;
 
 		this.getRecentMedia().then(function(result) {
-
 			/**
 			 *	Populate the collection from within a Fiber
 			 */
 			self.Fiber(function() {
 
 				/**
-				 *	Clear out the old collection data
-				 */
-				Server.collections.in_images.remove({});
-
-				/**
-				 *	Then refresh it, publishing the collections
+				 *	Call an upsert to check for and add new content
 				 */
 				_.each(result.data.data, function(item) {
-					Server.collections.in_images.insert(item);
-				});
 
-				Meteor.publish('in_images', function() {
-					return Server.collections.in_images.find({});
+					Server.collections.in_images.update(
+						{
+							id: item.id
+						},
+						item,
+						{
+							upsert: true
+						}
+					);
 				});
 
 			}).run();

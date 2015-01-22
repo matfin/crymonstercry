@@ -148,7 +148,9 @@ Contentful = {
 			this.Fiber(function() {
 
 				collection.upsert({
-					'sys.id': entry.sys.id
+					sys: {
+						id: entry.sys.id
+					}
 				}, 
 				{
 					$set: {
@@ -296,5 +298,70 @@ Contentful = {
 		 *	Return the resolved or rejected promise;
 		 */
 		return deferred.promise;
-	}
+	},
+
+	/**
+	 *	Set up listeners for incoming hooks from external content providers.
+	 *	These will be fired when content is updated, and they will be used to
+	 *	update collections automatically.
+	 *
+	 *	@method 	listenForContentChanges
+	 *	@return 	undefined - returns nothing
+	 */
+	listenForContentChanges: function() {
+
+		/**
+		 *	Required NPM modules
+		 */
+		var connect 	= Meteor.npmRequire('connect'),
+			bodyParser	= Meteor.npmRequire('body-parser'),
+			self		= this;
+
+		WebApp.connectHandlers
+		.use(bodyParser.json({type: 'application/json'}))
+		.use(bodyParser.json({type: 'application/vnd.contentful.management.v1+json'}))
+		/**
+		 *	Handling incoming requests from Contentful webhooks
+		 */
+		.use('/hooks/contentful', function(req, res, next) {
+
+			/**
+			 *	Checking credentials
+			 */
+			if(!self.checkCredentials(req)) {
+				Server.makeResponse(res, {
+					statusCode: 403,
+					contentType: 'application/json',
+					data: {
+						status: 'error',
+						message: 'Invalid credentials'
+					}
+				});
+			}
+			else {
+				/**
+				 *	Call on the Contentful object to handle this request
+				 */
+				self.handleRequest(req).then(function(result) {
+					/**
+					 *	Success
+					 */
+					Server.makeResponse(res, {
+						statusCode: 200,
+						contentType: 'application/json',
+						data: result
+					});
+				}).fail(function(error) {
+					/**
+					 *	Fail
+					 */
+					Server.makeResponse(res, {
+						statusCode: 200,
+						contentType: 'application/json',
+						data: error
+					});
+				});
+			}
+		});
+	},
 };

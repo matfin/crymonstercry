@@ -55,31 +55,145 @@ Contentful = {
 	 */
 	contentTypeHeader: Meteor.settings.contentful.contentTypeHeader,
 
+	/**
+	 *	Function to check the credentials on the request header
+	 *	are valid
+	 *
+	 *	@method 	checkCredentials
+	 *	@param  	{Object} request - the incoming request
+	 *	@return 	{Boolean} - true if credentials are valid
+	 */
+	checkCredentials: function(request) {
+		return 	Helpers.checkNested(request, 'headers', 'authorization') &&
+				request.headers.authorization === Meteor.settings.contentful.key;
+
+	},
+
+	/**
+	 *	Function to handle incoming requests from the Contentful API
+	 *	This function examines an incoming requests, looking at the 
+	 *	headers and body and calls the appropriate function.
+	 *	
+	 *	@method 	handleRequest()
+	 *	@param 		{Object} request - the incoming request object
+	 *	@return 	{Object} - a resolved or rejected promise
+	 */
+	handleRequest: function(request) {
+		/**
+		 *	Determine if we are updating or deleting content
+		 */
+		switch(request.headers['x-contentful-topic']) {
+			case 'ContentManagement.Entry.publish':
+			case 'ContentManagement.Asset.publish': {
+
+				return this.contentPublish(request.body);
+
+				break;
+			}
+			case 'ContentManagement.Entry.unpublish':
+			case 'ContentManagement.Asset.unpublish': {
+
+				console.log('A delete!');
+
+				break;
+			}
+		}
+
+		
+	},
 
 	/**
 	 *	Function to update Assets and entries for Contentful data
 	 *
-	 *	@method 	updateContent()
-	 *	@param 		{Object} - 	object representing the request body from the 
-	 *							Contentful callback webhook
+	 *	@method 	contentPublish()
+	 *	@param 		{Object} content - the request body with content payload 
 	 *	@return 	{Object} - 	A promise resolved or rejected
 	 */
-	updateContent: function(requestBody) {
+	contentPublish: function(requestBody) {
 
-		var deferred = Q.defer(),
-			self = this;
+		var deferred 	= Q.defer(),
+			self 		= this,
+			entry 		= requestBody,
+			collection;
 
-		/** 
-		 *	First, we need to determine which collection needs updating 
+		/**
+		 *	Check to see if we have the correct entry type
+		 *	and load the correct collection to be updated
 		 */
+		switch(entry.sys.type) {
+			case 'Entry': {
+				collection = Server.collections.cf_entries;
+				break;
+			}
+			case 'Asset': {
+				collection = Server.collection.cf_assets;
+				break;
+			}
+			default: {
+				deferred.reject({
+					status: 'error',
+					message: 'Entry type does not exist. Exiting'
+				});
+			}
+		}
 
-		console.log(requestBody);
+		/**
+		 *	If we have a collection to update
+		 */
+		if(typeof collection !== 'undefined') {
+			/**
+			 *	Call the upsert function from within a Fiber
+			 */
 
+			this.Fiber(function() {
 
-		deferred.resolve();
+				console.log(entry.sys);
+
+				collection.upsert({
+					'sys.id': entry.sys.id
+				}, 
+				{
+					$set: {
+						fields: Helpers.flattenObjects(entry.fields, 'en-IE'),
+						sys: entry.sys,
+						contentTypeName: self.contentTypeName(entry)
+					} 
+				});
+
+				deferred.resolve({
+					status: 'ok',
+					message: 'Contentful content updated ok'
+				})
+
+			}).run();
+		}
+		
 		return deferred.promise;
-
 	},
+
+	/**
+	 *	Function to fetch the content type name for an entry given its 
+	 *	content type id.
+	 *
+	 *	@method 	contentTypeName()
+	 *	@param 		{Object} - entry
+	 *	@return 	{String} - the content type name as a string
+	 */
+	contentTypeName: function(entry) {
+
+		if(Helpers.checkNested(entry, 'sys', 'contentType', 'sys', 'id')) {
+
+			var contentTypeId = entry.sys.contentType.sys.id,
+				contentType = _.find(this.contentTypes, function(contentType) {
+				return contentType.id === contentTypeId;
+			});
+
+			return (typeof contentType !== 'undefined') ? contentType.name:'nested';
+		}
+
+		return 'nested';
+	},
+
 
 	/**
 	 *	Function to make a HTTP call to the Contentful endpoint,
@@ -140,13 +254,7 @@ Contentful = {
 						/**
 						 *	We need to tag gigs and releases before we insert them
 						 */
-						if(Helpers.checkNested(item, 'sys', 'contentType', 'sys', 'id')) {
-							var contentTypeId 	= item.sys.contentType.sys.id,
-								contentType = _.find(self.contentTypes, function(contentType){
-									return contentType.id === contentTypeId;
-								});
-							item.contentTypeName = (typeof contentType !== 'undefined' ? contentType.name:'nested');
-						}
+						item.contentTypeName = self.contentTypeName(item);
 
 						/**
 						 *	Then we insert them to the collection

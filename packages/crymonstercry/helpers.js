@@ -28,5 +28,33 @@ Helpers = {
 			obj = obj[args[i]];
 		}
 		return true;
+	},
+
+	/**
+	 *	Function to remap incoming fields and reduce to a single nested
+	 *	object key pair
+	 *
+	 *	@method 	flattenObjects()
+	 *	@param 		{Object} - 	an array of objects containing fields 
+	 *							with deeply nested key value pairs ie:
+	 *							{date: {'en-IE': '2015-05-01'}}
+	 *
+	 *	@param 		{String} - 	A selector to dig the nested value out.
+	 *	
+	 *	@return 	{Object} - 	Less deeply nested fields ie:
+	 *							{date: '2015-05-01'} 
+	 */
+	flattenObjects: function(fields, selector) {
+		
+		var filtered = {};
+		_.each(fields, function(field, key) {
+			/**
+			 *	Discard null or undefined values
+			 */
+			if(field[selector] !== null) {
+				filtered[key] = field[selector];
+			}
+		});
+		return filtered;
 	}
 };

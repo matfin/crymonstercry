@@ -106,17 +106,28 @@ Server = {
 		 */
 		.use('/hooks/instagram', function(req, res, next){
 
-			console.log(req.body);
-
-			self.makeResponse(res, {
-				statusCode: 200,
-				contentType: 'application/json',
-				data: {
-					status: 'ok',
-					message: 'Instagram route has been hit'
-				}
-			});
-
+			/**
+			 *	Check if this is a subscription verification request.
+			 *	Instagram sents a GET request to verify real time 
+			 *	subscriptions.
+			 */
+			if(Helpers.checkNested(req, 'query', 'hub.mode')) {
+				self.makeResponse(res, {
+					statusCode: 200,
+					contentType: 'text/plain',
+					data: req.query['hub.challenge']
+				});
+			}
+			else {
+				self.makeResponse(res, {
+					statusCode: 200,
+					contentType: 'application/json',
+					data: {
+						status: 'ok',
+						message: 'Instagram route has been hit'
+					}
+				});
+			}
 		});
 	},
 
@@ -130,7 +141,12 @@ Server = {
 	 */
 	makeResponse: function(res, responseData) {
 		res.writeHead(responseData.statusCode, responseData.contentType);
-		res.end(JSON.stringify(responseData.data));
+		if(responseData.contentType === 'application/json') {
+			res.end(JSON.stringify(responseData.data));
+		}
+		else {
+			res.end(responseData.data);
+		}
 	}
 
 };

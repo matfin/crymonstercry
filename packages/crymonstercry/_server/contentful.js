@@ -93,21 +93,85 @@ Contentful = {
 			case 'ContentManagement.Entry.unpublish':
 			case 'ContentManagement.Asset.unpublish': {
 
-				console.log('A delete!');
+				return this.contentUnpublish(request.body);
 
 				break;
 			}
+			default: {
+				var deferred = Q.defer();
+				deferred.resolve({
+					status: 'ok',
+					messahe: 'No content has been changed.'
+				});
+				return deferred.promise;
+				break;
+			}
+		}
+	},
+
+	/**
+	 *	Function to unpublish or delete Assets and Entries for 
+	 *	Contentful data.
+	 *
+	 *	@method 	contentUnpublish
+	 *	@param 		{Object} requestBody - the request body
+	 *	@return 	{Object} - A promise resolved or rejected
+	 */
+	contentUnpublish: function(requestBody) {
+		var deferred = Q.defer(),
+			self = this,
+			entry = requestBody,
+			collection;
+
+		/**
+		 *	Check to see if we have the correct entry type
+		 *	and load the correct collection to be updated
+		 */
+		switch(entry.sys.type) {
+			case 'DeletedEntry': {
+				collection = Server.collections.cf_entries;
+				break;
+			}
+			case 'DeletedAsset': {
+				collection = Server.collection.cf_assets;
+				break;
+			}
+			default: {
+				deferred.reject({
+					status: 'error',
+					message: 'Entry type does not exist. Exiting'
+				});
+			}
 		}
 
-		
+		/**
+		 *	If we have a collection to update
+		 */
+		if(typeof collection !== 'undefined') {
+			/**
+			 *	Call the delete function from within a Fiber
+			 */
+			this.Fiber(function() {
+
+				/**
+				 *	Remove the item from the collection
+				 */
+				collection.remove({
+					'sys.id': entry.sys.id
+				});
+
+			}).run();
+		}
+
+		return deferred.promise;
 	},
 
 	/**
 	 *	Function to update Assets and entries for Contentful data
 	 *
 	 *	@method 	contentPublish()
-	 *	@param 		{Object} content - the request body with content payload 
-	 *	@return 	{Object} - 	A promise resolved or rejected
+	 *	@param 		{Object} requestBody - the request body with content payload 
+	 *	@return 	{Object} - A promise resolved or rejected
 	 */
 	contentPublish: function(requestBody) {
 
@@ -142,7 +206,7 @@ Contentful = {
 		 */
 		if(typeof collection !== 'undefined') {
 			/**
-			 *	Call the upsert function from within a Fiber
+			 *	Call the updte function from within a Fiber
 			 */
 
 			this.Fiber(function() {
@@ -160,7 +224,7 @@ Contentful = {
 						upsert: true
 					}	
 				);
-				
+
 				deferred.resolve({
 					status: 'ok',
 					message: 'Contentful content updated ok'

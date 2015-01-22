@@ -14,6 +14,7 @@ Template['cards_tumblr_post'].created = function() {
  *	@return undefined
  */
 Template['cards_tumblr_post'].rendered = function() {
+	this.$('a').attr('target', '_blank');
 };
 
 /**

@@ -1,0 +1,10 @@
+#about {
+	padding-top: @gridSpacing * 4;
+
+	p {
+		margin: 0 auto;
+		width: 60%;
+		text-align: left;
+		margin-bottom: @gridSpacing * 2;
+	}
+}

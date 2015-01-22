@@ -14,6 +14,7 @@ Template['views_tour'].created = function() {
  *	@return undefined
  */
 Template['views_tour'].rendered = function() {
+	this.$('a', 'table').attr('target', '_blank');
 };
 
 /**

@@ -14,7 +14,7 @@ Template['cards_link'].created = function() {
  *	@return undefined
  */
 Template['cards_link'].rendered = function() {
-
+	this.$('a').attr('target', '_blank');
 };
 
 /**

@@ -11,6 +11,11 @@ Meteor.startup(function() {
 		console.log('Meteor server booting up - ' + new Date().toString());
 
 		/**
+		 *	Kick off mailchimp
+		 */
+		MailChimp.setup();
+
+		/**
 		 *	Grabbing Contentful Assets and Entries
 		 *	No polling is needed here as Contentul
 		 *	uses hooks to notify of refreshed content.

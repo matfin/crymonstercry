@@ -43,5 +43,10 @@
 		"apiUrl": 			"https://api.instagram.com",
 		"clientID": 		"{your_client_id}",
 		"userId": 			"{your_user_id}"
+	},
+	"mailchimp": {
+		"endpointUrl": "{your_mailchimp_endpoint_url}",
+		"apiKey": "{your_api_key}",
+		"listId": "{your_list_id}"
 	}
 }

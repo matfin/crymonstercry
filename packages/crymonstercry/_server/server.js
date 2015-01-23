@@ -5,7 +5,6 @@
  *	@class Server
  *	@static
  */
-
 Server = {
 
 	/**

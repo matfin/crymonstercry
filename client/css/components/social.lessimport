@@ -20,6 +20,13 @@
 				.border-radius(@gridSpacing * 2);
 				color: @backgroundColourPrimary;
 				font-size: @fontSizeMiddle;
+
+				.transition-property(transform);
+				.transition-duration(150ms);
+
+				&:hover {
+					.scale(1.2);
+				}
 			}
 		}
 	}

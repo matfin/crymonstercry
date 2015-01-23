@@ -36,6 +36,7 @@ Package.onUse(function(api) {
 		'_server/instagram.js',
 		'_server/tumblr.js',
 		'_server/youtube.js',
+		'_server/mailchimp.js',
 		'_server/server.js'
 	], 	'server');
 
@@ -63,4 +64,5 @@ Package.onUse(function(api) {
 	api.export('Instagram');
 	api.export('Tumblr');
 	api.export('Youtube');
+	api.export('MailChimp');
 });

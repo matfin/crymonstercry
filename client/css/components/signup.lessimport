@@ -21,5 +21,6 @@ form.signup {
 		.flex(1);
 		.border-top-right-radius(@gridSpacing / 2);
 		.border-bottom-right-radius(@gridSpacing / 2);
+		cursor: pointer;
 	}
 }

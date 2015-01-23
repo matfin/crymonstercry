@@ -222,6 +222,31 @@ seoPicker.route('/photos', function(params, request, response) {
 			images: Server.collections.in_images.find({}, sort).fetch()
 		}
 	});
+
+	/**
+	 *	Then write out the compiled html
+	 */
+	response.end(html);
+
+});
+
+/**
+ *	Setting up server side routing 
+ *	for the about page
+ */
+seoPicker.route('/about', function(params, request, response) {
+
+	/**
+	 *	Set up the template for rendering
+	 */
+	var html = SSR.render('seo_layout', {
+		template: 'seo_about',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'about'}),
+		}
+	});
 	
 	/**
 	 *	Then write out the compiled html

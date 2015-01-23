@@ -61,13 +61,12 @@ seoPicker.route('/', function(params, request, response) {
 
 /**
  *	Setting up the server side routing 
- *	for the 
+ *	for the news section 
  */
 seoPicker.route('/news', function(params, request, response) {
 
 	/**
-	 *	Grab the news content we need from the 
-	 *	Tumblr collection
+	 *	Sorting for the Tumblr news items
 	 */
 	var sort = {
 		'timestamp': -1
@@ -93,6 +92,41 @@ seoPicker.route('/news', function(params, request, response) {
 
 });
 
+/**
+ *	Setting up server side routing 
+ *	for the tour section
+ */
+seoPicker.route('/tour', function(params, request, response) {
+
+	/**
+	 *	Sorting and filtering for the content
+	 */
+	var sort = {
+		'fields.date': 1
+	},
+	query = {
+		contentTypeName: 'gig'
+	};
+
+	/**
+	 *	Set up the template for rendering
+	 */
+	var html = SSR.render('seo_layout', {
+		template: 'seo_tour',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'tour'}),
+			gigs: Server.collections.cf_entries.find(query, {sort: sort}).fetch()
+		}
+	});
+
+	/**
+	 *	Then write out the compiled html
+	 */
+	response.end(html);
+
+});
 
 
 

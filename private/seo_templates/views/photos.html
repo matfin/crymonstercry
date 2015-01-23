@@ -1,0 +1,10 @@
+<figure class="image">
+	{{#each images}}
+		<figure>
+			<img src="{{images.low_resolution.url}}" title="{{caption.text}}" width="100%" height="auto" />
+			<figcaption>
+				{{{caption.text}}}
+			</figcaption>
+		</figure>
+	{{/each}}
+</figure>

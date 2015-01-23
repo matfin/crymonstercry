@@ -166,7 +166,7 @@ seoPicker.route('/music', function(params, request, response) {
 
 /**
  *	Setting up server side routing 
- *	for the tour section
+ *	for the video section
  */
 seoPicker.route('/video', function(params, request, response) {
 
@@ -190,6 +190,39 @@ seoPicker.route('/video', function(params, request, response) {
 		}
 	});
 
+	/**
+	 *	Then write out the compiled html
+	 */
+	response.end(html);
+
+});
+
+/**
+ *	Setting up server side routing 
+ *	for the photos section
+ */
+seoPicker.route('/photos', function(params, request, response) {
+
+	/**
+	 *	Sorting and filtering for the content
+	 */
+	var sort = {
+		'created_time': -1
+	};
+
+	/**
+	 *	Set up the template for rendering
+	 */
+	var html = SSR.render('seo_layout', {
+		template: 'seo_photos',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'photos'}),
+			images: Server.collections.in_images.find({}, sort).fetch()
+		}
+	});
+	
 	/**
 	 *	Then write out the compiled html
 	 */

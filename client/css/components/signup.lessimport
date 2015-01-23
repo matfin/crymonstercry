@@ -1,0 +1,25 @@
+form.signup {
+	.display(flex);
+
+	input,
+	button {
+		height: @gridSpacing * 2.5;
+		line-height: @gridSpacing * 2.5;
+		font-size: @baseFontSize;
+	}
+
+	input {
+		.box-sizing(border-box);
+		padding: 0 @gridSpacing / 2;
+		.flex(5);
+		.border-top-left-radius(@gridSpacing / 2);
+		.border-bottom-left-radius(@gridSpacing / 2);
+	}
+	button {
+		background-color: @backgroundColourSecondary;
+		color: @colourWhite;
+		.flex(1);
+		.border-top-right-radius(@gridSpacing / 2);
+		.border-bottom-right-radius(@gridSpacing / 2);
+	}
+}

@@ -1,5 +1,23 @@
+.flip {
+	position: relative;
+}
+
+form.signup,
+p.message {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
 form.signup {
+	
 	.display(flex);
+	.transform(rotateX(0deg));
+	.transform-origin(100% 100%);
+
+	.transition-property(all);
+	.transition-duration(250ms);
 
 	input,
 	button {
@@ -22,5 +40,33 @@ form.signup {
 		.border-top-right-radius(@gridSpacing / 2);
 		.border-bottom-right-radius(@gridSpacing / 2);
 		cursor: pointer;
+	}
+
+	&.tryagain {
+		input {
+			border: 1px solid @colourError;
+			border-right: 0px;
+		}
+	}
+
+	&.flipped {
+		.transform(rotateX(-90deg));
+	}
+}
+
+p.message {
+	height: @gridSpacing * 2.5;
+	line-height: @gridSpacing * 2.5;
+	font-size: @fontSizeMiddle;
+	color: @colourWhite;
+
+	.transition-property(all);
+	.transition-duration(250ms);
+
+	.transform(rotateX(90deg));
+	.transform-origin(0% 0%);
+
+	&.flipped {
+		.transform(rotateX(0deg));
 	}
 }

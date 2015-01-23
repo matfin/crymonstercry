@@ -9,13 +9,15 @@
 @colourPostLink: #529ECC;
 @colourLight: #ccc;
 @colourYellow: #f1d911;
+@colourSuccess: #cbe32d;
+@colourError: #ff9494;
 
 /**
  *	Font sizes
  */
 @baseFontSize: 16px;
 @fontSizeSmall: @baseFontSize * 0.8;
-@fontSizeMiddle: @baseFontSize * 1.5;
+@fontSizeMiddle: @baseFontSize * 1.25;
 @fontSizeMiddleLarge: @baseFontSize * 3;
 @fontSizeLarge: @baseFontSize * 4;
 

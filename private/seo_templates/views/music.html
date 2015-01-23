@@ -1,0 +1,31 @@
+{{#each releases}}
+
+	<!-- Featured release artwork -->
+	<img src="{{releaseArtwork.fields.file.url}}" width="100%" height="auto" />
+	
+	<div class="info">
+		<!-- List of tracks -->
+		<h2>
+			{{fields.title}}
+		</h2>
+		<ol class="tracks">
+			{{#each releaseTracks}}
+				<li>
+					{{fields.trackNumber}}. {{fields.trackTitle}}
+				</li>
+			{{/each}}
+		</ol>
+		<!-- Links to purchase -->
+		<ol class="links">
+			{{#each releaseLinks}}
+				<li>
+					<a href="{{fields.linkUrl}}" title="{{fields.linkTitle}}" rel="external">
+						{{fields.linkTitle}}
+					</a>
+				</li>
+			{{/each}}
+		</ol>
+		<!-- Mailing list signup -->
+	</div>
+
+{{/each}}

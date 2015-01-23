@@ -128,5 +128,41 @@ seoPicker.route('/tour', function(params, request, response) {
 
 });
 
+/**
+ *	Setting up server side routing 
+ *	for the tour section
+ */
+seoPicker.route('/music', function(params, request, response) {
+
+	/**
+	 *	Sorting and filtering for the content
+	 */
+	var sort = {
+		'fields.releaseDate': -1
+	},
+	query = {
+		contentTypeName: 'release'
+	};
+
+	/**
+	 *	Set up the template for rendering
+	 */
+	var html = SSR.render('seo_layout', {
+		template: 'seo_music',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'music'}),
+			releases: Server.collections.cf_entries.find(query, {sort: sort}).fetch()
+		}
+	});
+
+	/**
+	 *	Then write out the compiled html
+	 */
+	response.end(html);
+
+});
+
 
 

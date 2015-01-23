@@ -130,7 +130,7 @@ seoPicker.route('/tour', function(params, request, response) {
 
 /**
  *	Setting up server side routing 
- *	for the tour section
+ *	for the music section
  */
 seoPicker.route('/music', function(params, request, response) {
 
@@ -154,6 +154,39 @@ seoPicker.route('/music', function(params, request, response) {
 			socialNav: Nav.social,
 			page: Server.collections.cf_entries.findOne({'fields.identifier': 'music'}),
 			releases: Server.collections.cf_entries.find(query, {sort: sort}).fetch()
+		}
+	});
+
+	/**
+	 *	Then write out the compiled html
+	 */
+	response.end(html);
+
+});
+
+/**
+ *	Setting up server side routing 
+ *	for the tour section
+ */
+seoPicker.route('/video', function(params, request, response) {
+
+	/**
+	 *	Sorting and filtering for the content
+	 */
+	var sort = {
+		'created_time': -1
+	};
+
+	/**
+	 *	Set up the template for rendering
+	 */
+	var html = SSR.render('seo_layout', {
+		template: 'seo_video',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'video'}),
+			videos: Server.collections.yt_videos.find({}, sort).fetch()
 		}
 	});
 

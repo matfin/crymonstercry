@@ -51,7 +51,8 @@ Package.onUse(function(api) {
 	 *	Client and server side files included as part of this package
 	 */
 	api.addFiles([
-		'helpers.js'
+		'helpers.js',
+		'nav.js'
 	], ['client', 'server']);
 
 	/**
@@ -60,6 +61,7 @@ Package.onUse(function(api) {
 	api.export('Server');
 	api.export('App');
 	api.export('Helpers');
+	api.export('Nav');
 	api.export('Contentful');
 	api.export('Instagram');
 	api.export('Tumblr');

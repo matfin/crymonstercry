@@ -11,7 +11,7 @@
  *	@return 	{Object} - an object containing the data for top navigation links
  */
 UI.registerHelper('topNav', function() {
-	return App.nav.top;
+	return Nav.top;
 });
 
 /**
@@ -21,7 +21,7 @@ UI.registerHelper('topNav', function() {
  *	@return 	{Object} - an object containing the data for social links
  */
 UI.registerHelper('socialNav', function() {
-	return App.nav.social;
+	return Nav.social;
 });
 
 /**

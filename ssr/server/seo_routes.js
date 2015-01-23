@@ -20,7 +20,7 @@ var seoPicker = Picker.filter(function(request, result) {
 /**
  *	Setting up the server side routing to deliver content to bots.
  */
-seoPicker.route('/landing', function(params, request, response){
+seoPicker.route('/', function(params, request, response) {
 
 	/**
 	 *	Grab the content from the collections
@@ -34,14 +34,24 @@ seoPicker.route('/landing', function(params, request, response){
 			'fields.releaseDate': -1
 		}
 	},
-	release = App.collections.cf_entries.findOne(query); 
+	release = Server.collections.cf_entries.findOne(query); 
 	if(typeof release === 'undefined') {
-		release = App.collections.cf_entries.findOne({contentTypeName: 'release'}, sort);
+		release = Server.collections.cf_entries.findOne({contentTypeName: 'release'}, sort);
 	}
 
 	/**
 	 *	Then set the template up for rendering
 	 */
-	
+	var html = SSR.render('seo_layout', {
+		template: 'seo_landing',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			release: release,
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'landing'})
+		}
+	});
+
+	response.end(html);
 
 });

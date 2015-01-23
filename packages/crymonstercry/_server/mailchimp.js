@@ -37,8 +37,28 @@ MailChimp = {
 	 *	@return 	undefined - returns nothing
 	 */
 	setup: function() {
+
+		var self = this;
 		Meteor.methods({
-			postSubscriber: this.postSubscriber.bind(this)
+			callPostSubscribe: function(data) {
+				var postSubscriberSync = Meteor.wrapAsync(self.postSubscriber, self);
+					result;
+				try {
+					result = postSubscriberSync(data);
+				}	
+				catch(e) {
+					/**
+					 *	We want to return the error to the front end
+					 *	instead of it being 'caught' and logged to the 
+					 *	server side console. The front end should still
+					 *	be able to see it as an error because we are
+					 *	throwing it in this instance.
+					 */
+					throw Meteor.Error(500, "Something went wrong", "Badly wrong"); 
+				}	
+
+				return result;
+			}
 		});
 	},
 
@@ -47,12 +67,13 @@ MailChimp = {
 	 *	
 	 *	@method 	postSubscriber()
 	 *	@param 		{Object} data - the serialized form data
-	 *	@return  	{Object} - a resolved or rejected promise
+	 *	@param 		{Function} cb - callback function to run.
+	 *								Note: assigned by Meteor.wrapAsync
+	 *	@return  	undefined - returns nothing
 	 */
-	postSubscriber: function(data) {
-
-		var deferred = Q.defer(),
-			self = this,
+	postSubscriber: function(data, cb) {
+		
+		var	self = this,
 			data = {
 				apikey: this.apiKey,
 				email: {
@@ -65,25 +86,8 @@ MailChimp = {
 			'POST', 
 			self.endpointUrl + '/lists/subscribe.json', 
 			{data: data},
-			function(error, result){
-
-				if(error) {
-					console.log(error);
-					deferred.reject({
-						status: 'error',
-						data: error
-					});
-				}
-				else {
-					console.log(result);
-					deferred.resolve({
-						status: 'ok',
-						data: result
-					});
-				}
-		});
-
-		return deferred.promise;
+			function(error, result) {
+				cb(error, result);
+			});
 	}
-
-}
+};

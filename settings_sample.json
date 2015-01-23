@@ -8,6 +8,7 @@
 		"authorisationHeader": 	"Bearer {your_auth_access_token}",
 		"contentTypeHeader": 	"application/vnd.contentful.delivery.v1+json",
 		"spaceId": 				"{your_contentful_space_id_here}",
+		"key":					"Basic {your_auth_key_for_hooks}",
 		"contentTypes": [
 			{
 				"name": "release",

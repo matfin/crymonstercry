@@ -42,12 +42,16 @@ Template['components_signup'].events({
 		Meteor.call('callPostSubscribe', {email: subscriber}, function(error, result) {
 
 			if(error) {
-				$('form').addClass('tryagain');
+				template.$('form').addClass('tryagain');
 			}
 			else {
-				$('p, form').addClass('flipped');
+				template.$('p, form').addClass('flipped');
 			}
 
 		});
+	},
+
+	'focus input': function(e, template) {
+		$(e.currentTarget).parent().removeClass('tryagain');
 	}
 });

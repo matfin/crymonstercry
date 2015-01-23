@@ -44,8 +44,7 @@ form.signup {
 
 	&.tryagain {
 		input {
-			border: 1px solid @colourError;
-			border-right: 0px;
+			background-color: @colourError;
 		}
 	}
 

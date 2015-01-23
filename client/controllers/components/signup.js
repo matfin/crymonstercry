@@ -41,7 +41,12 @@ Template['components_signup'].events({
 		 */
 		Meteor.call('callPostSubscribe', {email: subscriber}, function(error, result) {
 
-			console.log(error, result);
+			if(error) {
+				$('form').addClass('tryagain');
+			}
+			else {
+				$('p, form').addClass('flipped');
+			}
 
 		});
 	}

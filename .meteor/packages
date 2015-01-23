@@ -21,3 +21,5 @@ meteorhacks:npm
 
 npm-container
 markdown
+meteorhacks:ssr
+meteorhacks:picker

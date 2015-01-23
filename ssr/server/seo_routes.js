@@ -18,7 +18,8 @@ var seoPicker = Picker.filter(function(request, result) {
 });
 
 /**
- *	Setting up the server side routing to deliver content to bots.
+ *	Setting up the server side routing 
+ * 	for the landing page
  */
 seoPicker.route('/', function(params, request, response) {
 
@@ -52,6 +53,46 @@ seoPicker.route('/', function(params, request, response) {
 		}
 	});
 
+	/**
+	 *	Then write out the compiled html
+	 */
+	response.end(html);
+});
+
+/**
+ *	Setting up the server side routing 
+ *	for the 
+ */
+seoPicker.route('/news', function(params, request, response) {
+
+	/**
+	 *	Grab the news content we need from the 
+	 *	Tumblr collection
+	 */
+	var sort = {
+		'timestamp': -1
+	};
+
+	/**
+	 *	Set up the template rendering
+	 */
+	var html = SSR.render('seo_layout', {
+		template: 'seo_news',
+		data: {
+			topNav: Nav.top,
+			socialNav: Nav.social,
+			posts: Server.collections.tmblr_posts.find({}, {sort: sort}).fetch(),
+			page: Server.collections.cf_entries.findOne({'fields.identifier': 'news'})
+		}
+	});
+
+	/**
+	 *	Then write out the compiled html
+	 */
 	response.end(html);
 
 });
+
+
+
+

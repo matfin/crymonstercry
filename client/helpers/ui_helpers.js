@@ -44,6 +44,5 @@ UI.registerHelper('lowerCase', function(str) {
  *	@return 	{String} - the formatted date
  */
 UI.registerHelper('formattedDate', function(dateString, dateFormat) {
-	var m = moment(dateString);
-	return m.isValid() ? m.format(dateFormat):dateString;
+	return Helpers.formattedDate(dateString, dateFormat);
 });

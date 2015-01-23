@@ -56,5 +56,18 @@ Helpers = {
 			}
 		});
 		return filtered;
+	},
+
+	/**
+	 *	Function to return a date formatted with Moment JS
+	 *
+	 *	@function 	formattedDate
+	 *	@param 		{String} - the date string
+	 *	@param 		{String} - desired date format string
+	 *	@return 	{String} - the formatted date
+	 */
+	formattedDate: function(dateString, dateFormat) {
+		var m = moment(dateString);
+		return m.isValid() ? m.format(dateFormat):dateString;
 	}
 };

@@ -1,4 +1,5 @@
 .release {
+	position: relative;
 	display: inline-block;
 	width: 100%;
 	margin-bottom: @gridSpacing * 4;
@@ -8,6 +9,7 @@
 		float: left;
 		width: @gridSpacing * 30;
 		margin-left: @gridSpacing * 2;
+		min-height: @gridSpacing * 30;
 		height: auto;
 	}
 

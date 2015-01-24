@@ -77,7 +77,7 @@ Tumblr = {
 					/**
 					 *	Kill the poll update interval on fail
 					 */
-					Meteor.clearTimrout(self.updatePollInterval);
+					Meteor.clearInterval(self.updatePollInterval);
 				});
 
 			}, Meteor.settings.app.pollInterval);

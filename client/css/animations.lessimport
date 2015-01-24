@@ -1,0 +1,22 @@
+.rotateLoop {
+	0% {
+		.transform(rotate(0deg));
+	}
+
+	100% {
+		.transform(rotate(360deg));
+	}
+}
+
+@-webkit-keyframes progress {
+	.rotateLoop;
+}
+@-moz-keyframes progress {
+	.rotateLoop;
+}
+@-o-keyframes progress {
+	.rotateLoop;
+}
+@keyframes progress {
+	.rotateLoop;
+}

@@ -19,5 +19,27 @@ App = {
 		yt_videos: 		new Mongo.Collection('yt_videos'),
 		tmblr_posts: 	new Mongo.Collection('tmblr_posts'),
 		in_images:  	new Mongo.Collection('in_images')
+	},
+
+	/**
+	 *	Dependencies for updating the UI
+	 *
+	 *	@property 	dependencies
+	 *	@type 		{Object}
+	 */
+	dependencies: {
+		scrolled: new Tracker.Dependency
 	}
-}
+};
+
+/**
+ *	Fire off the scrolled dependency when the user scrolls
+ *	the window.
+ *	Setting the changed function on the dependency will
+ *	call any helper functions inside the templates that
+ *	need them automatically, for instance when loading 
+ *	new images lazily as the user scrolls.
+ */
+$(window).on('scroll', _.throttle(function() {
+	App.dependencies.scrolled.changed();
+}, 250));

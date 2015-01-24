@@ -69,5 +69,70 @@ Helpers = {
 	formattedDate: function(dateString, dateFormat) {
 		var m = moment(dateString);
 		return m.isValid() ? m.format(dateFormat):dateString;
-	}
+	},
+
+	/**
+	 *	Function to determine if an element is in the viewport,
+	 *	used in conjunction with lazy loading of images.
+	 *
+	 *	@method isInView
+	 *	@param {object} element - the element being checked
+	 *	@return {boolean} true if the element is in the viewport or false if not.
+	 */
+	isInView: function(element) {
+
+		var viewportHeight = $(window).height(),
+			element = $(element),
+			scrollTop = $(window).scrollTop();
+			top = $(element).offset().top;
+
+		return (top - scrollTop) <= viewportHeight;
+	},
+
+	/**
+	 *	Function to load images when the template has been rendered
+	 *
+	 *	@method lazyLoadImage
+	 *	@param {object} element - element object coming from a selector
+	 *	@param {options} callback - optional parameters, including callback and aspect ratio
+	 *	@return undefined - returns nothing
+	 */
+	lazyLoadImage: function(element, options) {
+		
+		/**
+		 *	Grab the data we need
+		 */
+		var img = $(element),
+			loaded = img.hasClass('loaded'),
+			visible = this.isInView(element),
+			src = img.data('src'),
+			width = img.width();
+			height = (options.height || width * 0.75);
+			image = new Image();
+
+		if(!loaded) {
+			/**
+			 *	Set a temporary height given the width
+			 */
+			img.height(height);
+		}
+
+		if(!loaded && visible) {
+			
+			/**
+			 *	Set the source, which kicks off loading...
+			 */
+			image.src = src;
+
+			/**
+			 *	Then listen for when it has loaded, runing the callback
+			 *	when loading has finished.
+			 */
+			image.onload = function() {
+				if(typeof options !== 'undefined' && options.callback !== 'undefined') {
+					options.callback();
+				}
+			}
+		}
+	},
 };

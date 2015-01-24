@@ -6,7 +6,7 @@
 	> img {
 		display: inline;
 		float: left;
-		width: @gridSpacing * 25;
+		width: @gridSpacing * 30;
 		margin-left: @gridSpacing * 2;
 		height: auto;
 	}
@@ -16,7 +16,7 @@
 		display: inline;
 		float: left;
 		width: @gridSpacing * 25;
-		min-height: @gridSpacing * 25;
+		min-height: @gridSpacing * 30;
 		padding-left: @gridSpacing * 2;
 		.box-sizing(border-box);
 		text-align: left;
@@ -30,6 +30,7 @@
 		ol.tracks {
 			li {
 				color: @colourWhite;
+				margin-bottom: @gridSpacing / 2;
 			}
 		}	
 

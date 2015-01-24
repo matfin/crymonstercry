@@ -6,17 +6,38 @@ div.image {
 	padding: @gridSpacing / 2;
 
 	figure {
+		position: relative;
 		.flex(1);
 		background-color: @colourWhite;
 		padding: @gridSpacing;
 		.box-shadow(0 1px 0 rgba(255,255,255,.4),0 1px 0 1px rgba(255,255,255,.1));
 		img {
 			width: 100%;
+			min-height: @gridSpacing * 16;
 			height: auto;
+
+			.transition-property(height, opacity);
+			.transition-duration(250ms);
+			.opacity(0.0);
+
+			&.loaded {
+				.opacity(1.0);
+			}
 		}
 		figcaption {
 			margin-top: @gridSpacing;
 			text-align: left;
+		}
+		i {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: @gridSpacing * 16;
+			line-height: @gridSpacing * 16;
+			color: @backgroundColourSecondary;
+			font-size: @fontSizeMiddle;
+			.animation(progress 500ms linear infinite);
 		}
 	}
 }

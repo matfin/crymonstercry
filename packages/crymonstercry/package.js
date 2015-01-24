@@ -26,6 +26,7 @@ Package.onUse(function(api) {
 	api.use('http', 		'server');
 	api.use('ejson',		'server');
 	api.use('deps',			'client');
+	api.use('jquery',		'client');
 
 	
 	/**

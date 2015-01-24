@@ -16,7 +16,6 @@ App = {
 	collections: {
 		cf_assets: 		new Mongo.Collection('cf_assets'),
 		cf_entries: 	new Mongo.Collection('cf_entries'),
-		yt_videos: 		new Mongo.Collection('yt_videos'),
 		tmblr_posts: 	new Mongo.Collection('tmblr_posts'),
 		in_images:  	new Mongo.Collection('in_images')
 	},

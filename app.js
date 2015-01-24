@@ -27,24 +27,6 @@ Meteor.startup(function() {
 		});
 
 		/**
-		 *	Grabbing YouTube videos
-		 */
-		Youtube.refreshVideos().then(function(){
-			console.log('YouTube videos populated successfully');
-			/**
-			 *	Publish the collection and start polling for updates
-			 */
-			Youtube.publishCollection();
-			Youtube.pollForUpdates();
-		}).fail(function() {
-			console.log('Could not populate YouTube videos');
-			/**
-			 *	Stop polling for changes on error
-			 */
-			Meteor.clearInterval(Youtube.pollUpdateInterval);
-		});
-
-		/**
 		 *	Grabbing Tumblr posts
 		 */
 		Tumblr.refreshPosts().then(function() {

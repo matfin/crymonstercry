@@ -6,7 +6,7 @@
 
 Package.describe({
 	summary: 	'This package contains client and server side code for fetching and publishing data.',
-	version: 	'0.0.1',
+	version: 	'0.0.9',
 	name:  		'crymonstercry' 
 });
 
@@ -36,7 +36,6 @@ Package.onUse(function(api) {
 		'_server/contentful.js',
 		'_server/instagram.js',
 		'_server/tumblr.js',
-		'_server/youtube.js',
 		'_server/mailchimp.js',
 		'_server/server.js'
 	], 	'server');
@@ -66,6 +65,5 @@ Package.onUse(function(api) {
 	api.export('Contentful');
 	api.export('Instagram');
 	api.export('Tumblr');
-	api.export('Youtube');
 	api.export('MailChimp');
 });

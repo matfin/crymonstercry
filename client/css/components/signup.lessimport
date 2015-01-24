@@ -1,5 +1,7 @@
 .flip {
 	position: relative;
+	height: @gridSpacing * 2.5;
+	margin-bottom: @gridSpacing * 3;
 }
 
 form.signup,

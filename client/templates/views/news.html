@@ -1,7 +1,14 @@
 <template name="views_news">
 	<section class="content" id="{{view}}">
 		{{#each posts}}
-			{{> cards_tumblr_post}}
+			{{#if isText}}
+				{{> cards_tumblr_text}}
+			{{/if}}
+
+			{{#if isPhoto}}
+				{{> cards_tumblr_photo}}
+			{{/if}}
+
 		{{/each}}
 	</section>
 </template>

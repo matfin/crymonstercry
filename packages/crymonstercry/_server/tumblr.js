@@ -157,9 +157,10 @@ Tumblr = {
 	posts: function() {
 
 		var deferred 	= 	Q.defer();
-			params 		= 	_.map(this.filterParams.posts, function(item, key) {
-								return key + '=' + item
-							}).join('&'),
+			params 		= 	{
+				api_key: this.consumerKey,
+				filter:  this.filterParams.posts.filter
+			},
 			url 		=	this.endpointUrl + '/v2/blog/' + this.blogUrl + '/posts?api_key=' + this.consumerKey + '&' + params;
 
 

@@ -30,7 +30,6 @@
 		"apiUrl": 		"api.tumblr.com",
 		"filterParams": {
 			"posts": {
-				"type": 	"text",
 				"filter": 	"html"
 			}
 		}

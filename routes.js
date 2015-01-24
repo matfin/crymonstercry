@@ -117,10 +117,14 @@ Router.map(function() {
 				sort: {
 					'timestamp': -1
 				}
+			},
+			filter = {
+				type: {
+					$in: ['photo', 'text']
+				}
 			};
-
 			return {
-				posts: App.collections.tmblr_posts.find({}, sort).fetch(),
+				posts: App.collections.tmblr_posts.find(filter, sort).fetch(),
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'news'}),
 				view: 'news'
 			};

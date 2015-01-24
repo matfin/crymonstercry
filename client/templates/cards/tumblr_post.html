@@ -1,4 +1,4 @@
-<template name="cards_tumblr_post">
+<template name="cards_tumblr_text">
 	<div class="post">
 		<article class="story">
 			<h1>
@@ -6,6 +6,37 @@
 			</h1>
 			<div>
 				{{{body}}}
+				<span class="source">
+					(Source: <a href="http://crymonstercry.tumblr.com" title="Cry Monster Cry on Tumblr">crymonstercry</a>)
+				</span>
+			</div>
+			<ol class="tags">
+				{{#each tags}}
+					<li>
+						#{{this}}
+					</li>
+				{{/each}}
+			</ol>
+			<time datetime="{{jsTimestamp}}">
+				{{formattedDate jsTimestamp "MMM Do, YYYY"}}
+			</time>
+		</article>
+	</div>
+</template>
+
+<template name="cards_tumblr_photo">
+	<div class="post">
+		<article class="story">
+			<h1>
+				{{title}}
+			</h1>
+			<div>
+				<figure>
+					<img src="{{photoUrl}}" width="100%" height="auto" alt="{{title}}" />
+					<figcaption>
+						{{{caption}}}
+					</figcaption>
+				</figure>
 				<span class="source">
 					(Source: <a href="http://crymonstercry.tumblr.com" title="Cry Monster Cry on Tumblr">crymonstercry</a>)
 				</span>

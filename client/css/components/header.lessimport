@@ -12,6 +12,7 @@ header {
 		height: @gridSpacing * 7;
 		line-height: @gridSpacing * 7;
 		margin-left: @gridSpacing * 2;
+		text-transform: lowercase;
 
 		a {
 			color: @colourWhite;

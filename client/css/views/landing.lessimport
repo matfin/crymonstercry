@@ -10,31 +10,30 @@ body {
 	}
 }
 
-
 #landing {
+
+	padding-top: @gridSpacing * 2;
+	padding-right: @gridSpacing * 2;
+
 	.feature {
 		display: block;
 		float: right;
-		width: @gridSpacing * 25;
+		width: @gridSpacing * 22.5;
 
 		figure {
 			display: block;
 			width: 100%;
 
-			> img,
-			> caption {
-				display: block;
-				width: 100%;
-			}
-
 			> img {
-				height: @gridSpacing * 25;
+				width: 100%;
+				height: auto;
+				min-height: @gridSpacing * 22.5;
 			}
 
 			> figcaption {
 				margin-top: @gridSpacing;
 				color: @colourWhite;
-				font-size: @baseFontSize * 2;
+				font-size: @fontSizeMiddle;
 				text-transform: uppercase;
 				letter-spacing: 4px;
 			}

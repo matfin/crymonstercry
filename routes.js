@@ -9,10 +9,6 @@ Router.onRun(function() {
 	this.next();
 });
 
-Router.onBeforeAction(function() {
-	this.next();
-});
-
 /**
  *	Router map function
  */
@@ -22,6 +18,9 @@ Router.map(function() {
 	 */
 	this.route('landing', {
 		path: '/',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			/**
 			 *	Subscribe to these three collections publised
@@ -92,6 +91,9 @@ Router.map(function() {
 	 */
 	this.route('news', {
 		path: '/news',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			return [
 				Meteor.subscribe('tmblr_posts'),
@@ -136,6 +138,9 @@ Router.map(function() {
 	 */
 	this.route('tour', {
 		path: '/tour',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			return [
 				Meteor.subscribe('cf_entries')
@@ -180,6 +185,9 @@ Router.map(function() {
 	 */
 	this.route('music', {
 		path: '/music',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			/**
 			 *	Subscribe to these three collections publised
@@ -230,6 +238,9 @@ Router.map(function() {
 	 */
 	this.route('video', {
 		path: '/video',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			/**
 			 *	Subscribe to these three collections publised
@@ -276,6 +287,9 @@ Router.map(function() {
 	 */
 	this.route('photos', {
 		path: '/photos',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			/**
 			 *	Returning the subscription for Instagram 
@@ -321,6 +335,9 @@ Router.map(function() {
 	 */
 	this.route('about', {
 		path: '/about',
+		onBeforeAction: function() {
+			this.next();
+		},
 		waitOn: function() {
 			return [
 				Meteor.subscribe('cf_entries')

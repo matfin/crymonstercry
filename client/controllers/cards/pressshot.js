@@ -5,7 +5,6 @@
  *	@return undefined
  */
 Template['cards_pressshot'].created = function() {
-	console.log(this.data);
 };
 
 /**

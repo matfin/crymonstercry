@@ -14,6 +14,7 @@ Template['views_photos'].created = function() {
  *	@return undefined
  */
 Template['views_photos'].rendered = function() {
+	Slider.setup(this.$('.sliderContainer').get(0));
 };
 
 /**

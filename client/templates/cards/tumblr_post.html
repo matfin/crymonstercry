@@ -28,9 +28,10 @@
 				{{title}}
 			</h1>
 			<div class="post-images">
+				<i class="icon-loading"></i>
 				{{#each photos}}
 					{{#with itemAtIndex this.alt_sizes 0}}
-						<img src="{{url}}" width="100%" height="auto" alt="{{title}}" />
+						<img data-src="{{url}}" width="100%" height="auto" alt="{{title}}" />
 					{{/with}}
 				{{/each}}
 			</div>

@@ -25,6 +25,30 @@ article.story {
 
 	.post-images {
 		margin-top: 0;
+		min-height: @gridSpacing * 25;
+		position: relative;
+
+		img {
+			.opacity(0);
+			.transition-property(opacity);
+			.transition-duration(200ms);
+			&.loaded {
+				.opacity(1.0);
+			}
+		}
+
+		i {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			text-align: center;
+			height: @gridSpacing * 25;
+			line-height: @gridSpacing * 25;
+			color: @backgroundColourSecondary;
+			font-size: @fontSizeLarge;
+			.animation(progress 500ms linear infinite);
+		}
 	}
 
 	.post-text {

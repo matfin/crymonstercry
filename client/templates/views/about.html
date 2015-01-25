@@ -1,5 +1,6 @@
 <template name="views_about">
 	<section class="content" id="{{view}}">
+		<img src="{{image.fields.file.url}}" width="100%" height="auto" alt="{{image.fields.title}}" />
 		{{#markdown}}
 			{{page.fields.content}}
 		{{/markdown}}

@@ -25,7 +25,7 @@ article.story {
 
 	.post-images {
 		margin-top: 0;
-		min-height: @gridSpacing * 25;
+		min-height: @gridSpacing * 15;
 		position: relative;
 
 		img {
@@ -43,8 +43,8 @@ article.story {
 			left: 0px;
 			width: 100%;
 			text-align: center;
-			height: @gridSpacing * 25;
-			line-height: @gridSpacing * 25;
+			height: @gridSpacing * 15;
+			line-height: @gridSpacing * 15;
 			color: @backgroundColourSecondary;
 			font-size: @fontSizeLarge;
 			.animation(progress 500ms linear infinite);

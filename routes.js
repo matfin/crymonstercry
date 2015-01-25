@@ -342,7 +342,8 @@ Router.map(function() {
 		},
 		waitOn: function() {
 			return [
-				Meteor.subscribe('cf_entries')
+				Meteor.subscribe('cf_entries'),
+				Meteor.subscribe('cf_assets')
 			];
 		},
 		action: function() {
@@ -355,6 +356,7 @@ Router.map(function() {
 		},
 		data: function() {
 			return {
+				photo: App.collections.cf_entries.findOne({'fields.page': 'about'}),
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'about'}),
 				view: 'about'
 			};

@@ -1,10 +1,21 @@
 #about {
 	padding-top: @gridSpacing * 4;
 
+	img {
+		margin: 0 auto;
+		width: 60%;
+		height: auto;
+		margin-bottom: @gridSpacing;
+		background-color: @colourWhite;
+		padding: @gridSpacing / 2;
+	}
+
 	p {
 		margin: 0 auto;
 		width: 60%;
-		text-align: left;
+		text-align: justify;
 		margin-bottom: @gridSpacing * 2;
+		color: @colourWhite;
+		letter-spacing: 1.1px;
 	}
 }

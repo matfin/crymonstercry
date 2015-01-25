@@ -265,8 +265,15 @@ Router.map(function() {
 		},
 		data: function() {
 
-		
+			var query = {
+				contentTypeName: 'video'
+			},
+			sort = {
+				'fields.publishDate': -1
+			};
+			
 			return {
+				videos: App.collections.cf_entries.find(query, {sort: sort}).fetch(),
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'video'}),
 				view: 'video'
 			};

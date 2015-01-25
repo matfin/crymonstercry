@@ -21,6 +21,10 @@
 			{
 				"name": "page",
 				"id": "{content_type_id}"
+			},
+			{
+				"name": "video",
+				"id": "{content_type_id}"
 			}
 		]
 	},

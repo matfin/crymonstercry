@@ -4,6 +4,7 @@
 		float: left;
 		margin-bottom: @gridSpacing * 4;
 		width: 100%;
+		min-height: @gridSpacing * 20;
 		.box-sizing(border-box);
 		padding-left: @gridSpacing * 2;
 

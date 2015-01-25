@@ -133,7 +133,7 @@ Contentful = {
 				break;
 			}
 			case 'DeletedAsset': {
-				collection = Server.collection.cf_assets;
+				collection = Server.collections.cf_assets;
 				break;
 			}
 			default: {
@@ -190,7 +190,7 @@ Contentful = {
 				break;
 			}
 			case 'Asset': {
-				collection = Server.collection.cf_assets;
+				collection = Server.collections.cf_assets;
 				break;
 			}
 			default: {

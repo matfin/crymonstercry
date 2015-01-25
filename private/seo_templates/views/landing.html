@@ -10,7 +10,9 @@
 	<ol>
 		{{#each releaseLinks}}
 			<li>
-				{{> cards_link}}
+				<a href="{{fields.linkUrl}}" title="{{fields.linkTitle}}" rel="external">
+					{{fields.linkTitle}}
+				</a>
 			</li>
 		{{/each}}
 	</ol>

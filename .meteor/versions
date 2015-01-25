@@ -55,6 +55,7 @@ reload@1.1.2
 retry@1.0.2
 routepolicy@1.0.4
 session@1.0.5
+slider@0.0.1
 spacebars@1.0.5
 spacebars-compiler@1.0.4
 templating@1.0.11

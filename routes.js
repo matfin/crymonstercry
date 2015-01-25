@@ -299,7 +299,8 @@ Router.map(function() {
 			 */
 			return [
 				Meteor.subscribe('in_images'),
-				Meteor.subscribe('cf_entries')
+				Meteor.subscribe('cf_entries'),
+				Meteor.subscribe('cf_assets')
 			];
 		},
 		action: function() {
@@ -320,6 +321,7 @@ Router.map(function() {
 
 			return {
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'photos'}),
+				pressShots: App.collections.cf_entries.find({'fields.page': 'photos'}).fetch(),
 				images: App.collections.in_images.find({},{sort: orderBy}).fetch(),
 				view: 'photos'
 			};

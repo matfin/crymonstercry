@@ -9,7 +9,7 @@ div.image {
 		position: relative;
 		.flex(1);
 		background-color: @colourWhite;
-		padding: @gridSpacing;
+		padding: @gridSpacing / 2;
 		.box-shadow(0 1px 0 rgba(255,255,255,.4),0 1px 0 1px rgba(255,255,255,.1));
 		img {
 			width: 100%;

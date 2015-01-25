@@ -1,7 +1,20 @@
 <template name="views_photos">
 	<section class="content" id="{{view}}">
-		{{#each images}}
-			{{> cards_instagram_photo}}
-		{{/each}}
+		<div class="photos">
+			<div class="press-shots">
+				<div class="slider-container">
+					<div class="slider" style="width: {{sliderWidth}}%">
+						{{#each pressShots}}
+							<div class="slide">
+								{{> cards_pressshot}}
+							</div>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+			{{#each images}}
+				{{> cards_instagram_photo}}
+			{{/each}}
+		</div>
 	</section>
 </template>

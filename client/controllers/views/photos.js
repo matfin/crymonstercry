@@ -24,3 +24,22 @@ Template['views_photos'].rendered = function() {
  */
 Template['views_photos'].destroyed = function() {
 };
+
+/**
+ *	Template - views_photos
+ *	Helpers
+ */
+Template['views_photos'].helpers({
+
+	/**
+	 *	Function to get the total number of press shots
+	 *	and use this to get the slider width.
+	 *	
+	 *	@function 	sliderWidth
+	 *	@return 	{Number} - slider width as percentage
+	 */
+	sliderWidth: function() {
+		return this.pressShots.length * 100;
+	}
+
+});

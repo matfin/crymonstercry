@@ -70,6 +70,11 @@ seoPicker.route('/news', function(params, request, response) {
 	 */
 	var sort = {
 		'timestamp': -1
+	},
+	filter = {
+		type: {
+			$in: ['photo', 'text']
+		}
 	};
 
 	/**
@@ -80,7 +85,7 @@ seoPicker.route('/news', function(params, request, response) {
 		data: {
 			topNav: Nav.top,
 			socialNav: Nav.social,
-			posts: Server.collections.tmblr_posts.find({}, {sort: sort}).fetch(),
+			posts: Server.collections.tmblr_posts.find(filter, {sort: sort}).fetch(),
 			page: Server.collections.cf_entries.findOne({'fields.identifier': 'news'})
 		}
 	});
@@ -173,8 +178,11 @@ seoPicker.route('/video', function(params, request, response) {
 	/**
 	 *	Sorting and filtering for the content
 	 */
-	var sort = {
-		'created_time': -1
+	var query = {
+		contentTypeName: 'video'
+	},
+	sort = {
+		'fields.publishDate': -1
 	};
 
 	/**
@@ -186,7 +194,7 @@ seoPicker.route('/video', function(params, request, response) {
 			topNav: Nav.top,
 			socialNav: Nav.social,
 			page: Server.collections.cf_entries.findOne({'fields.identifier': 'video'}),
-			videos: Server.collections.yt_videos.find({}, sort).fetch()
+			videos: Server.collections.cf_entries.find(query, {sort: sort}).fetch()
 		}
 	});
 

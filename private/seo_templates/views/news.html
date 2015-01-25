@@ -3,12 +3,28 @@
 		<h1>
 			{{title}}
 		</h1>
-		<div>
-			{{{body}}}
-			<span class="source">
-				(Source: <a href="http://crymonstercry.tumblr.com" title="Cry Monster Cry on Tumblr">crymonstercry</a>)
-			</span>
-		</div>
+		{{#if isText}}
+			<div>
+				{{{body}}}
+				<span class="source">
+					(Source: <a href="http://crymonstercry.tumblr.com" title="Cry Monster Cry on Tumblr">crymonstercry</a>)
+				</span>
+			</div>
+		{{/if}}
+		{{#if isPhoto}}
+			<div class="post-images">
+				<i class="icon-loading"></i>
+				{{#each photos}}
+					{{#with itemAtIndex this.alt_sizes 0}}
+						<img data-src="{{url}}" width="100%" height="auto" alt="{{title}}" />
+					{{/with}}
+				{{/each}}
+			</div>
+			<div class="post-text">
+				{{{caption}}}
+			</div>
+		{{/if}}
+
 		<ol class="tags">
 			{{#each tags}}
 				<li>

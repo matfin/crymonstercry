@@ -114,9 +114,7 @@ Router.map(function() {
 			 *	Sort posts by date
 			 */
 			var sort = {
-				sort: {
-					'timestamp': -1
-				}
+				'timestamp': -1
 			},
 			filter = {
 				type: {
@@ -124,7 +122,7 @@ Router.map(function() {
 				}
 			};
 			return {
-				posts: App.collections.tmblr_posts.find(filter, sort).fetch(),
+				posts: App.collections.tmblr_posts.find(filter, {sort: sort}).fetch(),
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'news'}),
 				view: 'news'
 			};

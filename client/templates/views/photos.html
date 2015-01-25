@@ -1,6 +1,7 @@
 <template name="views_photos">
 	<section class="content" id="{{view}}">
 		<div class="photos">
+			<!-- Add in the press shots first -->
 			<div class="press-shots">
 				<div class="sliderContainer">
 					<div class="slider" style="width: {{sliderWidth}}%">
@@ -12,6 +13,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- Then add in the Instagram images -->
 			{{#each images}}
 				{{> cards_instagram_photo}}
 			{{/each}}

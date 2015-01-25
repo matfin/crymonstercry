@@ -40,9 +40,16 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-
 .icon-soundcloud:before {
 	content: "\e600";
+}
+
+.icon-arrow-left:before {
+	content: "\e60d";
+}
+
+.icon-arrow-right:before {
+	content: "\e614";
 }
 
 .icon-loading:before {

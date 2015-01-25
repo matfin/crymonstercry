@@ -252,7 +252,6 @@ Router.map(function() {
 			 *	we will be listing.
 			 */
 			return [
-				Meteor.subscribe('yt_videos'),
 				Meteor.subscribe('cf_entries')
 			];
 		},
@@ -266,15 +265,9 @@ Router.map(function() {
 		},
 		data: function() {
 
-			var sort = {
-				sort: {
-					'created_time': -1
-				}
-			};
-
+		
 			return {
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'video'}),
-				videos: App.collections.yt_videos.find({}, sort).fetch(),
 				view: 'video'
 			};
 		},

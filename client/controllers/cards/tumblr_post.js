@@ -49,11 +49,14 @@ Template['cards_tumblr_text'].helpers({
  */
 Template['cards_tumblr_photo'].helpers({
 	/**
-	 *	Extracting the photo
+	 *	Extracting the photos
 	 */
-	photoUrl: function() {
-		if(Helpers.checkNested(this, 'photos', '0', 'alt_sizes', '1')) {
-			return this.photos[0].alt_sizes[1].url;
+	images: function() {
+		// if(Helpers.checkNested(this, 'photos', '0', 'alt_sizes', '1')) {
+		// 	return this.photos[0].alt_sizes[1].url;
+		// }
+		if(Helpers.checkNested(this, 'photos')) {
+			return this.photos;
 		}
 	}
 });

@@ -7,48 +7,55 @@ div.post {
 }
 
 article.story {
-	position: relative;
 	background-color: @colourWhite;
-	width: 100%;
 	.box-sizing(border-box);
-	padding: @gridSpacing;
-	padding-bottom: @gridSpacing * 3;
+	padding: @gridSpacing / 2;
+	width: 100%;
 
-	h1 {
-		color: @colourSecondary;
+	a {
+		color: @colourPostLink;
 	}
-
-	> div {
-		color: @colourPost;
-		margin-top: @gridSpacing;
-
-		a {
-			color: @colourPostLink;
-		}
-
-		span.source {
-			display: block;
-			margin-top: @gridSpacing;
-			a {
-				color: @colourPostLink;
-			}
-		}
-	}
-
-	ol.tags {
+	
+	.post-text,
+	.post-images,
+	.post-tags {
 		margin: @gridSpacing 0;
-		font-size: @baseFontSize;
+		width: 100%;
+	}
+
+	.post-images {
+		margin-top: 0;
+	}
+
+	.post-text {
+
+		color: @colourPost;
+
+		blockquote {
+			margin: @gridSpacing / 2 0;
+			padding-left: @gridSpacing;
+			border-left: 2px solid @colourPost;
+		}
+
+		p {
+			margin: @gridSpacing / 2 0;
+		}
+	}
+
+	.post-tags {
+		display: inline-block;
+		margin: @gridSpacing / 2 0;
+
 		li {
 			display: inline;
-			float: left;
 			margin-right: @gridSpacing / 2;
 			color: @colourLight;
 		}
 	}
 
 	time {
-		position: absolute;
-		bottom: @gridSpacing;
-		right: @gridSpacing;
+		display: block;
+		float: right;
+		text-align: right;
 	}
 }

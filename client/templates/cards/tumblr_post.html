@@ -4,13 +4,10 @@
 			<h1>
 				{{title}}
 			</h1>
-			<div>
+			<div class="post-text">
 				{{{body}}}
-				<span class="source">
-					(Source: <a href="http://crymonstercry.tumblr.com" title="Cry Monster Cry on Tumblr">crymonstercry</a>)
-				</span>
 			</div>
-			<ol class="tags">
+			<ol class="post-tags">
 				{{#each tags}}
 					<li>
 						#{{this}}
@@ -30,18 +27,17 @@
 			<h1>
 				{{title}}
 			</h1>
-			<div>
-				<figure>
-					<img src="{{photoUrl}}" width="100%" height="auto" alt="{{title}}" />
-					<figcaption>
-						{{{caption}}}
-					</figcaption>
-				</figure>
-				<span class="source">
-					(Source: <a href="http://crymonstercry.tumblr.com" title="Cry Monster Cry on Tumblr">crymonstercry</a>)
-				</span>
+			<div class="post-images">
+				{{#each photos}}
+					{{#with itemAtIndex this.alt_sizes 0}}
+						<img src="{{url}}" width="100%" height="auto" alt="{{title}}" />
+					{{/with}}
+				{{/each}}
 			</div>
-			<ol class="tags">
+			<div class="post-text">
+				{{{caption}}}
+			</div>
+			<ol class="post-tags">
 				{{#each tags}}
 					<li>
 						#{{this}}

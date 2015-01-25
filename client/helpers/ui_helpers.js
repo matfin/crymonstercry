@@ -36,6 +36,18 @@ UI.registerHelper('lowerCase', function(str) {
 });
 
 /**
+ *	Function to access an array indexed item in a template
+ *
+ *	@function 	itemAtIndex
+ *	@param 		{Array}  - the array 
+ *	@param 		{Number} - the index number
+ *	@return  	{Object} - the item at the index
+ */
+UI.registerHelper('itemAtIndex', function(collection, index) {
+	return collection[index];
+});
+
+/**
  *	Function to return a date formatted with Moment JS
  *
  *	@function 	formattedDate

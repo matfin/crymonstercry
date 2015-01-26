@@ -35,7 +35,7 @@ body {
 .content {
 	margin: 0 auto;
 	min-height: @gridSpacing * 24;
-	padding-top: @gridSpacing * 4;
+	padding-top: @gridSpacing * 2;
 	.flex(9);
 }
 
@@ -91,4 +91,7 @@ button {
 	.resetPaddingMargin;
 	border: none;
 	background-color: transparent;
+	&:focus {
+		outline: none;
+	}
 }

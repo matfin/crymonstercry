@@ -1,7 +1,8 @@
 div.post {
+	margin: 0 auto;
 	.display(flex);
 	text-align: left;
-	width: 50%;
+	width: 60%;
 	.box-sizing(border-box);
 	padding: @gridSpacing / 2;
 }

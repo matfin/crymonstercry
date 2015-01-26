@@ -14,7 +14,7 @@ Template['views_photos'].created = function() {
  *	@return undefined
  */
 Template['views_photos'].rendered = function() {
-	Slider.setup(this.$('.sliderContainer').get(0));
+	this.slider = Slider.setup(this.$('.sliderContainer').get(0));
 };
 
 /**
@@ -24,6 +24,7 @@ Template['views_photos'].rendered = function() {
  *	@return undefined
  */
 Template['views_photos'].destroyed = function() {
+	delete this.slider;
 };
 
 /**
@@ -41,6 +42,37 @@ Template['views_photos'].helpers({
 	 */
 	sliderWidth: function() {
 		return this.pressShots.length * 100;
+	}
+
+});
+
+/**
+ *	Template - views_photos
+ *	Events
+ */
+Template['views_photos'].events({
+
+	'click .paddle': function(e, template) {
+		var direction = $(e.currentTarget).data('direction');
+		template.slider.go(direction);
+	},
+
+	'slidecomplete': function(e, template) {
+
+		if(template.slider.currentSlide === 0) {
+			template.$('#left').addClass('hidden');
+		}
+		else {
+			template.$('#left').removeClass('hidden');
+		}
+		
+		if(template.slider.currentSlide === (template.slider.slides.length - 1)) {
+			template.$('#right').addClass('hidden');
+		}
+		else {
+			template.$('#right').removeClass('hidden');
+		}
+
 	}
 
 });

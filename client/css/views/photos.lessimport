@@ -16,6 +16,7 @@
 			.display(flex);
 
 			.sliderContainer {
+				position: relative;
 				overflow: hidden;
 				background-color: @colourWhite;
 				.display(flex);
@@ -43,6 +44,46 @@
 				}
 			}
 		}
+	}
+}
+
+.paddle {
+	position: absolute;
+	top: 0;
+	width: @gridSpacing * 3;
+	height: 100%;
+	line-height: 100%;
+	z-index: 10;
+	.opacity(1);
+
+	&.hidden {
+		i {
+			.opacity(0);
+		}
+	}
+
+	&:hover {
+		i {
+			color: @colourWhite;
+		}
+	}
+
+	i {
+		font-size: @gridSpacing * 3;
+		color: @backgroundColourSecondary;
+		border-radius: @gridSpacing * 1.5;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		.transition-property(color, opacity);
+		.transition-duration(200ms);
+	}
+
+	&#left {
+		left: 0;
+	}
+	&#right {
+		right: 0;
 	}
 }
 

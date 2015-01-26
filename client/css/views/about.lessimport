@@ -1,5 +1,6 @@
 #about {
 	padding-top: @gridSpacing * 4;
+	padding-bottom: @gridSpacing * 4;
 
 	img {
 		margin: 0 auto;
@@ -17,5 +18,26 @@
 		margin-bottom: @gridSpacing * 2;
 		color: @colourWhite;
 		letter-spacing: 1.1px;
+	}
+
+	h2,ul {
+		font-size: @baseFontSize;
+		margin: 0 auto;
+		width: 60%;
+		margin-bottom: @gridSpacing;
+		text-align: left;
+		color: @colourWhite;
+	}
+
+	ul {
+		li {
+			margin: @gridSpacing / 4 0;
+			a {
+				color: @colourWhite;
+				&:hover {
+					border-bottom: 1px dotted;
+				}
+			}
+		}
 	}
 }

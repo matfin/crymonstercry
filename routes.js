@@ -118,7 +118,7 @@ Router.map(function() {
 			},
 			filter = {
 				type: {
-					$in: ['photo', 'text']
+					$in: ['text']
 				}
 			};
 			return {

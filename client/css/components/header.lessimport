@@ -2,15 +2,15 @@ header {
 	margin: 0 auto;
 	min-width: @minWidth;
 	max-width: @maxWidth;
-	height: @gridSpacing * 7;
+	height: @gridSpacing * 5;
 
 	h1 {
 		font-family: 'markusink';
 		font-size: @fontSizeLarge;
 		float: left;
 		display: inline;
-		height: @gridSpacing * 7;
-		line-height: @gridSpacing * 7;
+		height: @gridSpacing * 5;
+		line-height: @gridSpacing * 5;
 		margin-left: @gridSpacing * 2;
 		text-transform: lowercase;
 
@@ -27,8 +27,8 @@ header {
 			.display(flex);
 			li {
 				.flex(1);
-				height: @gridSpacing * 7;
-				line-height: @gridSpacing * 7;
+				height: @gridSpacing * 5;
+				line-height: @gridSpacing * 5;
 				min-width: @gridSpacing * 5;
 
 				a {

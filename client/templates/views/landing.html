@@ -3,19 +3,22 @@
 		<div class="feature">
 			<!-- Featured release artwork -->
 			<figure>
-				<img src="{{releaseArtwork.fields.file.url}}" />
+				<div class="release-image">
+					<img src="{{releaseArtwork.fields.file.url}}" />
+					{{#if hasReleaseLinks}}
+						<ol class="releaseLinks">
+							{{#each releaseLinks}}
+								<li>
+									{{> cards_link}}
+								</li>
+							{{/each}}
+						</ol>
+					{{/if}}
+				</div>
 				<figcaption>
 					{{release.fields.description}}
 				</figcaption>
 			</figure>
-			<!-- Links to purchase -->
-			<ol>
-				{{#each releaseLinks}}
-					<li>
-						{{> cards_link}}
-					</li>
-				{{/each}}
-			</ol>
 			<!-- Mailing list signup -->
 			{{> components_signup}}
 		</div>

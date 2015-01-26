@@ -58,6 +58,16 @@ Template['views_landing'].helpers({
 	},
 
 	/**
+	 *	Function to determine if there are any release links
+	 *	
+	 *	@function 	hasReleaseLinks
+	 *	@return 	{Boolean} - true if there are any release links
+	 */
+	hasReleaseLinks: function() {
+		return Helpers.checkNested(this, 'release', 'fields', 'buyersLinks') && this.release.fields.buyersLinks !== null;
+	},
+
+	/**
 	 *	Function to fetch external links for a release (Amazon, Spotify, iTunes etc)	
 	 *	@function 	releaseLinks
 	 *	@return  	{Object} - an object with nested release links representing a cf_entry

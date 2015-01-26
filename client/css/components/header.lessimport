@@ -9,10 +9,11 @@ header {
 		font-size: @fontSizeLarge;
 		float: left;
 		display: inline;
-		height: @gridSpacing * 5;
+		height: @gridSpacing * 4.5;
 		line-height: @gridSpacing * 5;
 		margin-left: @gridSpacing * 2;
 		text-transform: lowercase;
+		padding-top: @gridSpacing / 2;
 
 		a {
 			color: @colourWhite;

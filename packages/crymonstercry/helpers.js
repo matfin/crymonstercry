@@ -67,7 +67,7 @@ Helpers = {
 	 *	@return 	{String} - the formatted date
 	 */
 	formattedDate: function(dateString, dateFormat) {
-		var m = moment(dateString);
+		var m = moment(new Date(dateString));
 		return m.isValid() ? m.format(dateFormat):dateString;
 	},
 

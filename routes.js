@@ -114,7 +114,7 @@ Router.map(function() {
 			 *	Sort posts by date
 			 */
 			var sort = {
-				'timestamp': -1
+				'date': -1
 			},
 			filter = {
 				type: {

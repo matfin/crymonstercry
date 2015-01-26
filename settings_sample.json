@@ -34,7 +34,8 @@
 		"apiUrl": 		"api.tumblr.com",
 		"filterParams": {
 			"posts": {
-				"filter": 	"html"
+				"filter": 	"html",
+				"limit": 	12
 			}
 		}
 	},

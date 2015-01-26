@@ -119,15 +119,17 @@ Tumblr = {
 
 					_.each(result.data.response.posts, function(item) {
 						/**
-						 *	Call the upsert
+						 *	Call the upsert, ignoring posts with a reblog
 						 */
-						Server.collections.tmblr_posts.update({
-							id: item.id
-						},
-						item,
-						{
-							upsert: true
-						});
+						if(typeof item.reblog === 'undefined') {
+							Server.collections.tmblr_posts.update({
+								id: item.id
+							},
+							item,
+							{
+								upsert: true
+							});
+						}
 					});
 				}
 				else {	
@@ -159,15 +161,10 @@ Tumblr = {
 		var deferred 	= 	Q.defer();
 			params 		= 	{
 				api_key: this.consumerKey,
-				filter:  this.filterParams.posts.filter
+				filter:  this.filterParams.posts.filter,
+				limit: this.filterParams.posts.limit
 			},
 			url 		=	this.endpointUrl + '/v2/blog/' + this.blogUrl + '/posts?api_key=' + this.consumerKey + '&' + params;
-
-
-		/**
-		 *	Run this inside a Fiber
-		 */
-		//Fiber(function() {
 
 		HTTP.call('get', url, function(error, result) {
 
@@ -185,8 +182,6 @@ Tumblr = {
 			}
 
 		});
-
-		//}).run();
 
 		return deferred.promise;
 	}

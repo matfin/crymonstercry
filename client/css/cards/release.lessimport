@@ -1,15 +1,14 @@
 .release {
 	position: relative;
 	display: inline-block;
-	width: 100%;
+	width: 75%;
 	margin-bottom: @gridSpacing * 4;
 
 	> img {
 		display: inline;
 		float: left;
-		width: @gridSpacing * 30;
-		margin-left: @gridSpacing * 2;
-		min-height: @gridSpacing * 30;
+		width: @gridSpacing * 22.5;
+		min-height: @gridSpacing * 22.5;
 		height: auto;
 	}
 
@@ -17,8 +16,7 @@
 		position: relative;
 		display: inline;
 		float: left;
-		width: @gridSpacing * 25;
-		min-height: @gridSpacing * 30;
+		width: @gridSpacing * 20;
 		padding-left: @gridSpacing * 2;
 		.box-sizing(border-box);
 		text-align: left;
@@ -37,20 +35,16 @@
 		}	
 
 		ol.links {
-			position: absolute;
-			bottom: 0;
-			left: @gridSpacing * 2;
-
+			.display(flex);
 			width: 100%;
-
+			margin-top: @gridSpacing * 2;
 			li {
-				display: inline;
-				float: left;
-				width: @gridSpacing * 7.5;
-				height: @gridSpacing * 3;
-				margin-right: @gridSpacing / 2;
+				.flex(1);
 				a {
 					display: block;
+					.box-sizing(border-box);
+					padding: @gridSpacing;
+					padding-left: 0px;
 				}
 			}
 		}

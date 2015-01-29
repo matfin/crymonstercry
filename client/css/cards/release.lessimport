@@ -13,10 +13,9 @@
 	}
 
 	> div.info {
-		position: relative;
 		display: inline;
 		float: left;
-		width: @gridSpacing * 20;
+		width: @gridSpacing * 16;
 		padding-left: @gridSpacing * 2;
 		.box-sizing(border-box);
 		text-align: left;
@@ -29,6 +28,8 @@
 
 		ol.tracks {
 			li {
+				text-indent: 0 - @gridSpacing - 2;
+				margin-left: @gridSpacing;
 				color: @colourWhite;
 				margin-bottom: @gridSpacing / 2;
 			}
@@ -43,7 +44,7 @@
 				a {
 					display: block;
 					.box-sizing(border-box);
-					padding: @gridSpacing;
+					padding: @gridSpacing / 2;
 					padding-left: 0px;
 				}
 			}

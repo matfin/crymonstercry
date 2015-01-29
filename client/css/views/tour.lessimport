@@ -3,11 +3,12 @@
 	padding-top: @gridSpacing * 4;
 	
 	> table {
+		margin: 0 auto;
 		display: table;
-		width: 100%;
+		width: 75%;
 		color: @colourWhite;
 		border-spacing: 0;
-		pdding-left: @gridSpacing;
+		padding-left: @gridSpacing;
 		thead {
 			font-size: @fontSizeMiddle;
 			tr {
@@ -27,6 +28,7 @@
 					border-bottom: 1px solid @colourWhite;
 					a {
 						color: @colourWhite;
+						border-bottom: 1px dotted;
 					}
 				}
 

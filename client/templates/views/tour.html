@@ -24,7 +24,9 @@
 							{{formattedDate fields.date "MMMM D"}}
 						</td>
 						<td>
-							{{{fields.venueName}}}
+							<a href="http://maps.google.com/?q={{fields.location.lat}},{{fields.location.lon}}" title="View {{fields.venueName}} on Google Maps" rel="external">
+								{{{fields.venueName}}}
+							</a>
 						</td>
 						<td>
 							<a href="http://maps.google.com/?q={{fields.location.lat}},{{fields.location.lon}}" title="View {{fields.locationName}} on Google Maps" rel="external">

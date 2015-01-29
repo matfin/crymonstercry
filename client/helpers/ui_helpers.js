@@ -58,3 +58,14 @@ UI.registerHelper('itemAtIndex', function(collection, index) {
 UI.registerHelper('formattedDate', function(dateString, dateFormat) {
 	return Helpers.formattedDate(dateString, dateFormat);
 });
+
+/**
+ *	Helper function to determine if an object exists
+ *
+ *	@function 	fieldsExists
+ *	@param 		{Object} - the field
+ *	@return 	{Boolean}
+ */
+UI.registerHelper('fieldExists', function(field) {
+	return typeof field !== 'undefined';
+});

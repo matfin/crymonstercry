@@ -32,9 +32,13 @@
 							</a>
 						</td>
 						<td>
-							<a href="{{fields.ticketUrl}}" title="Buy Tickets" rel="external">
-								Tickets
-							</a>
+							{{#if fieldExists fields.ticketUrl}}
+								<a href="{{fields.ticketUrl}}" title="Buy Tickets" rel="external">
+									Tickets
+								</a>
+							{{else}}
+								See venue
+							{{/if}}
 						</td>
 					</tr>
 				{{/each}}

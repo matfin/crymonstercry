@@ -10,6 +10,30 @@ Router.onRun(function() {
 });
 
 /**
+ *	Setting SEO tags as a fallback. The server side routing 
+ *	usually takes care of this, but we should generate meta
+ *	tags client side as well.
+ */
+Router.onAfterAction(function(){
+	if(this.ready()) {
+		try {
+			var page = this.data().page;
+			SEO.set({
+				title: page.fields.title,
+				meta: {
+					description: page.fields.description
+				},
+				og: {
+					image: 'http://crymonstercry.com/images/landing.jpg'
+				}
+			});
+		}
+		catch(e) {
+		}
+	}
+});
+
+/**
  *	Router map function
  */
 Router.map(function() {

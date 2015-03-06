@@ -65,6 +65,13 @@ article.story {
 		p {
 			margin: @gridSpacing / 2 0;
 		}
+
+		figure {
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
 	}
 
 	.post-tags {

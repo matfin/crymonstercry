@@ -72,7 +72,7 @@ body {
 			a {
 				display: block;
 				img {
-					
+					height: auto;
 				}
 			}
 		}

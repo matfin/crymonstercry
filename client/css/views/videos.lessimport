@@ -17,3 +17,17 @@
 		}
 	}
 }
+
+&.mobile {
+	#video {
+		> div.video {
+			width: 100%;
+		}
+
+		h2 {
+			font-size: 1.0em;
+			padding: 0 @gridSpacing / 2;
+			text-align: left;
+		}
+	}
+}

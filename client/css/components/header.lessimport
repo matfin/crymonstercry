@@ -91,6 +91,7 @@ header.mobile {
 	}
 
 	nav {
+		z-index: 1;
 		position: absolute;
 		top: @gridSpacing * 2.75;
 		right: 0;

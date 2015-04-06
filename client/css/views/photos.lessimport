@@ -47,6 +47,21 @@
 	}
 }
 
+.mobile {
+	#photos {
+		width: 100%;
+		padding: 0;
+
+		.photos {
+			.press-shots {
+				margin-top: @gridSpacing / 2;
+				padding: 0;
+				width: 100%;
+			}
+		}
+	}
+}
+
 .paddle {
 	position: absolute;
 	top: 0;

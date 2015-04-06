@@ -77,7 +77,7 @@ Template['components_header_mobile'].destroyed = function() {
  */
 Template['components_header_mobile'].events({
 
-	'touchstart button': function(e, template) {
+	'click button': function(e, template) {
 		template.$('button').toggleClass('showing');
 		template.$('nav').toggleClass('revealed');
 	}

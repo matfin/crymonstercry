@@ -9,9 +9,12 @@
 					<th>
 						Venue
 					</th>
+					{{#if deviceIsOfClass 'mobile'}}
+					{{else}}
 					<th>
 						Location
 					</th>
+					{{/if}}
 					<th>
 						Tickets
 					</th>
@@ -28,11 +31,14 @@
 								{{{fields.venueName}}}
 							</a>
 						</td>
+						{{#if deviceIsOfClass 'mobile'}}
+						{{else}}
 						<td>
 							<a href="http://maps.google.com/?q={{fields.location.lat}},{{fields.location.lon}}" title="View {{fields.locationName}} on Google Maps" rel="external">
 								{{fields.locationName}}
 							</a>
 						</td>
+						{{/if}}
 						<td>
 							{{#if fieldExists fields.ticketUrl}}
 								<a href="{{fields.ticketUrl}}" title="Buy Tickets" rel="external">

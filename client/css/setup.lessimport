@@ -21,6 +21,10 @@ body {
 		&:first-child {
 			border-bottom: 2px solid @colourWhite;
 			background-color: @backgroundColourSecondary;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10;
 		}
 
 		&.main {
@@ -38,7 +42,14 @@ body {
 	}
 
 	&.mobile {
-		min-width: initial;	
+		min-width: initial; 
+		padding-top: @gridSpacing * 2.75;
+		padding-bottom: @gridSpacing * 2;
+		div.wrapper.main {
+			min-width: initial;
+			max-width: initial;
+			width: 100%;
+		}
 	}
 }
 

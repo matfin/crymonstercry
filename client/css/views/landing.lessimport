@@ -10,12 +10,8 @@ body {
 			&.mobile {
 				background-image: none;
 
-				
 				div.wrapper.main {
-					min-width: initial;
-					max-width: initial;
-					width: 100%;
-
+					
 					#landing {
 						padding: 0;
 						padding-top: @gridSpacing * 2;
@@ -29,6 +25,10 @@ body {
 									.box-sizing(border-box);
 								}
 							}
+						}
+
+						ol.releaseLinks {
+							.opacity(1);
 						}
 					}
 				}

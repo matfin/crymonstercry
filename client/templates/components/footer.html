@@ -1,2 +1,25 @@
+<template name="footer">
+	{{#if deviceIsOfClass 'mobile'}}
+		{{> components_footer_mobile}}
+	{{else}}
+		{{> components_footer}}
+	{{/if}}
+</template>
+
 <template name="components_footer">
+</template>
+
+<template name="components_footer_mobile">
+	<footer class="mobile">
+		<ol>
+			{{#each socialNav}}
+				<li>
+					<a href="{{link}}" title="{{title}}" rel="external">
+						<i class="icon-{{lowerCase title}}">
+						</i>
+					</a>
+				</li>
+			{{/each}}
+		</ol>
+	</footer>
 </template>

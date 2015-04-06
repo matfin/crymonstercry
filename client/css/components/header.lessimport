@@ -46,5 +46,78 @@ header {
 			}
 		}
 	}
-	
+}
+
+header.mobile {
+	min-width: initial;
+	max-width: initial;
+	width: 100%;
+	height: @gridSpacing * 2.75;
+
+	h1 {
+		line-height: initial;
+		height: initial;
+		font-size: 32px;
+		margin: 0;
+		width: 50%;
+		a {
+			display: block;
+			height: @gridSpacing * 2.75;
+			line-height: @gridSpacing * 2.75;
+		}
+	}
+
+	button {
+		display: inline;
+		float: right;
+		width: @gridSpacing * 3;
+		height: @gridSpacing * 2.75;
+		line-height: @gridSpacing * 2.75;
+		color: @colourWhite;
+		font-size: 32px;
+
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+		.transition-property(all);
+		.transition-duration(@transitionDuration);
+
+		&:active {
+			.scale(0.8);
+		}
+
+		&.showing {
+			.rotateZ(90deg);
+		}
+	}
+
+	nav {
+		position: absolute;
+		top: @gridSpacing * 2.75;
+		right: 0;
+		width: 50%;
+		margin: 0;
+		background-color: @backgroundColourSecondary;
+		border-bottom: 2px solid @colourWhite;
+		border-left: 2px solid @colourWhite;
+
+		.transition-property(transform);
+		.transition-duration(@transitionDuration * 2);
+		.transform(translateY(-120%));
+
+		&.revealed {
+			.transform(translateY(0%));
+		}
+
+		ol {
+			.flex-direction(column);
+
+			li {
+				line-height: @gridSpacing * 2.75;
+				height: @gridSpacing * 2.75;
+				text-align: right;
+				.box-sizing(border-box);
+				margin-right: @gridSpacing - 6;
+			}
+		}
+	}
 }

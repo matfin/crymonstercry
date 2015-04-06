@@ -6,6 +6,33 @@ body {
 		.container {
 			background: @backgroundColourPrimary url('/images/landing.jpg') no-repeat center top;
 			background-size: cover;
+
+			&.mobile {
+				background-image: none;
+
+				
+				div.wrapper.main {
+					min-width: initial;
+					max-width: initial;
+					width: 100%;
+
+					#landing {
+						padding: 0;
+						padding-top: @gridSpacing * 2;
+
+						.feature {
+							width: 100%;
+
+							.flip {
+								form {
+									padding: @gridSpacing;
+									.box-sizing(border-box);
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

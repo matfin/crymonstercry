@@ -69,3 +69,28 @@ UI.registerHelper('formattedDate', function(dateString, dateFormat) {
 UI.registerHelper('fieldExists', function(field) {
 	return typeof field !== 'undefined';
 });
+
+/**
+ *	Helper function to return the current device type based on screen size
+ *
+ *	@function 	deviceIsOfClass
+ *	@param 		{String}  - device class name: can be 'mobile', 'tablet' or 'desktop'
+ *	@return 	{Boolean} - true if the device string matches
+ */
+UI.registerHelper('deviceIsOfClass', function(deviceClassName) {
+
+	/**
+	 *	Call this when the window is resized
+	 */
+	App.dependencies.resized.depend();
+
+	var width = $(window).width();
+
+	var sizes = {
+		desktop: 	width >= 1024,
+		tablet: 	width > 640 && width < 1024,
+		mobile: 	width <= 640
+	};
+
+	return (sizes[deviceClassName] !== 'undefined') ? sizes[deviceClassName]:false;
+});

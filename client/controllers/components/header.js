@@ -40,3 +40,48 @@ Template['components_header'].helpers({
 	}
 
 });
+
+/**
+ *	Template - components_header_mobile
+ *	Callback function automatically called when the template instance is created
+ *	@method created
+ *	@return undefined
+ */
+Template['components_header_mobile'].created = function() {
+
+};
+
+/**
+ *	Template - components_header_mobile
+ *	Callback function automatically called when the template instance is rendered
+ *	@method created
+ *	@return undefined
+ */
+Template['components_header_mobile'].rendered = function() {
+
+};
+
+/**
+ *	Template - components_header_mobile
+ *	Callback function automatically called when the template instance is destroyed
+ *	@method created
+ *	@return undefined
+ */
+Template['components_header_mobile'].destroyed = function() {
+
+};
+
+/**
+ *	Template - components_header_mobile 
+ *	Events
+ */
+Template['components_header_mobile'].events({
+
+	'touchstart button': function(e, template) {
+		template.$('button').toggleClass('showing');
+		template.$('nav').toggleClass('revealed');
+	}
+
+});
+
+

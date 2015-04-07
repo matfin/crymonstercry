@@ -1,5 +1,7 @@
 #video {
 	> div.video {
+		position: relative;
+		z-index: 9;
 		display: inline-block;
 		margin: 0 auto;
 		margin-bottom: @gridSpacing * 4;

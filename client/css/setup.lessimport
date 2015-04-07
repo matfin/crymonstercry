@@ -24,7 +24,7 @@ body {
 			position: fixed;
 			top: 0;
 			left: 0;
-			z-index: 10;
+			z-index: 11;
 		}
 
 		&.main {
@@ -33,18 +33,11 @@ body {
 			max-width: @maxWidth;
 			.display(flex);
 		}
-
-		&.footer {
-			position: fixed;
-			bottom: 0;
-			left: 0;
-		}
 	}
 
 	&.mobile {
 		min-width: initial; 
 		padding-top: @gridSpacing * 2.75;
-		padding-bottom: @gridSpacing * 2;
 		div.wrapper.main {
 			min-width: initial;
 			max-width: initial;

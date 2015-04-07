@@ -15,9 +15,10 @@ footer.mobile {
 				display: block;
 				text-align: center;
 				width: @gridSpacing * 2;
-				height: @gridSpacing * 2;
-				line-height: @gridSpacing * 2;
+				height: @gridSpacing * 2.75;
+				line-height: @gridSpacing * 2.75;
 				color: @colourWhite;	
+				font-size: 24px;
 			}
 			
 		}

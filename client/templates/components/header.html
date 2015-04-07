@@ -1,3 +1,12 @@
+<template name="header">
+	{{#if deviceIsOfClass 'mobile'}}
+		{{> components_header_mobile}}
+	{{else}}
+		{{> components_header}}
+	{{/if}}
+</template>
+
+
 <template name="components_header">
 	<header>
 		<h1>
@@ -10,6 +19,39 @@
 				{{#each topNav}}
 				<li>
 					<a href="{{pathFor route}}" title="{{title}}" class="{{activeClass ../../..}}">
+						{{title}}
+					</a>
+				</li>
+				{{/each}}
+				<li>
+					<a href="http://crymonstercry.bigcartel.com" title="Cry Monster Cry store" target="_blank">
+						Store
+					</a>
+				</li>
+			</ol>
+		</nav>
+	</header>
+</template>
+
+<template name="components_header_mobile">
+	<header class="mobile">
+		<h1>
+			<a href="{{pathFor 'landing'}}" title="home">
+				Cry Monster Cry
+			</a>
+		</h1>
+		<button class="icon-menu">
+		</button>
+		<nav>
+			<ol>
+				<li>
+					<a href="{{pathFor 'landing'}}" title="Home">
+						Home
+					</a>
+				</li>
+				{{#each topNav}}
+				<li>
+					<a href="{{pathFor route}}" title="{{title}}" class="">
 						{{title}}
 					</a>
 				</li>

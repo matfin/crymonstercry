@@ -41,3 +41,30 @@
 		}
 	}
 }
+
+.mobile {
+	#about {
+		padding-top: @gridSpacing;
+		img {
+			width: 100%;
+			.box-sizing(border-box);
+		}
+
+		p {
+			width: 100%;
+			margin: 0;
+			padding: @gridSpacing / 2;
+			.box-sizing(border-box);
+		}
+
+		h2 {
+			margin: 0;
+			padding: @gridSpacing / 2;
+		}
+
+		ul {
+			margin: 0;
+			padding: @gridSpacing / 2;
+		}
+	}
+}

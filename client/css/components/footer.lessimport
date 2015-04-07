@@ -1,8 +1,27 @@
-footer {
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
+footer.mobile {
 	width: 100%;
-	height: @gridSpacing * 2.5;
 	background-color: rgba(45, 57, 74, 0.5);
+
+	ol {
+		.display(flex);
+		width: 100%;
+
+		li {
+			.flex(1);
+			.flex-direction(row);
+			text-align: center;
+			a {
+				margin: auto;
+				display: block;
+				text-align: center;
+				width: @gridSpacing * 2;
+				height: @gridSpacing * 2.75;
+				line-height: @gridSpacing * 2.75;
+				color: @colourWhite;	
+				font-size: 24px;
+			}
+			
+		}
+
+	}
 }

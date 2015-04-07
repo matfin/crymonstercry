@@ -41,3 +41,10 @@ div.image {
 		}
 	}
 }
+
+.mobile {
+	div.image {
+		width: 100%;
+		padding: @gridSpacing / 2 0;
+	}
+}

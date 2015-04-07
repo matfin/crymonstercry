@@ -5,3 +5,13 @@
 	padding-left: @gridSpacing * 2;
 	padding-bottom: @gridSpacing * 4;
 }
+
+&.mobile {
+	#news {
+		padding: 0;
+
+		.post {
+			width: 100%;
+		}
+	}
+}

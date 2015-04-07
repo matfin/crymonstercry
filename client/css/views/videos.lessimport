@@ -1,5 +1,7 @@
 #video {
 	> div.video {
+		position: relative;
+		z-index: 9;
 		display: inline-block;
 		margin: 0 auto;
 		margin-bottom: @gridSpacing * 4;
@@ -14,6 +16,20 @@
 
 		iframe {
 			float: left;
+		}
+	}
+}
+
+&.mobile {
+	#video {
+		> div.video {
+			width: 100%;
+		}
+
+		h2 {
+			font-size: 1.0em;
+			padding: 0 @gridSpacing / 2;
+			text-align: left;
 		}
 	}
 }

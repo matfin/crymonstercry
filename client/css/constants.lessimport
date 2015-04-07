@@ -37,3 +37,8 @@
 @gridSpacing: 16px;
 @maxWidth: @gridSpacing * 80;
 @minWidth: @gridSpacing * 64;
+
+/**
+ *	Animation timings
+ */
+@transitionDuration: 100ms;

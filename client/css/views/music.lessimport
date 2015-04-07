@@ -1,3 +1,16 @@
-#music {
-	
+&.mobile {
+	#music {
+		.release {
+			width: 100%;
+			img {
+				width: 100%;
+				height: auto;
+			}
+
+			.info {
+				padding: @gridSpacing / 2 @gridSpacing;
+			}
+		}
+	}	
 }
+

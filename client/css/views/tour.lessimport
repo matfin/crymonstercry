@@ -47,3 +47,16 @@
 		}
 	}
 }
+
+&.mobile {
+	#tour {
+		padding: 0;
+		padding-top: @gridSpacing * 2;
+
+		> table {
+			margin: 0;
+			padding: 0 @gridSpacing / 2;
+			width: 100%;
+		}
+	}
+}

@@ -27,7 +27,8 @@ App = {
 	 *	@type 		{Object}
 	 */
 	dependencies: {
-		scrolled: new Tracker.Dependency
+		scrolled: new Tracker.Dependency,
+		resized: new Tracker.Dependency
 	}
 };
 
@@ -41,4 +42,11 @@ App = {
  */
 $(window).on('scroll', _.throttle(function() {
 	App.dependencies.scrolled.changed();
+}, 250));
+
+/**
+ *	Fire off the sized tracker dependency when the window gets resized
+ */
+$(window).on('resize', _.throttle(function() {
+	App.dependencies.resized.changed();
 }, 250));

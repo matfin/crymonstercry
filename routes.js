@@ -102,11 +102,11 @@ Router.map(function() {
 				view: 'landing'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 				{to: 'header'},
 			'views_landing': 		{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 				{to: 'footer'}
 		}
 	});
 
@@ -151,11 +151,11 @@ Router.map(function() {
 				view: 'news'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 			{to: 'header'},
 			'views_news': 		{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 			{to: 'footer'}
 		}
 	});
 
@@ -198,11 +198,11 @@ Router.map(function() {
 				view: 'tour'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 				{to: 'header'},
 			'views_tour': 			{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 				{to: 'footer'}
 		}
 	});
 
@@ -251,11 +251,11 @@ Router.map(function() {
 				view: 'music'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 				{to: 'header'},
 			'views_music': 			{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 				{to: 'footer'}
 		}
 	});
 
@@ -300,11 +300,11 @@ Router.map(function() {
 				view: 'video'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 				{to: 'header'},
 			'views_video': 			{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 				{to: 'footer'}
 		}
 	});
 
@@ -353,11 +353,11 @@ Router.map(function() {
 				view: 'photos'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 				{to: 'header'},
 			'views_photos': 		{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 				{to: 'footer'}
 		}
 	});
 
@@ -390,11 +390,11 @@ Router.map(function() {
 				view: 'about'
 			};
 		},
-		template: 'template_main',
+		template: 'main',
 		yieldTemplates: {
-			'components_header': 	{to: 'header'},
+			'header': 				{to: 'header'},
 			'views_about': 			{to: 'content'},
-			'components_footer': 	{to: 'footer'}
+			'footer': 				{to: 'footer'}
 		}
 	});
 

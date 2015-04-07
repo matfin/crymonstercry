@@ -40,16 +40,8 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-soundcloud:before {
-	content: "\e600";
-}
-
-.icon-arrow-left:before {
-	content: "\e60d";
-}
-
-.icon-arrow-right:before {
-	content: "\e614";
+.icon-menu:before {
+	content: "\e9bd";
 }
 
 .icon-loading:before {
@@ -74,5 +66,17 @@
 
 .icon-tumblr:before {
 	content: "\eabb";
+}
+
+.icon-soundcloud:before {
+	content: "\e600";
+}
+
+.icon-arrow-left:before {
+	content: "\e60d";
+}
+
+.icon-arrow-right:before {
+	content: "\e614";
 }
 

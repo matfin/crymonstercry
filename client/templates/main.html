@@ -3,12 +3,21 @@
     <title>
     	Cry Monster Cry | Official Website
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
     <meta name="description" content="Official site featuring news, tour dates, videos, music and online store">
     <!-- @TODO: App icons need to go in here -->
 </head>
 
 <body>
 </body>
+
+<template name="main">
+	{{#if deviceIsOfClass 'mobile'}}
+		{{> template_main_mobile}}
+	{{else}}
+		{{> template_main}}
+	{{/if}}
+</template>
 
 <template name="template_main">
 	<div class="container">
@@ -24,3 +33,18 @@
 		</div>
 	</div>
 </template>
+
+<template name="template_main_mobile">
+	<div class="container mobile">
+		<div class="wrapper">
+			{{> yield region="header"}}
+		</div>
+		<div class="wrapper main">
+			{{> yield region="content"}}
+		</div>
+		<div class="wrapper footer">
+			{{> yield region="footer"}}
+		</div>
+	</div>
+</template>
+

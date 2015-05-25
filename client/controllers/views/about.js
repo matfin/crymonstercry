@@ -5,7 +5,6 @@
  *	@return undefined
  */
 Template['views_about'].created = function() {
-	console.log(this.data);
 };
 
 /**

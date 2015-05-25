@@ -118,18 +118,13 @@ Tumblr = {
 				if(Helpers.checkNested(result, 'data', 'response', 'posts')) {
 
 					_.each(result.data.response.posts, function(item) {
-						/**
-						 *	Call the upsert, ignoring posts with a reblog
-						 */
-						if(typeof item.reblog === 'undefined') {
-							Server.collections.tmblr_posts.update({
-								id: item.id
-							},
-							item,
-							{
-								upsert: true
-							});
-						}
+						Server.collections.tmblr_posts.update({
+							id: item.id
+						},
+						item,
+						{
+							upsert: true
+						});
 					});
 				}
 				else {	

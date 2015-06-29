@@ -29,6 +29,7 @@
 		]
 	},
 	"tumblr": {
+		"blogName":	"{your_blog_name}",
 		"blogUrl": 		"{yourblog}.tumblr.com",
 		"consumerKey": 	"{your_consumer_key}",
 		"apiUrl": 		"api.tumblr.com",

@@ -170,8 +170,6 @@ Tumblr = {
 			},
 			url = this.endpointUrl + '/v2/blog/' + this.blogUrl + '/posts';
 
-		console.log('URL: ', url);
-
 		HTTP.call('get', url, {params: params}, function(error, result) {
 
 			if(error) {

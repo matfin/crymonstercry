@@ -37,6 +37,14 @@ Tumblr = {
 	blogUrl: Meteor.settings.tumblr.blogUrl,
 
 	/**
+	 *	The blog name, so we can filter posts
+	 *
+	 *	@property	blogName
+	 *	@type {String}
+	 */
+	blogName: Meteor.settings.tumblr.blogName,
+
+	/**
 	 *	Filter parameter for Tumblr content
 	 *
 	 *	@property 	filterParams
@@ -116,15 +124,16 @@ Tumblr = {
 			self.Fiber(function() {
 
 				if(Helpers.checkNested(result, 'data', 'response', 'posts')) {
-
 					_.each(result.data.response.posts, function(item) {
-						Server.collections.tmblr_posts.update({
-							id: item.id
-						},
-						item,
-						{
-							upsert: true
-						});
+						if(typeof item.trail[0].blog.name !== 'undefined' && item.trail[0].blog.name === self.blogName) {
+							Server.collections.tmblr_posts.update({
+								id: item.id
+							},
+							item,
+							{
+								upsert: true
+							});
+						}
 					});
 				}
 				else {	
@@ -159,9 +168,11 @@ Tumblr = {
 				filter:  this.filterParams.posts.filter,
 				limit: this.filterParams.posts.limit
 			},
-			url 		=	this.endpointUrl + '/v2/blog/' + this.blogUrl + '/posts?api_key=' + this.consumerKey + '&' + params;
+			url = this.endpointUrl + '/v2/blog/' + this.blogUrl + '/posts';
 
-		HTTP.call('get', url, function(error, result) {
+		console.log('URL: ', url);
+
+		HTTP.call('get', url, {params: params}, function(error, result) {
 
 			if(error) {
 				deferred.reject({

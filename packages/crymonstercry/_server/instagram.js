@@ -101,8 +101,16 @@ Instagram = {
 	 *	@return 	undefined - returns nothing;
 	 */
 	publishCollection: function() {
-		Meteor.publish('in_images', function() {
-			return Server.collections.in_images.find({});
+		Meteor.publish('in_images', function(offset, limit) {
+			/**
+			 *	Default values for optional offset and limit params
+			 */
+			offset = offset || 0;
+			limit = limit || 20;
+
+			console.log('Offser: ', offset, 'Limit: ', limit);
+
+			return Server.collections.in_images.find({}, {offset: offset, limit: limit});
 		});
 	},
 
@@ -141,6 +149,14 @@ Instagram = {
 					});
 
 				});
+
+				/**
+				 *	Clear out the result queue
+				 */
+				self.resultQueue = new Array();
+
+				console.log(self.resultQueue.length, ' result queue size');
+
 			}).run();
 
 			deferred.resolve();
@@ -197,9 +213,6 @@ Instagram = {
 				if(typeof data.pagination !== 'undefined' && typeof data.pagination.next_url !== 'undefined') {
 					next_url = data.pagination.next_url;
 
-
-					console.log('Fetch again from url: ' + next_url);
-
 					/**
 					 *	Then use the next url parameter from the fetched data to do this all again,
 					 *	bumping newly fetched and paginated data to the result queue
@@ -207,8 +220,6 @@ Instagram = {
 					self.getRecentMedia(next_url);
 				}
 				else {
-
-					console.log('Fetch finished and ready to resolve');
 
 					self.deferred.resolve({
 						status: 'ok',

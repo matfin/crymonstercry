@@ -339,17 +339,14 @@ Router.map(function() {
 			/**
 			 *	Order by time descending
 			 */
-			var orderBy = {
-				created_time: -1
-			},
-			pressShotSort = {
+			var pressShotSort = {
 				'sys.createdAt': -1
 			};
 
 			return {
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'photos'}),
 				pressShots: App.collections.cf_entries.find({'fields.page': 'photos'}, {sort: pressShotSort}).fetch(),
-				images: App.collections.in_images.find({}, {sort: orderBy}).fetch(),
+				images: App.collections.in_images.find({}).fetch(),
 				view: 'photos'
 			};
 		},

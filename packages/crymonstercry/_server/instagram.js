@@ -108,9 +108,11 @@ Instagram = {
 			offset = offset || 0;
 			limit = limit || 20;
 
-			console.log('Offser: ', offset, 'Limit: ', limit);
+			var orderBy = {
+				created_time: -1
+			};
 
-			return Server.collections.in_images.find({}, {offset: offset, limit: limit});
+			return Server.collections.in_images.find({}, {offset: offset, limit: limit, order: orderBy});
 		});
 	},
 

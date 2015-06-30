@@ -5,6 +5,23 @@
  *	@return undefined
  */
 Template['views_photos'].created = function() {
+	this.offset = App.collections.in_images.find({}).count();
+	this.limit = this.offset + 10;
+	var self = this;
+
+	/**
+	 *	This tracker is fired when the user has scrolled to the 
+	 *	bottom of the window. 
+	 *	We need this to go and fetch more images from the collection.
+	 */
+	this.scrollTracker = Tracker.autorun(function() {
+		App.dependencies.scrolledbottom.depend();
+		self.offset += 10;
+		self.limit += 10;
+		Meteor.subscribe('in_images', self.offset, self.limit);
+		console.log('Fetching...', self.offset, self.limit);
+	});
+
 };
 
 /**
@@ -25,6 +42,7 @@ Template['views_photos'].rendered = function() {
  */
 Template['views_photos'].destroyed = function() {
 	delete this.slider;
+	this.scrollTracker.stop();
 };
 
 /**

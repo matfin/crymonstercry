@@ -28,7 +28,8 @@ App = {
 	 */
 	dependencies: {
 		scrolled: new Tracker.Dependency,
-		resized: new Tracker.Dependency
+		resized: new Tracker.Dependency,
+		scrolledbottom: new Tracker.Dependency
 	}
 };
 
@@ -43,6 +44,17 @@ App = {
 $(window).on('scroll', _.throttle(function() {
 	App.dependencies.scrolled.changed();
 }, 250));
+
+/**
+ *	A throttled function called every 2 seconds
+ *	whehn the bottom of the window has been reached.
+ */
+$(window).on('scroll', _.throttle(function(e) {
+	if(document.body.scrollHeight == (document.body.scrollTop + window.innerHeight)) {
+		App.dependencies.scrolledbottom.changed();
+	}
+}, 2000));
+
 
 /**
  *	Fire off the sized tracker dependency when the window gets resized

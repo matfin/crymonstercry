@@ -45,6 +45,24 @@ Instagram = {
 	updatePollInterval: false,
 
 	/**
+	 *	Result queue, where fetched results are stored 
+	 *	
+	 *	@property	resultQueue
+	 *	@type	{Array}
+	 *	@default empty array
+	 */
+	resultQueue: new Array(),
+
+	/**
+	 *	Promise, to be resolved when all remote fetches have been completed
+	 *
+	 *	@property deferred
+	 *	@type {Object}
+	 *	@default null
+	 */
+	deferred: null,
+
+	/**
 	 *	Function to poll for content updates at an interval
 	 *	
 	 *	@method 	pollForUpdates
@@ -83,8 +101,18 @@ Instagram = {
 	 *	@return 	undefined - returns nothing;
 	 */
 	publishCollection: function() {
-		Meteor.publish('in_images', function() {
-			return Server.collections.in_images.find({});
+		Meteor.publish('in_images', function(offset, limit) {
+			/**
+			 *	Default values for optional offset and limit params
+			 */
+			offset = offset || 0;
+			limit = limit || 20;
+
+			var orderBy = {
+				created_time: -1
+			};
+
+			return Server.collections.in_images.find({}, {offset: offset, limit: limit, order: orderBy});
 		});
 	},
 
@@ -99,27 +127,37 @@ Instagram = {
 		var deferred = Q.defer(),
 			self = this;
 
+		self.deferred = Q.defer();
+
 		this.getRecentMedia().then(function(result) {
+		
 			/**
-			 *	Populate the collection from within a Fiber
+			 *	Loop through the result queue in a fiber
 			 */
 			self.Fiber(function() {
+				/**
+				 *	Then go through each item, upserting it to the DB
+				 */
+				_.each(self.resultQueue, function(result){
+
+					_.each(result.data, function(item) {
+						Server.collections.in_images.update({
+							id: item.id
+						}, 
+						item,
+						{
+							upsert: true
+						});
+					});
+
+				});
 
 				/**
-				 *	Call an upsert to check for and add new content
+				 *	Clear out the result queue
 				 */
-				_.each(result.data.data, function(item) {
-					/**
-					 *	Call the upsert
-					 */
-					Server.collections.in_images.update({
-						id: item.id
-					},
-					item,
-					{
-						upsert: true
-					});
-				});
+				self.resultQueue = new Array();
+
+				console.log(self.resultQueue.length, ' result queue size');
 
 			}).run();
 
@@ -138,33 +176,62 @@ Instagram = {
 	 * 	Function to grab the users most recent media
 	 *
 	 *	@method		getRecentMedia()
+	 *	@param 		{String} url - optional url passed and used to fetch media
 	 *	@return		A resolved promise with json data for the recent uploads, or a rejected promise
 	 */
-	getRecentMedia: function() {
+	getRecentMedia: function(url) {
 
-		var deferred = Q.defer(),
+		var self = this,
 			data = {
 				client_id: this.clientID,
 				count: 20,
 			},
-			url = this.apiUrl + '/v1/users/' + this.userId + '/media/recent/';
+			initial_url = this.apiUrl + '/v1/users/' + this.userId + '/media/recent/';
+			fetch_url = (typeof url !== 'undefined') ? url:initial_url;
 
-		HTTP.call('get', url, {params: data}, function(error, result) {
+		HTTP.call('get', fetch_url, {params: data}, function(error, result) {
+
 			if(error) {
-				deferred.reject({
+				self.deferred.reject({
 					status: 'error',
 					data: error
 				});
 			}
 			else {
-				deferred.resolve({
-					status: 'ok',
-					data: EJSON.parse(result.content)
-				});
+				/**
+				 *	Grab our data from the result
+				 */
+				var data = EJSON.parse(result.content),
+						next_url;
+
+				/**
+				 *	Push this onto the result queue
+				 */
+				self.resultQueue.push(data);
+
+				/**
+				 *	Check to see if we have a new url to fetch paginated data from.
+				 */
+				if(typeof data.pagination !== 'undefined' && typeof data.pagination.next_url !== 'undefined') {
+					next_url = data.pagination.next_url;
+
+					/**
+					 *	Then use the next url parameter from the fetched data to do this all again,
+					 *	bumping newly fetched and paginated data to the result queue
+					 */
+					self.getRecentMedia(next_url);
+				}
+				else {
+
+					self.deferred.resolve({
+						status: 'ok',
+						message: 'All data fetched'
+					});
+				}
 			}
 		});
 
-		return deferred.promise;
+		return self.deferred.promise;
 	}
 };
 

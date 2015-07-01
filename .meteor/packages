@@ -19,9 +19,12 @@ ejson
 meteorhacks:npm
 
 
-npm-container
+
 markdown
 meteorhacks:ssr
 meteorhacks:picker
 manuelschoebel:ms-seo
 matfin:slider
+
+
+npm-container

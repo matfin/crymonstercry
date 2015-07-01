@@ -1,3 +1,4 @@
 *.tar.gz
 settings.json
 packages/npm-container/
+.DS_Store

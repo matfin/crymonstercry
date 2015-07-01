@@ -50,7 +50,15 @@ $(window).on('scroll', _.throttle(function() {
  *	whehn the bottom of the window has been reached.
  */
 $(window).on('scroll', _.throttle(function(e) {
-	if(document.body.scrollHeight == (document.body.scrollTop + window.innerHeight)) {
+
+	/**
+	 *	Cross browser scroll top function
+	 */
+	var crossScrollTop = function() {
+		return document.body.scrollTop !== 0 ? document.body.scrollTop:document.documentElement.scrollTop;
+	};
+
+	if(document.body.scrollHeight == (crossScrollTop() + window.innerHeight)) {
 		App.dependencies.scrolledbottom.changed();
 	}
 }, 2000));

@@ -60,7 +60,7 @@
 			.animation(progress 500ms linear infinite);
 		}
 
-		&.hideen {
+		&.hidden {
 			display: none;
 		}
 	}

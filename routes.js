@@ -322,7 +322,7 @@ Router.map(function() {
 			 *	photos here, needed for this view.
 			 */
 			return [
-				Meteor.subscribe('in_images'),
+				Meteor.subscribe('in_images', 0, 20),
 				Meteor.subscribe('cf_entries'),
 				Meteor.subscribe('cf_assets')
 			];

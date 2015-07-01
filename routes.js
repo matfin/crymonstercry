@@ -322,7 +322,7 @@ Router.map(function() {
 			 *	photos here, needed for this view.
 			 */
 			return [
-				Meteor.subscribe('in_images'),
+				Meteor.subscribe('in_images', 0, 20),
 				Meteor.subscribe('cf_entries'),
 				Meteor.subscribe('cf_assets')
 			];
@@ -339,17 +339,14 @@ Router.map(function() {
 			/**
 			 *	Order by time descending
 			 */
-			var orderBy = {
-				created_time: -1
-			},
-			pressShotSort = {
+			var pressShotSort = {
 				'sys.createdAt': -1
 			};
 
 			return {
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'photos'}),
 				pressShots: App.collections.cf_entries.find({'fields.page': 'photos'}, {sort: pressShotSort}).fetch(),
-				images: App.collections.in_images.find({}, {sort: orderBy, limit: 22}).fetch(),
+				images: App.collections.in_images.find({}).fetch(),
 				view: 'photos'
 			};
 		},

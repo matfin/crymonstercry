@@ -45,6 +45,25 @@
 			}
 		}
 	}
+
+	.loadingmore {
+		height: 10vh;
+		.display(flex);
+		.align-items(center);
+		.justify-content(center);
+
+		.icon-loading {
+			display: block;
+			font-size: @fontSizeLarge;
+			width: @fontSizeLarge;
+			height: @fontSizeLarge;
+			.animation(progress 500ms linear infinite);
+		}
+
+		&.hideen {
+			display: none;
+		}
+	}
 }
 
 .mobile {

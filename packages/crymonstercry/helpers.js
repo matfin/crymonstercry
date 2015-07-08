@@ -72,6 +72,19 @@ Helpers = {
 	},
 
 	/**
+	 *	Function to return a date formatted with Moment JS form a timestamp
+	 *
+	 *	@function formattedDateFromTS
+	 *	@param 		{Number} - the date string
+	 *	@param 		{String} - desired date format string
+	 *	@return 	{String} - the formatted date
+	 */
+	formattedDateFromTS: function(timestamp, dateFormat) {
+		var m = moment(timestamp);
+		return m.isValid() ? m.format(dateFormat):timestamp;
+	},
+
+	/**
 	 *	Function to determine if an element is in the viewport,
 	 *	used in conjunction with lazy loading of images.
 	 *

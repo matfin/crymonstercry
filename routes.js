@@ -342,11 +342,14 @@ Router.map(function() {
 			var pressShotSort = {
 				'sys.createdAt': -1
 			};
+			var inImageSort = {
+				'created_time': -1
+			};
 
 			return {
 				page: App.collections.cf_entries.findOne({'fields.identifier': 'photos'}),
 				pressShots: App.collections.cf_entries.find({'fields.page': 'photos'}, {sort: pressShotSort}).fetch(),
-				images: App.collections.in_images.find({}).fetch(),
+				images: App.collections.in_images.find({}, {sort: inImageSort}).fetch(),
 				view: 'photos'
 			};
 		},

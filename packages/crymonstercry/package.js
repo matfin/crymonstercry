@@ -6,7 +6,7 @@
 
 Package.describe({
 	summary: 	'This package contains client and server side code for fetching and publishing data.',
-	version: 	'1.0.2',
+	version: 	'1.2.2',
 	name:  		'crymonstercry' 
 });
 

@@ -60,6 +60,18 @@ UI.registerHelper('formattedDate', function(dateString, dateFormat) {
 });
 
 /**
+ *	Function to return a date formatted with Moment JS
+ *
+ *	@function formattedDateFromTS
+ *	@param 		{Number} - the date timestamp
+ *	@param 		{String} - desired date format string
+ *	@return 	{String} - the formatted date
+ */
+UI.registerHelper('formattedDateFromTS', function(timestamp, dateFormat) {
+	return Helpers.formattedDateFromTS(timestamp, dateFormat);
+});
+
+/**
  *	Helper function to determine if an object exists
  *
  *	@function 	fieldsExists

@@ -5,6 +5,12 @@
  *	@return undefined
  */
 Template['cards_tumblr_text'].created = function() {
+	/**
+	 *	Tumblr does not return valid timestamps for use with 
+	 *	Moment.js so we need to convert the timestamp to a 
+	 *	valid javascript format.
+	 */
+	this.data.js_timestamp = this.data.timestamp * 1000;
 };
 
 /**

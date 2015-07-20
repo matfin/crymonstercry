@@ -46,24 +46,29 @@
 		}
 	}
 
+	.loadmore,
 	.loadingmore {
-		height: 10vh;
-		.display(flex);
-		.align-items(center);
-		.justify-content(center);
-
-		.icon-loading {
-			display: block;
-			font-size: @fontSizeLarge;
-			width: @fontSizeLarge;
-			height: @fontSizeLarge;
-			.animation(progress 500ms linear infinite);
+		width: 50%;
+		margin: @gridSpacing * 4 0;
+		padding: @gridSpacing * 2;
+		color: @colourYellow;
+		font-size: @baseFontSize * 2;
+		background-color: @backgroundColourSecondary;
+		.border-radius(@gridSpacing);
+		cursor: pointer;
+		&:hover {
+			text-decoration: underline;
 		}
-
 		&.hidden {
 			display: none;
 		}
+
+		@media @mobile {
+			width: 80%;
+		}
+
 	}
+	
 }
 
 .mobile {

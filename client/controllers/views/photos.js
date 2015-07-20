@@ -5,50 +5,9 @@
  *	@return undefined
  */
 Template['views_photos'].created = function() {
-	this.total = App.collections.in_images.find({}).count();
-	this.offset = this.data.images.length;
-	this.limit = this.offset + 30;
-	var self = this;
-
-	/**
-	 *	This tracker is fired when the user has scrolled to the 
-	 *	bottom of the window. 
-	 *	We need this to go and fetch more images from the collection.
-	 */
-	this.scrollTracker = Tracker.autorun(function() {
-
-		/**
-		 *	This function is dependent on the scrolledbottom,
-		 *	so when the user reaches the bottom of the page,
-		 *	this function it called automatically.
-		 */
-		App.dependencies.scrolledbottom.depend();
-
-		/**
-		 *	If the offset is greater than the number of images in the server
-		 *	side collection, we know we have fetched all the images.
-		 */
-		if(self.offset > self.total) {
-			document.getElementById('loadingmore').className = 'loadingmore hidden';
-		}
-		
-		/**
-		 *	Subscribe to the in_images collection with the offset and limit
-		 *	params to call more images from the server.
-		 */
-		Meteor.subscribe('in_images', self.offset, self.limit, function() {
-
-			/**
-			 *	Or we increate the offsets and limits and update the image count.
-			 */
-			self.total = App.collections.in_images.find({}).count();
-			self.offset += 30;
-			self.limit += 30;	
-	
-		});
-			
-	});
-
+	Session.set('photos_total', App.collections.in_images.find({}).count());
+	Session.set('photos_offset', this.data.images.length);
+	Session.set('photos_limit', this.data.images.length + 30);
 };
 
 /**
@@ -69,7 +28,6 @@ Template['views_photos'].rendered = function() {
  */
 Template['views_photos'].destroyed = function() {
 	delete this.slider;
-	this.scrollTracker.stop();
 };
 
 /**
@@ -87,6 +45,26 @@ Template['views_photos'].helpers({
 	 */
 	sliderWidth: function() {
 		return this.pressShots.length * 100;
+	},
+
+	/**
+	 *	Should return true if photos are loading
+	 *	
+	 *	@function photosAreLoading
+	 *	@return {Boolean} - true if the photos are loading or false
+	 */
+	photosAreLoading: function() {
+		return Session.get('photos_loading');
+	},
+
+	/**
+	 *	Should return true when all photos have been loaded
+	 *	
+	 *	@function allPhotosLoaded
+	 *	@return {Boolean} - true if all photos from the collection have been loaded
+	 */
+	allPhotosLoaded: function() {
+		return Session.get('photos_loaded');
 	}
 
 });
@@ -100,6 +78,34 @@ Template['views_photos'].events({
 	'click .paddle': function(e, template) {
 		var direction = $(e.currentTarget).data('direction');
 		template.slider.go(direction);
+	},
+
+	'click #loadmore': function(e, template) {
+		
+		Session.set('photos_loading', true);
+
+		/**
+		 *	If the offset is greater than the number of images in the server
+		 *	side collection, we know we have fetched all the images.
+		 */
+		if(Session.get('photos_offset') > Session.get('photos_total')) {
+			Session.set('photos_loaded', true);
+		}
+
+		/**
+		 *	Subscribe to the in_images collection with the offset and limit
+		 *	params to call more images from the server.
+		 */
+		Meteor.subscribe('in_images', Session.get('photos_offset'), Session.get('photos_limit'), function() {
+			/**
+			 *	Or we increase the offsets and limits and update the image count.
+			 */
+			Session.set('photos_total', App.collections.in_images.find({}).count());
+			Session.set('photos_offset', Session.get('photos_offset') + 30);
+			Session.set('photos_limit', Session.get('photos_limit') + 30);
+			Session.set('photos_loading', false);
+
+		});
 	},
 
 	'slidecomplete': function(e, template) {

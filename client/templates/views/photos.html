@@ -24,9 +24,16 @@
 				{{> cards_instagram_photo}}
 			{{/each}}
 		</div>
-		<div class="loadingmore" id="loadingmore">
-			<i class="icon-loading">
-		</i>
-		</div>
+		{{#if photosAreLoading}}
+			<span class="loadingmore">
+				Loading photos &hellip;
+			</span>
+		{{else}}
+			{{#unless allPhotosLoaded}}
+				<button class="loadmore" id="loadmore">
+					Load more photos
+				</button>
+			{{/unless}}
+		{{/if}}
 	</section>
 </template>

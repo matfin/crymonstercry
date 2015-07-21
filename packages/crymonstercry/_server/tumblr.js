@@ -125,14 +125,17 @@ Tumblr = {
 
 				if(Helpers.checkNested(result, 'data', 'response', 'posts')) {
 					_.each(result.data.response.posts, function(item) {
-						if(typeof item.trail[0].blog.name !== 'undefined' && item.trail[0].blog.name === self.blogName) {
-							Server.collections.tmblr_posts.update({
-								id: item.id
-							},
-							item,
-							{
-								upsert: true
-							});
+						if(Helpers.checkNested(item, 'trail', '0')) {
+
+							if(typeof item.trail[0].blog.name !== 'undefined' && item.trail[0].blog.name === self.blogName) {
+								Server.collections.tmblr_posts.update({
+									id: item.id
+								},
+								item,
+								{
+									upsert: true
+								});
+							}
 						}
 					});
 				}

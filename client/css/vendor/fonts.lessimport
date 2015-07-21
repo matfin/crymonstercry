@@ -40,43 +40,39 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-menu:before {
-	content: "\e9bd";
+.icon-arrow-right:before {
+	content: "\e609";
 }
-
-.icon-loading:before {
-	content: "\e97e";
+.icon-arrow-left:before {
+	content: "\e60a";
 }
-
-.icon-facebook:before {
-	content: "\ea8c";
-}
-
-.icon-instagram:before {
-	content: "\ea90";
-}
-
-.icon-twitter:before {
-	content: "\ea91";
-}
-
-.icon-youtube:before {
-	content: "\ea99";
-}
-
-.icon-tumblr:before {
-	content: "\eabb";
-}
-
-.icon-soundcloud:before {
+.icon-spotify:before {
 	content: "\e600";
 }
-
-.icon-arrow-left:before {
-	content: "\e60d";
+.icon-menu:before {
+	content: "\e608";
 }
-
-.icon-arrow-right:before {
-	content: "\e614";
+.icon-spinner5:before {
+	content: "\e607";
 }
-
+.icon-menu:before {
+	content: "\e608";
+}
+.icon-facebook:before {
+	content: "\e601";
+}
+.icon-instagram:before {
+	content: "\e602";
+}
+.icon-twitter:before {
+	content: "\e603";
+}
+.icon-youtube:before {
+	content: "\e604";
+}
+.icon-tumblr:before {
+	content: "\e605";
+}
+.icon-soundcloud:before {
+	content: "\e606";
+}

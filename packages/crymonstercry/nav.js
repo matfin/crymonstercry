@@ -69,6 +69,10 @@ Nav = {
 		{
 			title:  'SoundCloud',
 			link: 	'https://soundcloud.com/crymonstercry'
+		},
+		{
+			title: 	'Spotify',
+			link: 	'https://play.spotify.com/artist/6FkLdpLelRlySjpOEZzDTl'
 		}
 	]
 }; 

@@ -112,7 +112,7 @@ Instagram = {
 				created_time: -1
 			};
 
-			return Server.collections.in_images.find({}, {offset: offset, limit: limit, order: orderBy});
+			return Server.collections.in_images.find({}, {offset: offset, limit: limit, sort: orderBy});
 		});
 	},
 
